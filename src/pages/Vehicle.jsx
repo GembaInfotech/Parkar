@@ -1,10 +1,16 @@
 
-import { useMemo, useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createVehicleAction, updateVehicleAction, getVehicleAction } from '../redux/actions/vehicleActions';
+import { createVehicleAction, getVehicleAction } from '../redux/actions/vehicleActions';
 import CommonLoading from "../components/loader/CommonLoading";
 import Cards from "../components/vehi/Cards";
+import DeleteModal from "../components/modals/DeleteModal";
+
 function Vehicle() {
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = (value) => {
+    setShowModal(value);
+  };
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -39,8 +45,22 @@ function Vehicle() {
     );
   }
 
-  return <div className="main-section">
+  return   (
+<div>
+<DeleteModal
+        showModal={showModal}
+       
+        onClose={() => toggleModal(false)}
+       
+      />
+<div className="main-section">
  <button onClick={()=>{call()}}>call</button>
+
+ <button
+                onClick={() => toggleModal(true)}
+                className="text-red-500"
+              >hj
+                </button>
 
  <button onClick={()=>{update()}}>Update</button>
 
@@ -54,6 +74,9 @@ function Vehicle() {
       ))}
 
   </div>;
+  </div>
+
+  )
 };
 
 

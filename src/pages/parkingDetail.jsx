@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { getParkingById } from '../redux/actions/parkingAction';
+import { getParkingById, getParkingAction } from '../redux/actions/parkingAction';
 import CommonLoading from "../components/loader/CommonLoading";
 import { useLocation } from 'react-router-dom';
 import ParkingDetailComponent from '../components/parking/ParkingDetailComponent';
@@ -22,9 +22,26 @@ const ParkingDetail = () => {
     (state) => state.parkings?.parking
   );
 
+  // const particularParking = useSelector(
+  //   (state) => state.parkings?.parking
+  // );
+
+  console.log(parking);
+  console.log("test12345666");
+  // console.log(particularParking);
+
+
   useEffect(() => {
+    
     const fetchData = async () => {
+      console.log("par")
+      console.log(parking);
       await dispatch(getParkingById(id));
+      if(!parking)
+        {
+          console.log("no")
+          await dispatch(getParkingAction(id));
+        }
       setLoading(false);
     };
     fetchData();

@@ -2,7 +2,7 @@ import * as types from "../constants/parkingConstant";
 import { LOGOUT } from "../constants/authConstants";
 
 const initialState = {
-  parking: {},
+  parking: null,
   parkings: [],
   selected:{},
   parkingsError:null
@@ -18,7 +18,15 @@ const parkingReducer = (state = initialState, action) => {
       parking:null,
       parkings:[]
       };
+    
 
+      case types.GET_PARTICULAR_PARKING_SUCCESS:
+        return { ...state, parking: payload, userError: null };
+  
+      case types.GET_PARTICULAR_PARKING_FAIL:
+        return { ...state, userError: payload };
+    
+    
     case types.SEARCH_PARKINGS_SUCCESS:
       return { ...state, parkings: payload, userError: null };
 

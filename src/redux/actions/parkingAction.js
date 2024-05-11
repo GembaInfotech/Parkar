@@ -24,6 +24,29 @@ export const searchParkings = (place, latitude, longitude, type) => async (dispa
 // parkingActions.js
 
 
+export const getParkingAction = (id) => async (dispatch) => {
+  try {
+    console.log("testoing..1");
+    const { error, data } = await api.getParking(id);
+    console.log(data.data);
+
+    if (error) {
+      throw new Error(error);
+    }
+
+    dispatch({
+      type: types.GET_PARTICULAR_PARKING_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.GET_PARTICULAR_PARKING_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+
 export const getParkingById = (parkingId) => ({
   type: types.GET_PARKING_BY_ID,
   payload: parkingId,

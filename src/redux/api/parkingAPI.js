@@ -9,6 +9,18 @@ export const searchParkings = async (locationQuery, latitude, longitude, type) =
   }
 };
 
+export const getParking = async (id) => {
+  try {
+    const { data } = await API.get(`/parking/get-parking/${id}`);
+    console.log("here ")
+    return { error: null, data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+
+
 // export const getSingleParking = async () => {
 //   try {
 //     const { data } = await API.put(`/parking/${id}`, formData, {
