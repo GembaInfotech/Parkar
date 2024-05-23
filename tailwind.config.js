@@ -16,6 +16,11 @@ module.exports = {
       },
     },
     extend: {
+        fontFamily: {
+        'jacquard': ['"Jacquard 12"', 'serif'],
+        'nunito-sans': ['"Nunito Sans"', 'sans-serif'],
+        'radio-canada-big': ['"Radio Canada Big"', 'sans-serif'],
+      },
       boxShadow: {
         "3xl": "-1px 34px 47px -29px rgb(32 32 32 / 100%)",
         "4xl": " 0vw 0vw 0.5vw 0vw rgb(32 32 32 / 20%)",

@@ -1,19 +1,16 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = "/";
 const ADMIN_URL = `${BASE_URL}/admin`;
 
 const authInterceptor = (req) => {
-   console.log(req.url)
    let accessToken = "";
    if(req.url=="/users/logout")
     {
-      console.log("here ")
       accessToken = JSON.parse(localStorage.getItem("profile"))?.refreshToken;
 
     }
     else{
-      console.log("here not  ")
       accessToken = JSON.parse(localStorage.getItem("profile"))?.accessToken;
 
     }
@@ -32,7 +29,7 @@ const adminAuthInterceptor = (req) => {
 };
 
 export const API = axios.create({
-  baseURL: "http://127.0.0.1:4005",
+  baseURL: BASE_URL,
 });
 
 export const ADMIN_API = axios.create({

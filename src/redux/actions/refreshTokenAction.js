@@ -15,7 +15,7 @@ API.interceptors.request.use((req) => {
 });
 export const refreshTokenAction = (refreshToken) => async (dispatch) => {
   try {
-    const response = await API.post("http://localhost:4005/users/refresh-token", {
+    const response = await API.post("/users/refresh-token", {
       refreshToken,
     });
     const profile = JSON.parse(localStorage.getItem("profile"));

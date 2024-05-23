@@ -18,6 +18,7 @@ import ParkingDetail from "./pages/parkingDetail";
 import Checkout from "./pages/Checkout";
 import Bookings from "./pages/Bookings";
 import Payment from "./pages/Payment";
+import About from "./pages/About";
 const ReportedPost = lazy(() => import("./pages/ReportedPost"));
 const Moderator = lazy(() => import("./pages/Moderator"));
 const DevicesLocations = lazy(() => import("./pages/DevicesLocations"));
@@ -94,6 +95,9 @@ export const semiPrivateRoute = [
   {
     path: "/",
     element: <MainPage />,
+  },{
+    path: "/about",
+    element: <About />,
   },
   {
     path: "/search",
@@ -115,6 +119,7 @@ export const publicRoutes = [
     path: "/signup",
     element: <SignUp />,
   },
+  
   {
     path: "/payment-success",
     element: <Payment />,

@@ -3,11 +3,14 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import { memo } from "react";
+import { CiSearch } from "react-icons/ci";
+
 import { logoutAction } from "../../redux/actions/authActions";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Transition } from "@headlessui/react";
 import { AiOutlineBars } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
+import logo from '../../assets/tlogo.png'
 
 const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
 
@@ -47,44 +50,84 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
 
   const navigation = userData? 
   [
-    { name: 'Home', href: '/', current: true },
-    { name: 'About', href: '/#/about', current: false },
+   
+
+    { name: 'About', href: '/about', current: false },
+    { name: 'We help you', href: '/#/contact', current: false },
     { name: 'Contact Us', href: '/#/contact', current: false },
+    { name: 'Professionals', href: '/#/contact', current: false },
   ]:
   [
-      { name: 'Home', href: '', current: true },
+   
       { name: 'About', href: '/#/about', current: false },
+      { name: 'We help you', href: '/#/contact', current: false },
       { name: 'Contact Us', href: '/#/contact', current: false },
+      { name: 'Professionals', href: '/#/contact', current: false },
       { name: 'Login', href: '/signin', current: false },
       { name: 'SignUp', href: '/signup', current: false },
     ];
+    const [show, setShow] = useState(false);
 
+    const setShowMethod =()=>{
+      setShow((show)=>!show)
+    }
+    const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
 
   return (
-    <nav className="sticky bg-gray-800 top-0 z-20 mb-5 flex justify-center gap-10 border bg-white p-2 md:items-center md:justify-between md:px-36">
-      <Link to="/" className="hidden md:inline-block">
-      </Link>
+    <nav className="sticky shadow-sm bg-gray-800 top-0 z-20 mb-0 flex justify-center gap-10 border bg-white py-2 md:items-center md:justify-between md:px-4">
+     
 
       <button className="inline-block md:hidden" onClick={toggleLeftbar}>
         {showLeftbar ? <RxCross1 /> : <AiOutlineBars />}
       </button>
-      <h4 className="text-lg md:text-md text-black"> Parkar</h4>
-      {navigation.map((item) => (
-                       <Link to={`${item.href}`}>{item.name}
+   
+      <Link to="/">
+      <img
+                    src={logo}
+                    alt="profile"
+                    className=" h-12 w-24 rounded-full object-cover"
+                  />
+       </Link>
+      
+      
+    <div className="flex w-full justify-center ">
+    {show &&
+    //  <div  className='fixed top-20 left-0 w-full  text-white px-16 py-4 flex justify-center z-10'>
+    <div className={`   fixed top-20 left-0 w-full  text-white px-16 py-4 flex justify-center z-10 my-component transition duration-700  ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+
+      <Search   /></div> }
+ 
+      <button onClick={()=>{setShowMethod() ; toggleVisibility()}} >
+   
+      <h1  className=' bg-violet-100 text-sm rounded-2xl w-fit py-2 px-2'><div className='flex'><p>Where you want to go </p><CiSearch className=' bg-yellow-300 rounded-2xl text-xl mx-1 p-1 '/></div> </h1>
+      </button>
+    {navigation.map((item) => (
+                       <Link to={`${item.href}`}
+                       
+                       >
+                        <p 
+                           className="font-nunito-sans  flex hover:bg-gray-600 mx-6 hover:text-white hover:rounded-xl transition:smooth px-4 py-0.5  duration-300  items-center  text-lg font-medium hover:text-primary"
+>{item.name}</p>
+                      
                    
                     </Link>
                     ))}
+    </div>
      
       <div className="relative flex justify-end md:w-36">
         <button
           type="button"
-          className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full"
+          className="inline-flex h-8 w-24 cursor-pointer items-center justify-center rounded-full"
           onClick={handleProfileClick}
         >
           <img
             src={userData.avatar}
             alt="profile"
-            className="h-8 w-8 rounded-full object-cover"
+            className="h-12 w-12  rounded-full object-cover"
           />
         </button>
         <Transition

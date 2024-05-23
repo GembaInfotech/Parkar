@@ -14,7 +14,7 @@ const initialState = {
 
 const bookingReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  console.log(type , payload)
+  console.log(type, payload)
 
   switch (type) {
     case LOGOUT:
@@ -39,6 +39,7 @@ const bookingReducer = (state = initialState, action) => {
               bookingError:null
           } 
         case types.BOOKING_DATA_SAVED:
+
             return{
                 ...state,
                 bookingPayload:payload?payload: null,

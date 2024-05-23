@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createVehicleAction, getVehicleAction } from '../redux/actions/vehicleActions';
 import CommonLoading from "../components/loader/CommonLoading";
@@ -16,6 +16,7 @@ function Vehicle() {
 
   const vehicle = useSelector(
     (state) => state.vehicle?.vehicleList
+    
   );
  console.log(vehicle)
   const call =() => {
@@ -27,14 +28,17 @@ function Vehicle() {
     fetchData();
   };
  
-  const update =() => {
-    setLoading(true)
-    const fetchData = async () => {
-      await dispatch(getVehicleAction());
-      setLoading(false);
-    };
-    fetchData();
+useEffect(()=>{
+  setLoading(true)
+  const fetchData = async () => {
+    await dispatch(getVehicleAction());
+    setLoading(false);
   };
+  fetchData();
+
+},[])
+   
+  
 
 
   if (loading) {
@@ -59,10 +63,9 @@ function Vehicle() {
  <button
                 onClick={() => toggleModal(true)}
                 className="text-red-500"
-              >hj
+              > button 
                 </button>
 
- <button onClick={()=>{update()}}>Update</button>
 
 
  {vehicle?.map((vehicled, index) => (
@@ -73,7 +76,7 @@ function Vehicle() {
         </div>
       ))}
 
-  </div>;
+  </div>
   </div>
 
   )

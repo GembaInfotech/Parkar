@@ -24,7 +24,7 @@ const VerifyEmail = () => {
 
   const handleVerify = useCallback(() => {
     setLoading(true);
-    const verificationLink = `http://localhost:3000/auth/verify?code=${code}&email=${email}`;
+    const verificationLink = `http://localhost:4005/auth/verify?code=${code}&email=${email}`;
     axios
       .get(verificationLink)
       .then((res) => {

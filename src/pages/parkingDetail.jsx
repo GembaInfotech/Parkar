@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useMemo, useState,useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { getParkingById, getParkingAction } from '../redux/actions/parkingAction';
 import CommonLoading from "../components/loader/CommonLoading";
@@ -12,36 +12,34 @@ import ParkingDetailComponent from '../components/parking/ParkingDetailComponent
 const ParkingDetail = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  console.log(searchParams)
   const id = searchParams.get('id');
-  console.log(id)
+  const inT = searchParams.get('in')
+  const ouT = searchParams.get('out')
+ console.log(inT)
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   
   const parking = useSelector(
     (state) => state.parkings?.parking
   );
+  const parkingss = useSelector(
+    (state) => state.parkings?.parkings
+  );
 
-  // const particularParking = useSelector(
-  //   (state) => state.parkings?.parking
-  // );
-
-  console.log(parking);
-  console.log("test12345666");
-  // console.log(particularParking);
-
+ 
+  
 
   useEffect(() => {
     
+    
     const fetchData = async () => {
-      console.log("par")
-      console.log(parking);
-      await dispatch(getParkingById(id));
-      if(!parking)
+      if(parkingss.length==0)
         {
-          console.log("no")
           await dispatch(getParkingAction(id));
         }
+     else{
+      await dispatch(getParkingById(id));
+     }
       setLoading(false);
     };
     fetchData();
@@ -49,8 +47,14 @@ const ParkingDetail = () => {
 
 
 
-  console.log(parking)
-
+  const parkingDetail = useMemo(() => {
+    if (!parking) {
+      return null;
+    }
+    return   <div  className="main-section ">
+         <ParkingDetailComponent data={parking} inT={inT} ouT={ouT}/>      </div>
+  
+  }, [parking]);
  
 
   if (loading) {
@@ -61,7 +65,7 @@ const ParkingDetail = () => {
     );
   }
   return (
-    <div><ParkingDetailComponent data={parking}/></div>
+    <div className='w-[90vw] mx-auto'>{parkingDetail}</div>
 
   )
 };

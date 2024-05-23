@@ -12,7 +12,7 @@ export const searchParkings = async (locationQuery, latitude, longitude, type) =
 export const getParking = async (id) => {
   try {
     const { data } = await API.get(`/parking/get-parking/${id}`);
-    console.log("here ")
+    console.log(data)
     return { error: null, data };
   } catch (error) {
     return handleApiError(error);

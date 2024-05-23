@@ -2,6 +2,7 @@ import * as api from "../api/authAPI";
 import * as types from "../constants/authConstants";
 import { isValidToken } from "../../utils/authUtils";
 import { refreshTokenAction } from "./refreshTokenAction";
+import { getVehicleAction } from "./vehicleActions";
 
 export const initializeAuth = () => async (dispatch) => {
   const accessToken = JSON.parse(localStorage.getItem("profile"))?.accessToken;
@@ -11,6 +12,7 @@ export const initializeAuth = () => async (dispatch) => {
 
   if (accessToken && refreshToken) {
     if (isValidToken(accessToken)) {
+      dispatch(getVehicleAction)
       dispatch(setAccessToken(accessToken));
       dispatch(setRefreshToken(refreshToken));
       dispatch(setUserData(JSON.parse(localStorage.getItem("profile")).user));

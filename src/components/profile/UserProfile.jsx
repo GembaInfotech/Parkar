@@ -38,13 +38,13 @@ const UserProfile = ({ userData }) => {
       ) : (
         <>
           <OwnProfileCard user={user} />
-          <OwnInfoCard user={user} />
+          {/* <OwnInfoCard user={user} /> */}
 
-          <h3 className="font-semibold text-center mb-4 text-gray-700 p-3 border-b">
+          {/* <h3 className="font-semibold text-center mb-4 text-gray-700 p-3 border-b">
             Your most recent parking bookings
-          </h3>
+          </h3> */}
 
-          {postToShow?.length === 0 ? (
+          {/* {postToShow?.length === 0 ? (
             <div className="text-center text-gray-700 flex justify-center items-center flex-col">
               <p className="font-semibold py-5 text-gray-500">
                 You haven't booked any parking yet
@@ -57,7 +57,7 @@ const UserProfile = ({ userData }) => {
             </div>
           ) : (
             postToShow
-          )}
+          )} */}
         </>
       )}
     </>

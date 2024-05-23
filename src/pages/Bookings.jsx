@@ -10,7 +10,6 @@ const Bookings = () => {
     const [loading, setLoading] = useState(true)
 
     const data = useSelector((state)=>state.bookings?.bookings)
-    console.log(data)
     useEffect(()=>{
         const fetchData = async () => {
             await dispatch(getBookingAction());

@@ -6,14 +6,14 @@ const initialState = {
   vehicles:[],
   vehicleData: null,
   vehicleList: null,
-  vehicleError:null
+  vehicleError:null,
+  selectedVehicle:null
   
 
 };
 
 const vehicleReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  console.log(type , payload)
 
   switch (type) {
     case LOGOUT:
@@ -56,6 +56,13 @@ const vehicleReducer = (state = initialState, action) => {
         vehicleList : payload ?  payload: [],
         vehicleError: null,
       };
+      case types.SELECTED_VEHICLE_SAVED:
+        const vehicle = state.vehicleList.find(vehicle => vehicle._id === payload);
+        return {
+          ...state,
+          selectedVehicle: vehicle ? vehicle : {},
+        };
+       
 
    
       default:

@@ -55,10 +55,15 @@ const PrivateRoute = ({ userData }) => {
         showLeftbar={showLeftbar}
       />
 
-<div className="md:mx-auto md:grid md:w-4/5 md:grid-cols-3 md:gap-6">
-  <Leftbar showLeftbar={showLeftbar} className="md:w-1/6 "  />
+<div className="md:mx-auto md:grid md:w-[90vw] md:grid-cols-5 max-h-[85vh] md:gap-6 flex  ">
+ <div className="sticky top-0   col-span-1">
+ <Leftbar showLeftbar={showLeftbar}    />
 
-    <Outlet />
+ </div>
+
+   <div className="col-span-4 overflow-y-auto">
+   <Outlet />
+   </div>
     
 </div>
 

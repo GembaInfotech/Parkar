@@ -26,6 +26,12 @@ export const createVehicleAction = (vehicle) => async (dispatch) => {
   }
 };
 
+
+export const selectVehicleAction = (id) => ({
+  type: types.SELECTED_VEHICLE_SAVED,
+  payload: id,
+});
+
 export const updateVehicleAction = (vehicle) => async (dispatch) => {
   try {
     console.log("ni ")
@@ -54,13 +60,11 @@ export const updateVehicleAction = (vehicle) => async (dispatch) => {
 
 export const getVehicleAction = () => async (dispatch) => {
   try {
-    console.log("ni ")
     const { error, data } = await  api.getVehicle();
     
     if (error) {
       throw new Error(error);
     }
-    console.log("data", data)
   try{
             
     dispatch({
@@ -70,7 +74,6 @@ export const getVehicleAction = () => async (dispatch) => {
         requiresAuth: true,
       },
     });
-    console.log("succcess")
   }
   catch(err)
   {
@@ -87,4 +90,5 @@ export const getVehicleAction = () => async (dispatch) => {
     });
   }
 };
+
 

@@ -9,6 +9,16 @@
 }
 *::-webkit-scrollbar {
   width: 1px;
+  display: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 *::-webkit-scrollbar-track {
@@ -18,7 +28,7 @@
 ::-webkit-scrollbar-thumb {
   background-image: linear-gradient(to bottom, #0070ff, #00d2ff, #0070ff);
   border-radius: 1px;
-  border: 2px solid #ffff;
+  border: 1px solid #ffff;
 }
 
 body {
@@ -149,6 +159,11 @@ body {
   transform: translate(-50%, 100%) scale(0);
   animation: push 2s infinite ease-in;
 }
+
+
+
+
+
 .admin-loader:after {
   animation-delay: 1s;
 }

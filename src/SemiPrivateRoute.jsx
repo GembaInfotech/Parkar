@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setInitialAuthState } from "./redux/actions/authActions";
 import Navbar from "./components/shared/Navbar";
 import Leftbar from "./components/shared/Leftbar";
+
 import Rightbar from "./components/shared/Rightbar";
 
 import ModeratorRightbar from "./components/moderator/Rightbar";
@@ -48,26 +49,20 @@ const SemiPrivateRoute = ({ userData }) => {
   };
 
   return isAuthenticated(userData, accessToken) ? (
-    <div className="scroll-smooth">
+    <div className="scroll-smooth " >
       <Navbar
         userData={userData}
         toggleLeftbar={toggleLeftbar}
         showLeftbar={showLeftbar}
       />
 
-      <div className="md:mx-auto md:grid md:w-10/12 md:grid-cols-4 md:gap-6 ">
+      <div className="md:mx-auto md:grid md:w-[100vw] md:grid-cols-1 md:gap-4 ">
 
 
 
         <Outlet />
 
-        {/* {showRightbar ? (
-          currentUserIsModerator ? (
-            <ModeratorRightbar />
-          ) : (
-            <Rightbar />
-          )
-        ) : null} */}
+     
       </div>
     </div>
   ) : (

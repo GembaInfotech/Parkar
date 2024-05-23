@@ -3,9 +3,10 @@ import { API, handleApiError } from "./utils";
 export const createVehicle = async () => {
   try {
     const vehicle ={
-        vehicle_name:"tiago",
-        vehicle_number:"chcg02020",
-        vehicle_type:"four wheeler"
+        vehicle_name:"santro",
+        vehicle_number:"mh06hg2180",
+        vehicle_type:"four wheeler",
+        isDefault:true
     }
     console.log(vehicle)
     const {data} = await API.post(`/vehicle/create-new-vehicle`,  {vehicle}, 
@@ -71,11 +72,9 @@ export const getVehicle = async () => {
      
       const {data} = await API.get(`/vehicle/view-vehicle-list` 
        );
-       console.log(data)
       
       return { error: null, data };
     } catch (error) {
-      console.log(error.message)
   
       return handleApiError(error);
     }

@@ -7,24 +7,30 @@ import ParkingRender from '../components/parking/ParkingRender';
 import Search from '../components/shared/Search';
 import { searchParkings } from "../redux/actions/parkingAction";
 import CommonLoading from "../components/loader/CommonLoading";
+import Map from "../components/map/Map";
 
 function SearchPage() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const [selected, setSelected] = useState();
 
 
   const parkings = useSelector(
     (state) => state.parkings?.parkings
   );
-  const locationQuery = searchParams.get('place');
-  const type = searchParams.get('type');
+  const locationQuery = searchParams?.get('place');
+  const type = searchParams?.get('type');
 
-  const longitude = searchParams.get('ln');
-  const latitude = searchParams.get('lt');
+  const longitude = searchParams?.get('ln');
+  const latitude = searchParams?.get('lt');
+  const inTime = searchParams?.get('in');
+  
+  const outTime = searchParams?.get('out');
   const [data, setData] = useState();
   const [error, setError] = useState();
+  console.log(inTime, outTime)
 
 
   useEffect(() => {
@@ -48,12 +54,18 @@ function SearchPage() {
 
 
     const parkingCards = useMemo(() => {
-      if (!parkings) {
-        return null;
+      if (parkings.length==0) {
+        return (
+          <div>
+          <h1>There are no Car Parks Available</h1>
+          </div>
+        )
       }
       return parkings.map((parking) => (
-        <div key={parking._id} className="main-section flex items-center">
-          <ParkingList className="mb-5" data={parking} />
+        <div key={parking._id} className="main-section ">
+          
+          <div onMouseEnter={() => { setSelected(parking) }}>   <ParkingList   data={parking} inT={inTime} outT={outTime} /></div>
+       
         </div>
       ));
     }, [parkings]);
@@ -76,9 +88,13 @@ function SearchPage() {
     <div>
 
       
-      <Search/>
-{/* <ParkingRender data={data.data} /> */}
-<div className="main-section">{parkingCards}</div>
+      <Search  inT={inTime}  ouT={outTime}/>
+<div className="flex max-h-[75vh]  min-h-[70vh] w-[90vw] mx-auto">
+<div className="main-section overflow-y-auto  w-1/3">{parkingCards}</div>
+{
+parkings.length!=0 && <div className=" bg-blue-400 sticky w-2/3 mt-2">    <Map data={parkings} selected={selected} /></div>}
+
+</div>
 
 
     </div>
