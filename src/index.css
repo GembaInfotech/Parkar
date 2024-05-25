@@ -184,3 +184,99 @@ body {
     transform: translate(-50%, -50%) scale(0);
   }
 }
+
+
+
+
+/* navbar */
+
+/* Hero Sections */
+/* about Parking */
+
+.purple-rounded-button{
+  background-color: #2b344e;
+    border-radius: 20px;
+    padding: 8px 16px;
+}
+.blue-rounded-button{
+  background-color: #4092d4;
+    border-radius: 20px;
+    padding: 4px 8px;
+    font-size: 10px;
+    margin-top: 4px;
+}
+
+
+.center-div{
+  display: flex;
+  justify-content: center;
+}
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.h1{
+  text-align: center;
+  font-size:1.8rem;
+  color: #2b344e;;
+  font-weight: bolder;
+
+}
+.h2{
+  text-align: center;
+  font-size:0.9rem;
+  color: #142085;;
+  font-weight: bold;
+
+}
+.h1-64{
+  text-align: center;
+  font-size:3rem;
+  font-weight: bolder;
+
+}
+.p-phone{
+  font-size: 11px;
+}
+.h3-phone{
+  font-size: 18px;
+}
+
+
+
+.footer-parent{
+ @apply flex flex-col bg-[#142085] text-white justify-center items-center
+}
+
+.upper-footer{
+  @apply flex  max-sm:flex-col md:w-[70vw] justify-center  w-[90vw]
+ }
+
+ .firstly-upper-footer{
+  @apply flex  flex-col md:w-[20vw]  my-2
+ }
+ .second-upper-footer{
+  @apply flex  flex-col md:w-[20vw] my-2 sm:mx-12
+ }
+ .third-upper-footer{
+  @apply flex  flex-col md:w-[20vw] my-2
+ }
+
+
+ .lower-footer{
+  @apply flex  max-sm:flex-col   justify-center md:justify-between items-center py-4 md:w-[70vw] 
+ }
+ 
+  
+ .first-lower-footer{
+  @apply flex  justify-center items-center text-center max-sm:w-[90vw]
+ }
+
+ 
+ .second-lower-footer{
+  @apply flex  justify-center items-center  max-sm:mt-2
+ }
+ 

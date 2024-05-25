@@ -1,10 +1,11 @@
 const titleMap = {
-  "/": "News Feed",
-  "/home": "News Feed",
+  "/": "HomePage",
+  "/home": "HomePage",
   "/signin": "Sign In",
   "/signup": "Sign Up",
   "/profile": "User Profile",
   "/saved": "Saved Posts",
+  "/search":"Available Parkings",
   "/edit-profile": "Edit Profile",
   "/communities": "Communities",
   "/my-communities": "My Communities",
@@ -14,6 +15,9 @@ const titleMap = {
   "/email-verified": "Email Verified",
   "/block-device": "Block Device",
   "/login-verified": "Login Verified",
+  "/detail/:place": "Details",
+  "/detail":"Parkings",
+  "/checkout":"Checkout"
 };
 /**
  * Returns the title of a page based on its route path.

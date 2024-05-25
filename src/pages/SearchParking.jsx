@@ -57,7 +57,7 @@ function SearchPage() {
       if (parkings.length==0) {
         return (
           <div>
-          <h1>There are no Car Parks Available</h1>
+          <h1>OOPs.. There are no Car Parks Available</h1>
           </div>
         )
       }
@@ -89,8 +89,8 @@ function SearchPage() {
 
       
       <Search  inT={inTime}  ouT={outTime}/>
-<div className="flex max-h-[75vh]  min-h-[70vh] w-[90vw] mx-auto">
-<div className="main-section overflow-y-auto  w-1/3">{parkingCards}</div>
+<div className="flex max-h-[75vh] max-sm:flex-col  min-h-[70vh] w-[90vw] mx-auto">
+<div className="main-section overflow-y-auto  w-1/3 max-sm:w-full">{parkingCards}</div>
 {
 parkings.length!=0 && <div className=" bg-blue-400 sticky w-2/3 mt-2">    <Map data={parkings} selected={selected} /></div>}
 

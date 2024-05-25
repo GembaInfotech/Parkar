@@ -6,6 +6,7 @@ import FallbackLoading from "./components/loader/FallbackLoading";
 import { publicRoutes, privateRoutes, semiPrivateRoute } from "./routes";
 
 import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 import SemiPrivateRoute from "./SemiPrivateRoute";
 import SignIn from "./pages/SignIn";
 
@@ -32,12 +33,16 @@ const App = () => {
           {privateRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
-        </Route>
-     
+                          </Route>
 
+     
+        <Route element={<PublicRoute    />}>
         {publicRoutes.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
+                </Route>
+
+
 
         <Route
           path="/signin"

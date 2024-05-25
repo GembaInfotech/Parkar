@@ -49,7 +49,7 @@ const SemiPrivateRoute = ({ userData }) => {
   };
 
   return isAuthenticated(userData, accessToken) ? (
-    <div className="scroll-smooth " >
+    <div className="scroll-smooth  z-10" >
       <Navbar
         userData={userData}
         toggleLeftbar={toggleLeftbar}

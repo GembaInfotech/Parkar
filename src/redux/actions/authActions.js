@@ -95,11 +95,13 @@ export const signInAction = (formData, navigate) => async (dispatch) => {
     const response = await api.signIn(formData);
     const { error, data } = response;
     if (error) {
+      console.log("here hu")
       dispatch({
         type: types.SIGNIN_FAIL,
         payload: error,
       });
     } else {
+      console.log("here")
       const { user, accessToken, refreshToken, accessTokenUpdatedAt } = data;
       const profile = {
         user,
@@ -108,6 +110,7 @@ export const signInAction = (formData, navigate) => async (dispatch) => {
         accessTokenUpdatedAt,
       };
       
+      console.log("her22")
       localStorage.setItem("profile", JSON.stringify(profile));
       dispatch({
         type: types.SIGNIN_SUCCESS,

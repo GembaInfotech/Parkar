@@ -5,11 +5,14 @@ import { searchParkings } from '../../redux/actions/parkingAction';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { format, addHours } from 'date-fns';
+import { RxCross2 } from 'react-icons/rx';
 
 
 function Search({inT, ouT}) {
 
   const dispatch = useDispatch();
+  
+  const [view, setView] = useState(false)
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const locationQuery = searchParams?.get('place');
@@ -58,7 +61,7 @@ function Search({inT, ouT}) {
   useEffect(() => {
     const timerId = setTimeout(() => {
       fetchSuggestions(inputText);
-    }, 200);
+    }, 100);
 
     return () => clearTimeout(timerId);
   }, [inputText]);
@@ -117,13 +120,20 @@ function Search({inT, ouT}) {
 
 
 
-    <div className="  p-2 py-2 m-h-screen w-full sticky  mx-auto w-[90vw] top-20 z-10 mt-2 overflow-y:hidden">
-       <div
-      className={`fixed inset-0 bg-black opacity-50  transition-opacity ${isInputFocused ? 'block' : 'hidden'}`}
-      aria-hidden="true"
-    />
-      <div className="bg-gray-200 items-center justify-center  w-full flex rounded-full shadow-lg p-2  sticky" >
-        <input className="font-bold uppercase rounded-full w-[60%] py-4 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs" type="text"
+    <div className='mx-auto' >
+{ location.pathname =="/" &&      <h1 className='text-white font-bold  text-2xl sm:text-4xl text-center'>THE  SMART WAY OF PARKING </h1>
+}    
+    <div className="   p-2 py-2 m-h-screen w-full sticky   mx-auto w-[80vw] max-sm:w-[80vw] top-20 z-10 mt-2 overflow-y:hidden">
+     
+
+    
+      
+      <div className={`${view ? 'null' : 'max-sm:hidden'}   items-center justify-center bg-white  rounded-xl  w-full flex max-sm:flex-col  shadow-lg  max-sm:p-4  sticky"`} >
+      <div className=' sm:hidden flex w-full  justify-end items-center'>
+         
+         <RxCross2 onClick={()=>setView(!view)} className='sm:hidden float-right'/>
+         </div>
+        <input className="font-bold uppercase rounded-l-xl max-sm:rounded-xl max-sm:w-full max-sm:m-1 w-[40%] py-4 max-sm:py-2 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs max-sm:text-[12px]" type="text"
         value={inputText}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
@@ -132,7 +142,7 @@ function Search({inT, ouT}) {
           placeholder="Type a location..." />
         <input aria-label="Date and time"
         
-          className="font-bold uppercase rounded-full  py-4 px-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
+          className="font-bold uppercase max-sm:rounded-xl max-sm:w-full max-sm:m-1   py-4 px-4 max-sm:py-2 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
           type="datetime-local" 
           name='inTime'
           value=  { inT || timeValues.inTime}
@@ -142,7 +152,7 @@ function Search({inT, ouT}) {
           onChange={handleChange}/>
         <input aria-label="Date and time"
        
-          className="font-bold uppercase rounded-full  py-4 px-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
+          className="font-bold uppercase  max-sm:rounded-xl max-sm:w-full max-sm:m-1 py-4 px-4 max-sm:py-2 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
           type="datetime-local" 
           name='outTime'
           onFocus={handleInputFocus}
@@ -156,30 +166,33 @@ function Search({inT, ouT}) {
          
         onClick={() => { gotosearch(searchfor) }}
          disabled={redirecting}
+    
         >
           <div 
           
-          className={`w-full transform rounded-full bg-blue-500 px-6 py-4 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
+          className={` rounded-r-xl w-full max-sm:rounded-xl max-sm:w-full max-sm:m-1   transform  bg-blue-500 px-6 max-sm:px-2 py-4 max-sm:py-1 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
             redirecting ? "cursor-not-allowed opacity-50" : ""
           }`}
-          >
-            <svg className="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          ><div className='flex max-sm:text-sm font-semibold px-1 justify-center items-center '><p className='px-1'>search</p>
+            <svg className=" max-sm:hidden w-6 max-sm:w-44 h-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
             </svg>
+            </div>
           </div>
         </button>
 
-      </div>
-
-      <div className="flex flex-col    mx-2 relative " ref={dropdownRef}>
+      
+    
+    </div>
+      <div className="flex flex-col     relative " ref={dropdownRef}>
 
         {showDropdown && (
-          <ul className="absolute z-10 top-full bg-white  rounded-2xl mt-1 w-1/2 max-h-48 overflow-y-auto shadow-lg">
+          <ul className="absolute z-10 top-full bg-white  mt-1 w-1/2 max-sm:w-full max-h-48 rounded-xl overflow-y-auto shadow-lg">
             {suggestions?.map((suggestion, index) => (
               <li key={index} onClick={() => handleSelectSuggestion(suggestion)} >
-                <div className="flex items-center justify-between w-full p-2 lg:rounded-full md:rounded-full hover:bg-gray-100 cursor-pointer rounded-lg">
+                <div className="flex items-center justify-between w-full p-2  hover:bg-gray-100 cursor-pointer ">
                   <div className="lg:flex md:flex items-center">
-                    {/* <div className="h-12 w-12 mb-2 lg:mb-0 border md:mb-0 rounded-full mr-3"></div> */}
+                    {/* <div className="h-12 w-12 mb-2 lg:mb-0 border md:mb-0  mr-3"></div> */}
                     <div className="flex flex-col">
                       <div className="text-sm h-8 text-gray-700 font-bold w-full ">   <p>{suggestion.properties.formatted}</p> </div>
                     </div>
@@ -196,6 +209,41 @@ function Search({inT, ouT}) {
 
     </div>
 
+
+
+
+
+    <div hidden={view} className="  p-2 py-2 pt-0 m-h-screen  sticky   mx-auto w-[70vw] top-20 z-5  overflow-y:hidden">
+       <div
+      className={`fixed inset-0 bg-black opacity-50  transition-opacity ${isInputFocused ? 'block' : 'hidden'}`}
+      aria-hidden="true"
+    />
+
+    
+      
+      <div onClick={()=>{setView(!view)}} className=" sm:hidden p-2 items-center bg-white  rounded-3xl  w-full flex justify-end  shadow-lg   sticky" >
+        <h1 className='twxt-center  font-semibold pr-4'>Want to book Parking..? </h1>
+      <div className='flex max-sm:text-sm font-semibold px-1 justify-center items-center bg-blue-600 rounded-full '>
+            <svg className="  w-6  h-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+            </svg>
+            </div>
+      
+    
+    </div>
+   
+
+   
+
+    </div> 
+
+
+
+  
+
+
+
+   </div>
 
   );
 }

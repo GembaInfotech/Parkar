@@ -19,6 +19,7 @@ import Checkout from "./pages/Checkout";
 import Bookings from "./pages/Bookings";
 import Payment from "./pages/Payment";
 import About from "./pages/About";
+import SignIn from "./pages/SignIn";
 const ReportedPost = lazy(() => import("./pages/ReportedPost"));
 const Moderator = lazy(() => import("./pages/Moderator"));
 const DevicesLocations = lazy(() => import("./pages/DevicesLocations"));
@@ -92,10 +93,21 @@ export const privateRoutes = [
   },
 ];
 export const semiPrivateRoute = [
+  
+  {
+    path: "/checkout",
+    element: <Checkout />,
+  }
+  
+];
+
+export const publicRoutes = [
+ 
   {
     path: "/",
     element: <MainPage />,
-  },{
+  },
+  {
     path: "/about",
     element: <About />,
   },
@@ -107,18 +119,11 @@ export const semiPrivateRoute = [
     path: "/detail/:place",
     element: <ParkingDetail />,
   },
-  {
-    path: "/checkout",
-    element: <Checkout />,
-  }
-  
-];
-
-export const publicRoutes = [
-  {
+   {
     path: "/signup",
     element: <SignUp />,
   },
+ 
   
   {
     path: "/payment-success",
