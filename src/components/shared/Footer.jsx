@@ -6,6 +6,7 @@ import { FaGooglePlusG } from "react-icons/fa";
 import { LuLocateFixed } from "react-icons/lu";
 import { MdOutlineLocalPhone } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 
 
@@ -18,17 +19,20 @@ const Footer = () => {
        <div className="upper-footer ">
           <div className="firstly-upper-footer">
             <p className='h3-phone font-semibold'>About Us</p>
-            <p className='p-phone md:text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus maiores delectus facilis similique unde blanditiis culpa. Iure nihil nulla iste error animi inventore voluptatem quidem, sequi cum excepturi quia!</p>
-             <button className='blue-rounded-button w-fit'>Read More</button>
+            <p className='p-phone md:text-sm'>
+            At Smart Parking, we're dedicated to transforming the way you park, offering seamless online booking for hassle-free experiences. With a passion for innovation, we strive to redefine convenience, speed, and affordability in the parking industry. Our commitment lies in providing you with reliable solutions that make parking simpler, faster, and more economical.              </p>
+          <Link to="/about">
+          <button className='blue-rounded-button w-fit'>Read More</button>
+          </Link>
           </div>
           <div className="second-upper-footer">
             <p className='h3-phone font-semibold'>Quick Links</p>
             <div className='flex justify-between max-sm:justify-start'>
                 <div className='max-sm:mr-4'>
                     <p className='p-phone md:text-sm'>Home</p>
-                    <p className='p-phone md:text-sm'>About Us</p>
-                    <p className='p-phone md:text-sm'>How does it Work</p>
-                    <p className='p-phone md:text-sm'>FAQ</p>
+                 <Link to="/about">   <p className='p-phone md:text-sm'>About Us</p></Link>
+                  <Link to="/how-works">  <p className='p-phone md:text-sm'>How does it Work</p></Link>
+                   <Link to="/FAQ"> <p className='p-phone md:text-sm'>FAQ</p></Link>
 
                 </div>
                 <div>

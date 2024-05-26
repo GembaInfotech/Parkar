@@ -1,5 +1,6 @@
 import React from 'react'
 import { BiSolidCarGarage } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 const AboutSmartParking = () => {
   return (
@@ -14,17 +15,16 @@ const AboutSmartParking = () => {
        </div>
        <div className='center-div'>
        <p className='text-center text-sm  max-sm:text-[11px]'> 
-       Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi voluptatem ducimus, voluptates minus itaque? Ut ad corrupti, magnam error alias, mollitia nulla inventore excepturi, nisi facere quos necessitatibus. Dignissimos?
-       </p>
+       At Smart Parking, we're passionate about revolutionizing parking convenience with our cutting-edge online platform. With a commitment to seamless experiences, we aim to redefine how you park, one click at a time.       </p>
        </div>
        <div className='center-div'>
        <p className='text-center text-sm max-sm:hidden'> 
-       Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur natus omnis aspernatur illum excepturi architecto totam itaque nihil consequuntur, quisquam sequi dolorum! Illum ipsa unde facilis similique optio hic?
-       </p>
+       At Smart Parking, we're passionate about revolutionizing parking convenience with our cutting-edge online platform. With a commitment to seamless experiences, we aim to redefine how you park, one click at a time.       </p>
        </div>
        <div className='center-div py-4'>
-        <button className='purple-rounded-button'><p className='text-white text-sm'>Read More</p></button>
-       </div>
+ <Link to="/about">        <button className='purple-rounded-button'><p className='text-white text-sm'>Read More</p></button>
+</Link>
+        </div>
     </div>
     </section>
   )

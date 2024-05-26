@@ -7,6 +7,7 @@ import { RxCross1 } from "react-icons/rx";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import ButtonLoadingSpinner from "../components/loader/ButtonLoadingSpinner";
 import parking3 from '../assets/parking3.jpg'
+import PublicNavBar from "../components/shared/PublicNavBar";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
@@ -43,11 +44,11 @@ const SignIn = () => {
 
   return (
     <section className="bg-white">
-      <div className="container mx-auto flex min-h-screen flex-col items-center justify-center px-6">
+      <PublicNavBar/>
+      <div className="container mx-auto flex min-h-[80vh] flex-col items-center justify-center px-6">
         <form className="w-full max-w-md">
           <div className="mx-auto flex justify-center">
           {/* <img className="h-7 w-auto sm:h-8" src={Logo} alt="" /> */}
-           <h1>Pakar</h1> 
           </div>
           {signInError && (
             <div
@@ -119,7 +120,7 @@ const SignIn = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="block w-full rounded-lg border bg-white px-11 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              className="block w-full rounded-lg border bg-white px-11  py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               placeholder="Email address"
               required
               autoComplete="off"
@@ -148,7 +149,7 @@ const SignIn = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="block w-full rounded-lg border bg-white px-10 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              className="block w-full rounded-lg border bg-white px-10 py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               placeholder="Password"
               required
               autoComplete="off"
@@ -158,7 +159,7 @@ const SignIn = () => {
             <button
               disabled={loading}
               onClick={handleSubmit}
-              className={`w-full transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
+              className={`w-full transform rounded-lg bg-blue-800 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
                 loading ? "cursor-not-allowed opacity-50" : ""
               }`}
             >
@@ -170,16 +171,7 @@ const SignIn = () => {
             </button>
           </div>
         </form>
-        <span className="flex items-center justify-center py-4 text-sm text-gray-600 ">
-        
-          <Link
-            to="/admin"
-            className="ml-8 flex items-center hover:text-blue-500"
-          >
-            <MdOutlineAdminPanelSettings className="mr-2 h-5 w-5" />
-            <span>Admin</span>
-          </Link>
-        </span>
+     
       </div>
     </section>
   );

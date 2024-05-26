@@ -96,7 +96,7 @@ const SignUpNew = () => {
 
   return (
     <section className="bg-white">
-      <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
+      <div className="container mx-auto flex min-h-[80vh] items-center justify-center px-6">
         <form className="w-full max-w-md" onSubmit={handleSubmit}>
           <div className="mx-auto flex justify-center">
           </div>
@@ -155,7 +155,7 @@ const SignUpNew = () => {
               type="text"
               value={name}
               onChange={handleNameChange}
-              className="block w-full rounded-lg border bg-white px-11 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              className="block w-full rounded-lg border bg-white px-11 py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               placeholder="Username"
               required
               autoComplete="off"
@@ -163,7 +163,7 @@ const SignUpNew = () => {
           </div>
           <label
             htmlFor="avatar"
-            className="mx-auto mt-6 flex cursor-pointer items-center rounded-lg border-2 border-dashed bg-white px-3 py-3 text-center"
+            className="mx-auto mt-6 flex cursor-pointer items-center rounded-lg border-2 border-blue-400 border-dashed bg-white px-3 py-2 sm:py-3 text-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -224,7 +224,7 @@ const SignUpNew = () => {
               value={email}
               onChange={handleEmailChange}
               type="email"
-              className="block w-full rounded-lg border bg-white px-11 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              className="block w-full rounded-lg border bg-white px-11 py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               placeholder="Email address"
               required
               autoComplete="off"
@@ -253,7 +253,7 @@ const SignUpNew = () => {
               type="password"
               value={password}
               onChange={handlePasswordChange}
-              className="block w-full rounded-lg border bg-white px-10 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              className="block w-full rounded-lg border bg-white px-10 py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               placeholder="Password"
               required
               autoComplete="off"

@@ -40,7 +40,7 @@ const HeroSection = () => {
 <div className='   md:w-[20vw] md:bg-white h-32 m-1 flex flex-col justify-center items-center'>
   <div className='p-4 sm:p-2 mx-2 text-4xl max-sm:bg-white flex justify-center items-center  sm:text-[54px]  text-black md:text-[#5cb3ee]  font-bold rounded-full '>
                         <FaRoute /></div>
-    <p className='max-sm:text-white font-semibold text-gray-800 '>200+ Available Parkings</p>
+    <p className='max-sm:text-white font-semibold text-gray-800 '>50+ Stations, Airports and Ports</p>
 </div>
 
 

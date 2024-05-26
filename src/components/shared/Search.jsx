@@ -200,7 +200,7 @@ function Search({inT, ouT}) {
         >
           <div 
           
-          className={` rounded-r-xl w-full max-sm:rounded-xl max-sm:w-full max-sm:m-1   transform  bg-blue-500 px-6 max-sm:px-2 py-4 max-sm:py-1 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
+          className={` rounded-r-xl w-full max-sm:rounded-xl max-sm:w-full max-sm:m-1   transform  bg-blue-500 px-8 max-sm:px-2 py-4 max-sm:py-1 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
             redirecting ? "cursor-not-allowed opacity-50" : ""
           }`}
           ><div className='flex max-sm:text-sm font-semibold px-1 justify-center items-center '><p className='px-1'>search</p>

@@ -16,8 +16,7 @@ const WhySmartParking = () => {
                 </div>
                 <div className='center-div'>
                     <p className='text-center text-sm  max-sm:text-[11px]'>
-                        Veniam excepturi voluptatem ducimus, voluptates minus itaque? Ut ad corrupti, magnam error alias, mollitia nulla inventore excepturi, nisi facere quos necessitatibus. Dignissimos?
-                    </p>
+                    Effortlessly reserve your parking spot online, ensuring hassle-free arrivals every time. Streamline your parking experience with our convenient online booking platform.                    </p>
                 </div>
 
 
@@ -29,20 +28,24 @@ const WhySmartParking = () => {
                     <div className='p-4 sm:p-2 mx-2 text-2xl flex justify-center items-center  sm:text-[68px] text-[#5cb3ee]  font-bold rounded-full '>
                         <IoHappyOutline /></div>
                     <p className='font-bold text-[#353b4d]'>Convenient</p>
-                    <p className='p-phone sm:text-sm text-center'>pora laudantium velit eveniet, saepe sit recusandae, soluta quibusdam!</p>
+                    <p className='p-phone sm:text-sm text-center'>
+                    Effortlessly book your parking spot online, saving you time and stress                        </p>
                 </div>
                 <div className=' flex flex-col items-center justify-center sm:w-[25vw]'>
 
                     <div className='p-4 sm:p-2 mx-2 text-2xl flex justify-center items-center  sm:text-[68px] text-[#5cb3ee]  rounded-full '>
                         <HiMiniArrowsRightLeft /></div>
                     <p className='font-bold text-[#353b4d]'>Fast</p>
-                    <p className='p-phone sm:text-sm text-center'>pora laudantium velit eveniet, saepe sit recusandae, soluta quibusdam!</p>
+                    <p className='p-phone sm:text-sm text-center'>
+                    Instantly secure your space for swift arrivals and departures in a quick Time 
+                        </p>
                 </div>
                 <div className=' flex flex-col items-center justify-center sm:w-[25vw]'>
 
                     <div className='p-4 sm:p-2 mx-2 text-2xl flex justify-center items-center  sm:text-[68px] text-[#5cb3ee]  rounded-full '>
-                        <TbMoneybag /></div>          <p className='font-bold text-[#353b4d]'>Chaper</p>
-                    <p className='p-phone sm:text-sm text-center'>pora laudantium velit eveniet, saepe sit recusandae, soluta quibusdam!</p>
+                        <TbMoneybag /></div>          <p className='font-bold text-[#353b4d]'>Cheaper</p>
+                    <p className='p-phone sm:text-sm text-center'>
+                    Enjoy budget-friendly rates without compromising on quality or convenience                       </p>
                 </div>
             </div>
 
