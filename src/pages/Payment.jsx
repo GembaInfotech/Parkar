@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { confirmBookingAction } from '../redux/actions/bookingAction';
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch
  } from 'react-redux';
 import {useNavigate} from 'react-router-dom'
@@ -14,7 +15,8 @@ const Payment = () => {
     dispatch(confirmBookingAction(createdBooking))
     const timer = setTimeout(() => {
       
-      navigate('/booking')
+      <Navigate to='/booking'  replace="/payment-success" />
+
       
     }, 3000);
 
@@ -34,8 +36,9 @@ const Payment = () => {
       <h1 className='text-bold text-3xl font-nunito text-green-500 '>Payment Successful</h1>
      </div> 
      </div>
-
+     <Navigate to='/booking'  replace="/payment-success"  />
     </div>
+    
   )
 }
 

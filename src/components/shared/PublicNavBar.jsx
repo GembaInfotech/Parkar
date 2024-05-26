@@ -64,8 +64,8 @@ const PublicNavbar = () => {
     [
 
       { name: 'ABOUT US', href: '/about', current: false },
-      { name: 'WE HELP YOU', href: '/contact', current: false },
-      { name: 'HOW DOES IT WORK', href: '/contact', current: false },
+      { name: 'WE HELP YOU', href: '/help-you', current: false },
+      { name: 'HOW DOES IT WORK', href: '/how-works', current: false },
       { name: 'CONTACT US', href: '/contact', current: false },
      
     ];

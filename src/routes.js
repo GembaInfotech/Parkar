@@ -20,6 +20,9 @@ import Bookings from "./pages/Bookings";
 import Payment from "./pages/Payment";
 import About from "./pages/About";
 import SignIn from "./pages/SignIn";
+import ContactUs from "./pages/ContactUs";
+import WeHelpYou from "./pages/WeHelpYou";
+import HowDoesItWork from "./pages/HowDoesItWork";
 const ReportedPost = lazy(() => import("./pages/ReportedPost"));
 const Moderator = lazy(() => import("./pages/Moderator"));
 const DevicesLocations = lazy(() => import("./pages/DevicesLocations"));
@@ -110,6 +113,18 @@ export const publicRoutes = [
   {
     path: "/about",
     element: <About />,
+  },
+  {
+    path: "/how-works",
+    element: <HowDoesItWork />,
+  },
+  {
+    path: "/help-you",
+    element: <WeHelpYou />,
+  },
+  {
+    path: "/contact",
+    element: <ContactUs />,
   },
   {
     path: "/search",

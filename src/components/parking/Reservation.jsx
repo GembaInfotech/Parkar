@@ -28,10 +28,10 @@ const Reservation = ({data, inT , ouT}) => {
         
         }
   return (
-    <div className=' sticky ml-4 shadow-2xl dark:bg-white rounded-2xl mt-16  w-1/3  h-96'>
-    <div className='p-8 pb-2'><p className='text-xl'>Reservation Details</p></div>
+    <div className=' sticky sm:ml-4 shadow-2xl dark:bg-white rounded-2xl my-2 sm:mt-16  sm:w-1/3  h-80 sm:h-96'>
+    <div className='p-4 sm:p-8 pb-2'><p className=' h1-phone sm:text-xl'>Reservation Details</p></div>
 
-     <div className='px-8 '>
+     <div className='px-4 sm:px-8 '>
        <div className=' border border-1 border-gray-400  rounded-3xl p-4 '>
        <div className='flex  justify-between '>
           <div>
@@ -40,7 +40,7 @@ const Reservation = ({data, inT , ouT}) => {
           <div className=' '>
            <div className='flex'>
            <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-3xl '/>
-            <p className='text-orange-400 font-bold text-2xl '>{amt} </p>
+            <p className='text-orange-400 font-bold text-xl sm:text-2xl '>{amt} </p>
            </div>
             <p className='text-[12px] text-gray-500'>for {Math.round(difference/60)} hours</p>
           </div>
@@ -51,12 +51,12 @@ const Reservation = ({data, inT , ouT}) => {
       <div className='flex justify-between '>
         <div>
           <div><p  className='text-[12px] text-gray-500'>Arrival </p>
-          <p> {format(inT , "EE dd MMMM hh:mm")}</p></div>
+          <p className=' p-phone sm:text-sm'> {format(inT , "EE dd MMMM hh:mm")}</p></div>
         </div>
         <div>
          
           <div><p className='text-[12px] text-gray-500'>Departure</p>
-           <p>{format(ouT, "EE dd MMMM  hh:mm")}</p>
+           <p className=' p-phone sm:text-sm'>{format(ouT, "EE dd MMMM  hh:mm")}</p>
           </div>
         </div>
       </div>

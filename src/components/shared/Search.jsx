@@ -58,13 +58,13 @@ function Search({inT, ouT}) {
     setInputFocused(false);
   };
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      fetchSuggestions(inputText);
-    }, 100);
+  // useEffect(() => {
+  //   const timerId = setTimeout(() => {
+  //     fetchSuggestions(inputText);
+  //   }, 100);
 
-    return () => clearTimeout(timerId);
-  }, [inputText]);
+  //   return () => clearTimeout(timerId);
+  // }, [inputText]);
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
@@ -89,6 +89,7 @@ function Search({inT, ouT}) {
    if(inputText && timeValues.inTime && timeValues.outTime && searchfor)
     navigate(`/search?place=${place}&lt=${ln}&ln=${lt}&in=${timeValues.inTime}&out=${timeValues.outTime}&type=${type}`);
    setRedirecting(false);
+   setShowDropdown(false)
   }
   const fetchSuggestions = async (text) => {
     if (text.trim() !== '') {
@@ -108,7 +109,9 @@ function Search({inT, ouT}) {
   const today = new Date().toISOString().slice(0, 16);
   const inTimeVal = new Date(timeValues?.inTime|| null).toISOString().slice(0, 16);
 
-
+  const handleClear = () => {
+    setInputText('');
+  };
   const handleSelectSuggestion = async (suggestion) => {
     setInputText(suggestion.properties.formatted);
     await setSearchfor(suggestion.geometry);
@@ -123,23 +126,50 @@ function Search({inT, ouT}) {
     <div className='mx-auto' >
 { location.pathname =="/" &&      <h1 className='text-white font-bold  text-2xl sm:text-4xl text-center'>THE  SMART WAY OF PARKING </h1>
 }    
-    <div className="   p-2 py-2 m-h-screen w-full sticky   mx-auto w-[80vw] max-sm:w-[80vw] top-20 z-10 mt-2 overflow-y:hidden">
+    <div className="    py-2 m-h-screen  sticky   mx-auto w-[70vw] max-sm:w-[80vw] top-20 z-10 mt-2 overflow-y:hidden">
      
 
     
       
       <div className={`${view ? 'null' : 'max-sm:hidden'}   items-center justify-center bg-white  rounded-xl  w-full flex max-sm:flex-col  shadow-lg  max-sm:p-4  sticky"`} >
-      <div className=' sm:hidden flex w-full  justify-end items-center'>
+      <div className=' sm:hidden flex w-full  justify-end items-center '>
          
          <RxCross2 onClick={()=>setView(!view)} className='sm:hidden float-right'/>
          </div>
-        <input className="font-bold uppercase rounded-l-xl max-sm:rounded-xl max-sm:w-full max-sm:m-1 w-[40%] py-4 max-sm:py-2 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs max-sm:text-[12px]" type="text"
+        <div className='w-[40%] flex  max-sm:w-full '>
+        <input 
+        className=" relative  w-[90%] font-bold uppercase rounded-l-xl max-sm:rounded-xl max-sm:m-1  py-4 max-sm:py-2 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs max-sm:text-[12px]" type="text"
         value={inputText}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+       
 
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={(e) =>{ setInputText(e.target.value)
+    fetchSuggestions(inputText)
+
+          }}
           placeholder="Type a location..." />
+        <div className='  flex items-center w-[10%] max-sm:rounded-xl max-sm:p-1 max-sm:my-1  bg-gray-100'>
+        {inputText && (
+        <button
+          onClick={handleClear}
+          className=" absolute  bg-gray-100  sm:borer  sm:border-black sm:border-r-2 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
+        >
+          <svg
+            className="h-5 w-5 "
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>)}
+        </div>
+        </div>
         <input aria-label="Date and time"
         
           className="font-bold uppercase max-sm:rounded-xl max-sm:w-full max-sm:m-1   py-4 px-4 max-sm:py-2 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"

@@ -263,7 +263,7 @@ const SignUpNew = () => {
             <button
               disabled={loading}
               type="submit"
-              className={`w-full transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
+              className={`w-full transform rounded-lg bg-blue-800 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
                 loading ? "cursor-not-allowed opacity-50" : ""
               }`}
             >
@@ -274,7 +274,7 @@ const SignUpNew = () => {
               )}
             </button>
 
-            <div onClick={() => setIsModalOpen(true)} className="mt-6">
+            {/* <div onClick={() => setIsModalOpen(true)} className="mt-6">
               {isConsentGiven && !isModerator ? (
                 <p className="mt-2 cursor-pointer rounded-lg border border-green-500 px-4 py-3 text-center text-sm font-semibold text-green-600">
                   Context-Based Authentication is enabled
@@ -284,7 +284,7 @@ const SignUpNew = () => {
                   Context-Based Authentication is disabled
                 </p>
               )}
-            </div>
+            </div> */}
 
             <div>
               <ContextAuthModal

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { confirmBookingAction, createBookingAction } from '../../redux/actions/bookingAction'
 import {  useNavigate } from 'react-router-dom'
+import { PiCurrencyInrLight } from "react-icons/pi";
+
 import ButtonLoadingSpinner from '../loader/ButtonLoadingSpinner'
 
 function loadScript(src) {
@@ -73,7 +76,6 @@ function Comp({amt, open, handleBooking}) {
 						{
 							try{
 							
-								
 								navigate(`/payment-success?id=${response.razorpay_payment_id}&order=${response.razorpay_order_id}`)
                                 
 							}
@@ -109,7 +111,7 @@ function Comp({amt, open, handleBooking}) {
 				
 				<button
 				
-					              className={`w-96 transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
+					              className={`sm:w-96 transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
 									launched ? "cursor-not-allowed opacity-50" : ""
 								  }`}
 					onClick={()=>{
@@ -124,7 +126,7 @@ function Comp({amt, open, handleBooking}) {
 					   {launched ? (
                 <ButtonLoadingSpinner loadingText="Redirecting to Payment Gateway" />
               ) : (
-                <span>Pay {amt}</span>
+                <span className='text-center'> <div className="flex justify-center"><p>Pay </p>  <PiCurrencyInrLight className='text-xl sm:font-bold'/> <p>{amt}</p></div></span>
               )}
 					
 				</button>

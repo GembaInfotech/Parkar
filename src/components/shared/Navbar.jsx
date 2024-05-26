@@ -24,6 +24,10 @@ import { FaGooglePlusG } from "react-icons/fa";
 
 const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
 
+
+
+
+  
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -60,16 +64,16 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
     [
 
 
-      { name: 'About', href: '/about', current: false },
-      { name: 'We help you', href: '/contact', current: false },
-      { name: 'Contact Us', href: '/contact', current: false },
-      { name: 'Professionals', href: '/contact', current: false },
+      { name: 'ABOUT US', href: '/about', current: false },
+      { name: 'WE HELP YOU', href: '/help-you', current: false },
+      { name: 'CONTACT US', href: '/contact', current: false },
+      { name: 'PROFESSIONALS', href: '/professionals', current: false },
     ] :
     [
 
       { name: 'ABOUT US', href: '/about', current: false },
-      { name: 'WE HELP YOU', href: '/contact', current: false },
-      { name: 'HOW DOES IT WORK', href: '/contact', current: false },
+      { name: 'WE HELP YOU', href: '/help-you', current: false },
+      { name: 'HOW DOES IT WORK', href: '/how-works', current: false },
       { name: 'CONTACT US', href: '/contact', current: false },
      
     ];

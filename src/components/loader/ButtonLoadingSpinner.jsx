@@ -1,7 +1,7 @@
 const ButtonLoadingSpinner = ({ loadingText }) => {
   return (
     <div className="flex justify-center items-center">
-      <span className="mr-2">
+      <span className="mr-2 p-phone sm:text-sm">
         {loadingText ? loadingText : "Just a moment..."}
       </span>
       <div className="flex justify-center items-center">

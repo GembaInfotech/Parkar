@@ -70,28 +70,28 @@ function Checkout() {
     <div className='w-[90vw] mx-auto'>
 
       <div className='flex justify-between mx-auto mt-4'>
-        <button className={activeSection === 'section1' ? 'section active p-2 py-1 text-2xl rounded-2xl font-nunito-sans mx-8' : 'p-2 py-1 text-xl rounded-2xl font-nunito-sans mx-8 '}
+        <button className={activeSection === 'section1' ? 'section active p-2 py-1 text-2xl rounded-2xl font-nunito-sans mx-0' : 'p-2 py-1 text-xl rounded-2xl font-nunito-sans mx-2 '}
           onClick={() => toggleSection('section1')}>My Details</button>
       </div>
-      <div className='flex justify-between items-center mx-auto  w-full '>
+      <div className='flex max-sm:flex-col justify-between items-center   w-[100%] '>
 
-        <div className='w-1/2 '>
-          <h1 className='text-xl'>Vehicle Information</h1>
+        <div className='sm:w-1/2 mx-2 bg-gray-100 p-2 rounded-md'>
+          <h1 className='  h3-phone sm:text-xl'>Vehicle Information</h1>
 
           <VehicleComponent handler={handleVehicle} />
 
         </div>
 
-        <div className=''>
-
-          <div className=' sticky ml-4 shadow-2xl dark:bg-white rounded-2xl   border border-1 border-gray-300  '>
-            <div className='p-6 pb-2'><p className='text-sm text-gray-600'>Summary</p></div>
 
 
-            <div className='px-6 '>
+          <div className=' max-sm:w-[100%] max-sm:my-2 sticky sm:ml-4 shadow-2xl dark:bg-white rounded-2xl   border border-1 border-gray-300  '>
+            <div className=' p-4 sm:p-6 pb-2'><p className='text-sm text-gray-600'>Summary</p></div>
 
-              <div className=' border border-1 border-gray-100  rounded-3xl   '>
-                <h1 className='text-gray-700 font-bold-600'>{name}</h1>
+
+            <div className=' px-2 '>
+
+              <div className=' border border-1 border-gray-100 p-2 sm:px-4  rounded-3xl   '>
+                <h1 className='text-gray-700 font-bold-600  sm:text-xl'>{name}</h1>
                 <div className='flex justify-between text-sm py-1'>
                   <h1 className='text-gray-700 font-bold-600'>{Math.round(dif / 60)} hour</h1>
                   <div className='flex'>
@@ -126,7 +126,7 @@ function Checkout() {
                 </div>
                 <div className='flex justify-between '>
                   <div>
-                    <div><p className='text-xl text-gray-500'>Total </p>
+                    <div><p className='sm:text-xl text-gray-500'>Total </p>
                     </div>
                   </div>
                   <div>
@@ -163,7 +163,9 @@ function Checkout() {
               <div>
                 {
                   clicked  ? <button
-                  className={`w-96 transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
+
+               
+                  className={`  sm:w-96 transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
                     !clicked ? "cursor-not-allowed opacity-50" : ""
                     }`}
                   onClick={()=>{handleBooking() ;
@@ -178,7 +180,7 @@ function Checkout() {
             </div>
 
           </div>
-        </div>
+      
       </div>
 
 

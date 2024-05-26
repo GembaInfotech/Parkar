@@ -30,7 +30,7 @@ const  ParkingList =({ data, inT, outT }) =>{
 
           <div className='flex flex-col'>
               <h3 className="  font-bold  text-[20px] text-gray-900 ">{data.name}</h3>
-              <h3 className="  font-normal  text-left text-sm text-gray-400  ">{data.address_line1}, {data?.address_line2}, {data.city}</h3>
+              <h3 className="  font-normal  text-left p-phone md:text-sm text-gray-400  ">{data.address_line1}, {data?.address_line2}, {data.city}</h3>
             </div>
 
             <div className='flex justify-between'>
