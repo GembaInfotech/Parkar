@@ -16,7 +16,7 @@ const UserProfile = ({ userData }) => {
   useEffect(() => {
     setLoading(true);
     const fetchUser = async () => {
-      await dispatch(getUserAction(userData._id));
+      await dispatch(getUserAction(userData?._id));
     };
     fetchUser().then(() => setLoading(false));
   }, [dispatch, userData._id]);

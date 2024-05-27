@@ -4,6 +4,7 @@ import { getPostsAction, getSavedPostsAction } from "./postActions";
 
 export const getUserAction = (id) => async (dispatch) => {
   try {
+    console.log(id)
     const { error, data } = await api.getUser(id);
 
     if (error) {

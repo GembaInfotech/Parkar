@@ -124,9 +124,9 @@ function Search({inT, ouT}) {
 
 
     <div className='mx-auto' >
-{ location.pathname =="/" &&      <h1 className='text-white font-bold  text-2xl sm:text-4xl text-center'>THE  SMART WAY OF PARKING </h1>
+{ location.pathname =="/" &&      <h1 className='text-white font-bold  text-2xl sm:text-4xl mt-24 mb-8 sm:mt-32 text-center'>THE  SMART WAY OF PARKING </h1>
 }    
-    <div className="    py-2 m-h-screen  sticky   mx-auto w-[70vw] max-sm:w-[80vw] top-20 z-10 mt-2 overflow-y:hidden">
+    <div className="    pb-2 m-h-screen  sticky   mx-auto w-[70vw] max-sm:w-[80vw] top-20 z-10  overflow-y:hidden">
      
 
     

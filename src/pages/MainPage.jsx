@@ -1,6 +1,6 @@
 import React from 'react'
 import Search from '../../src/components/shared/Search'
-import imageUrl from '../assets/home.jpg'
+import imageUrl from '../assets/homepage.jpg'
 import HeroSection from '../components/home/HeroSection'
 
 const MainPage = () => {
@@ -11,7 +11,7 @@ const MainPage = () => {
 
     <div>
       
-    <div className='h-screen flex  items-center dark-overlay justify-between max-sm:h-[50vh]   md:h-screen' 
+    <div className=' flex   dark-overlay justify-between max-sm:h-[50vh]   sm:h-[90vh]' 
     style={{ backgroundImage: `url(${imageUrl}) `, height: '  md:100vh',
     width:'100vw',
     backgroundSize: 'cover',

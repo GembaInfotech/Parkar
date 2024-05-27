@@ -45,10 +45,16 @@ function Comp({amt, open, handleBooking}) {
         return 
       }
 
+
+	  const createBookinginDatabase = async (transaction_id) =>{
+		booking.transaction_id =transaction_id
+		const bookingId = await dispatch(createBookingAction(booking, navigate))
+            return bookingId
+	  }
+
 	async function displayRazorpay() {
 		setLaunched(true)
              console.log(booking)
-        const bookingId = await dispatch(createBookingAction(booking, navigate))
 
 		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
 
@@ -69,13 +75,16 @@ function Comp({amt, open, handleBooking}) {
 			name: 'Parkar',
 			description: 'Thank you for booking with us. Please pay your booking amount',
 			image: 'http://localhost:1337/logo.svg',
-			handler: function (response) {
+			handler:async function (response) {
                 axios.post('/verification', {response:response})
                 .then(res=>{
                     if(res.data.status=="ok")
 						{
 							try{
-							
+                                  console.log(res);
+
+								  const data =  createBookinginDatabase(response.razorpay_payment_id)
+
 								navigate(`/payment-success?id=${response.razorpay_payment_id}&order=${response.razorpay_order_id}`)
                                 
 							}

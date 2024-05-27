@@ -1,9 +1,10 @@
 import { useMemo, useEffect, memo } from "react";
-import { Link } from "react-router-dom";
+import { Link , useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { IoCarOutline } from "react-icons/io5";
 import { BsBookmarkCheck } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
+
 
 
 
@@ -15,42 +16,66 @@ import {
 } from "react-icons/hi2";
 
 
-const Leftbar = ({ showLeftbar }) => {
+const Leftbar = ({ showLeftbar, userData }) => {
+  const location = useLocation();
+
+  // Define a function to determine if the link is active based on the URL path
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
 
   return (
    
-      <div className="flex flex-col justify-start  items-center h-[84vh] bg-gray-700 rounded-3xl sticky top-20  ">
+      <div className="flex flex-col justify-start  items-center h-[90vh]  sm:h-[84vh] bg-[#110065] rounded-md sticky top-20  ">
         <div className=" font-nunito-sans flex flex-col items-start text-white gap-4 w-full p-5">
+        
+        <div className="flex flex-col justify-center items-center w-[100%] ">
+          <img src={userData?.avatar} alt="" className="rounded-full w-12 h-auto" />
+          <p className="p-phone sm:text-lg mt-1">{userData?.name}</p>
+        </div>
+          <div className="border-0 border-b-2 border-gray-100 w-full"></div>
+        <Link
+            style={{ color: isActive('/dashboard') ? 'blue' : null }}
+            className=" flex hover:bg-white hover:text-black hover:rounded-xl transition:smooth hover:w-full  duration-300 hover:px-2 hover:py-1 items-center gap-2 text-lg font-medium hover:text-primary"
+            to="/dashboard"
+          >
+            <HiOutlineHome className="text-xl" />
+            <p className="font-nunito-sans p-phone  sm:text-lg">Dashboard</p>
+          </Link>
           <Link
-            className=" flex hover:bg-white hover:text-black hover:rounded-2xl transition:smooth hover:w-full  duration-300 hover:px-2 items-center gap-2 text-lg font-medium hover:text-primary"
+            style={{ color: isActive('/profile') ? 'blue' : null }}
+            className=" flex hover:bg-white hover:text-black hover:rounded-xl transition:smooth hover:w-full  duration-300 hover:px-2 hover:py-1 items-center gap-2 text-lg font-medium hover:text-primary"
             to="/profile"
           >
             <HiOutlineHome className="text-xl" />
-            <p className="font-nunito-sans">Profile</p>
+            <p className="font-nunito-sans p-phone  sm:text-lg">Profile</p>
           </Link>
           <Link
-            className="flex hover:bg-white hover:text-black hover:rounded-2xl transition:smooth hover:w-full  duration-300 hover:px-2 items-center gap-2 text-lg font-medium hover:text-primary"
+            style={{ color: isActive('/booking') ? 'blue' : null }}
+            className="flex hover:bg-white hover:text-black hover:rounded-xl transition:smooth hover:w-full  duration-300 hover:px-2 hover:py-1 items-center gap-2 text-lg font-medium hover:text-primary"
             to="/booking"
           >
             <HiOutlineRectangleStack className="text-xl" />
-            <p className="font-nunito-sans">Booking</p>
+            <p className="font-nunito-sans p-phone  sm:text-lg">Booking</p>
           </Link>
           <Link
-            className="flex hover:bg-white hover:text-black hover:rounded-2xl transition:smooth hover:w-full  duration-300 hover:px-2 items-center gap-2 text-lg font-medium hover:text-primary"
+            style={{ color: isActive('/vehicles') ? 'blue' : null }}
+            className="flex hover:bg-white hover:text-black hover:rounded-xl transition:smooth hover:w-full  duration-300 hover:px-2 hover:py-1 items-center gap-2 text-lg font-medium hover:text-primary"
             to="/vehicles"
           >
             <IoCarOutline className="text-xl" />
-            <p className="font-nunito-sans">Vehicle</p>
+            <p className="font-nunito-sans p-phone  sm:text-lg">Vehicle</p>
           </Link>
 
        
             <Link
-            className="flex hover:bg-white hover:text-black hover:rounded-2xl transition:smooth hover:w-full  duration-300 hover:px-2 items-center gap-2 text-lg font-medium hover:text-primary"
+              style={{ color: isActive('/setting') ? 'blue' : null }}
+            className="flex hover:bg-white hover:text-black hover:rounded-xl transition:smooth hover:w-full  duration-300 hover:px-2 hover:py-1 items-center gap-2 text-lg font-medium hover:text-primary"
             to="/setting"
             >
               <CiSettings className="text-xl" />
-              <p className="font-nunito-sans">Setting</p>
+              <p className="font-nunito-sans p-phone  sm:text-lg">Setting</p>
             </Link>
           
 

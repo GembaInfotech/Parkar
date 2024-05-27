@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getVehicleAction, selectVehicleAction } from '../../redux/actions/vehicleActions';
 import { FaDotCircle } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 const VehicleComponent = ({handler}) => {
@@ -33,7 +34,7 @@ const VehicleComponent = ({handler}) => {
 
 
       if(vehicle?.length==0){
-        return <h1>Kindly add One vehicle for proceed</h1>
+        return <h1>Kindly add One vehicle for proceed <span><Link to="/vehicles" className='text-blue p-phone sm:text-sm'> Add Vehicle</Link></span></h1>
       }
 
 

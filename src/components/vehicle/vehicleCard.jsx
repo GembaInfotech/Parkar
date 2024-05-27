@@ -1,9 +1,10 @@
+import { FaCarRear } from "react-icons/fa6";
 
 const vehicleCard = ({ vehicle }) => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-[#1034A6]">
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{vehicle.name}</div>
+        <div className="font-bold text-sm sm:text-xl mb-2">{vehicle.name}</div>
         <p className="text-gray-700 text-base">
           <span className="font-semibold">ID:</span> {vehicle.id}
         </p>

@@ -287,3 +287,12 @@ body {
  .error-msg{
   @apply  text-red-500 md:text-sm  text-[12px]
  }
+ .blue-button{
+  background-color: #030a6b;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  margin-top: 4px;
+  color: white;
+
+ }

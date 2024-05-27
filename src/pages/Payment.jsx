@@ -12,11 +12,9 @@ const Payment = () => {
 		(state) => state.bookings?.createBookingSuccess)
   useEffect(() => {
     
-    dispatch(confirmBookingAction(createdBooking))
     const timer = setTimeout(() => {
       
-      <Navigate to='/booking'  replace="/payment-success" />
-
+navigate('/booking')
       
     }, 3000);
 
@@ -26,7 +24,7 @@ const Payment = () => {
 
   }, []);
   return (
-    <div className='h-screen flex  items-center justify-center'>
+    <div className='h-[90vh]   items-center justify-center'>
      
      <div className=' flex flex-col  items-center justify-center   '>
      <div className='text-center' >
@@ -36,7 +34,6 @@ const Payment = () => {
       <h1 className='text-bold text-3xl font-nunito text-green-500 '>Payment Successful</h1>
      </div> 
      </div>
-     <Navigate to='/booking'  replace="/payment-success"  />
     </div>
     
   )

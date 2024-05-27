@@ -23,7 +23,7 @@ const Bookings = () => {
           return null;
         }
         return data.map((booking) => (
-          <div key={booking._id} className="main-section flex items-center">
+          <div key={booking._id} className=" ">
             <BookingCard className="mb-5" data={booking} />
           </div>
         ));
@@ -42,7 +42,7 @@ const Bookings = () => {
 
       
 {/* <ParkingRender data={data.data} /> */}
-<div className="main-section">{bookingCards}</div>
+<div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{bookingCards}</div>
 
 
   </div>

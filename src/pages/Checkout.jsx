@@ -51,6 +51,8 @@ function Checkout() {
     cgst: Math.ceil(amt * 0.09),
     totalPrice: Number(amount),
     vehicle: vehicle,
+    transaction_id: '' ,
+    order_id: '' ,
     vehicle_number: '',
     vehicle_name: ''
   });

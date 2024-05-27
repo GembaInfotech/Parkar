@@ -81,7 +81,7 @@ const PublicNavbar = () => {
   };
 
   return (
-    <div className="flex flex-col relative z-50  ">
+    <div className="flex flex-col relative z-50  sticky fixed top-0 bg-white  ">
       <div className="flex flex-row justify-between max-sm:px-4 px-24  mb-1">
         <div className="flex items-center">
           <img className="md:h-10 md:w-20 h-10 w-16" src={logo} href="/" />
@@ -166,18 +166,20 @@ const PublicNavbar = () => {
               )}
             </Transition>
           </div> }
-<HiOutlineMenu onClick={()=>{setOpen(!open)}} className="text-2xl"/>
+
+          {open ? <RxCross1 onClick={()=>{setOpen(!open)}} className="text-2xl"/> : <HiOutlineMenu onClick={()=>{setOpen(!open)}} className="text-2xl"/>
+}
         </div>
       </div>
       
-      <div className={    ` sm:my-1  max-sm:absolute max-sm:top-11 max-sm:h-screen   max-sm:px-2 px-24 flex flex-row max-sm:flex-col justify-between max-sm:justify-start  ${open  ? "max-sm:w-48 max-sm:bg-gray-200" :"max-sm:hidden "} `}>
+      <div className={    ` sm:my-1  max-sm:absolute max-sm:top-11 max-sm:h-screen   max-sm:px-2 px-24 flex flex-row max-sm:flex-col justify-between max-sm:justify-start  ${open  ? "max-sm:w-full max-sm:bg-white" :"max-sm:hidden "} `}>
         <div>
           <ul className="flex max-sm:flex-col font-semibold">
-          <li className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[10px] lg:text-xs"><Link to="/"><FaHome className="text-xl text-blue-600"/></Link></li>
+          <li className="max-sm:pt-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[12px] lg:text-xs"><Link to="/"><FaHome className=" text-3xl sm:text-2xl text-blue-600"/></Link></li>
 
           {navigation.map((item) => (
                            <Link to={`${item.href}`}
-                           className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[10px] lg:text-xs"
+                           className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[14px] lg:text-xs"
                            >
                             <p 
     >{item.name}</p>
@@ -260,12 +262,12 @@ const PublicNavbar = () => {
     </div>:  <div className="flex max-sm:flex-col font-semibold"> 
           <div className="">
 <Link  to="/signin">
-<p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[10px] sm:text-[10px] lg:text-xs  ">USER LOGIN</p>
+<p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[14px] sm:text-[10px] lg:text-xs  ">USER LOGIN</p>
 </Link>
           </div>
           <div className="">
           <Link  to="/signup">
-<p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[10px] sm:text-[10px] lg:text-xs  ">USER SIGNUP</p>
+<p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[14px] sm:text-[10px] lg:text-xs  ">USER SIGNUP</p>
 </Link>          </div>
         </div>}
       </div>

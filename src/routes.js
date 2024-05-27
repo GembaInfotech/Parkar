@@ -23,6 +23,7 @@ import SignIn from "./pages/SignIn";
 import ContactUs from "./pages/ContactUs";
 import WeHelpYou from "./pages/WeHelpYou";
 import HowDoesItWork from "./pages/HowDoesItWork";
+import Dashboard from "./pages/Dashboard";
 const ReportedPost = lazy(() => import("./pages/ReportedPost"));
 const Moderator = lazy(() => import("./pages/Moderator"));
 const DevicesLocations = lazy(() => import("./pages/DevicesLocations"));
@@ -45,6 +46,10 @@ export const privateRoutes = [
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
   {
     path: "/vehicles",

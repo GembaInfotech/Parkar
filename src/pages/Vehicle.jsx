@@ -57,7 +57,7 @@ useEffect(()=>{
         onClose={() => toggleModal(false)}
        
       />
-<div className="main-section">
+<div className="main-section  overflow-y-auto max-h-screen">
  <button onClick={()=>{call()}}>call</button>
 
  <button
@@ -67,14 +67,15 @@ useEffect(()=>{
                 </button>
 
 
-
+                <div  className="grid grid-cols-1 sm:grid-cols-2  gap-0">
  {vehicle?.map((vehicled, index) => (
 
-        <div key={index}>
+    
          
-         <Cards vehicle={vehicled} />
-        </div>
+         <Cards key={index} vehicle={vehicled} />
+       
       ))}
+       </div>
 
   </div>
   </div>
