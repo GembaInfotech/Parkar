@@ -18,7 +18,9 @@ const MainPage = () => {
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'}}  >
      
-      <Search/>
+     <div className='mt-16 sm:mt-32 md:mt-24 lg:mt-16 flex mx-auto justify-center'>
+      <Search/> 
+     </div>
    
     </div>
 

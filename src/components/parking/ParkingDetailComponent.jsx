@@ -8,6 +8,7 @@ import { selecetedParking } from '../../redux/actions/parkingAction';
 import Search from '../shared/Search';
 import { format, parseISO } from 'date-fns';
 import Tooltip from "../shared/Tooltip";
+import image2 from '../../assets/road2.jpg'
 
 
 import { PiCurrencyInrLight } from "react-icons/pi";
@@ -63,9 +64,9 @@ const ParkingDetailComponent = ({ data, inT, ouT }) => {
         </div>
         <div className=' flex overflow-x-auto w-full  scrollbar-hide'>
           <img src={img} alt="" className='m-2 rounded-2xl h-32 sm:h-48 ' />
+          <img src={image2} alt="" className='m-2 rounded-2xl h-32 sm:h-48' />
           <img src={img} alt="" className='m-2 rounded-2xl h-32 sm:h-48' />
-          <img src={img} alt="" className='m-2 rounded-2xl h-32 sm:h-48' />
-          <img src={img} alt="" className='m-2 rounded-2xl h-32 sm:h-48' />
+          <img src={image2} alt="" className='m-2 rounded-2xl h-32 sm:h-48' />
 
         </div>
 
@@ -90,8 +91,7 @@ const ParkingDetailComponent = ({ data, inT, ouT }) => {
             <div className='text-gray-700'>
               <h1 className='p-phone sm:text-sm'>
                 {data.description}
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quas accusantium a, vitae iste quod sed totam odit? Error, nulla. Vitae officia sequi a in alias iure ea neque adipisci?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis similique recusandae odio ipsum ratione ullam optio tenetur consequuntur natus nemo ea voluptate mollitia voluptas beatae sit iste consectetur, perspiciatis voluptates?</h1>
+               </h1>
             </div>
           </div>
         </div>

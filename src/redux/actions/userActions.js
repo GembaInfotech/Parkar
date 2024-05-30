@@ -118,6 +118,38 @@ export const unfollowUserAction = (id) => async (dispatch) => {
     });
   }
 };
+export const getCityAction = (state) => async (dispatch) => {
+  try {
+    const { error, data } = await api.getCity(state);
+    console.log(data)
+    if (error) {
+      throw new Error(error);
+    }
+    dispatch({
+      type: types.GET_CITY,
+      payload: data,
+    });
+   
+  } catch (error) {
+    
+  }
+};
+export const getStateAction = () => async (dispatch) => {
+  try {
+    const { error, data } = await api.getState();
+    console.log(data)
+    if (error) {
+      throw new Error(error);
+    }
+    dispatch({
+      type: types.GET_STATE,
+      payload: data,
+    });
+   
+  } catch (error) {
+    
+  }
+};
 export const getFollowingUsersAction = () => async (dispatch) => {
   try {
     const { error, data } = await api.getFollowingUsers();

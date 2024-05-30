@@ -5,6 +5,7 @@ import { createVehicleAction, getVehicleAction } from '../redux/actions/vehicleA
 import CommonLoading from "../components/loader/CommonLoading";
 import Cards from "../components/vehi/Cards";
 import DeleteModal from "../components/modals/DeleteModal";
+import VehicleForm from "../components/vehi/VehicleForm";
 
 function Vehicle() {
   const [showModal, setShowModal] = useState(false);
@@ -20,12 +21,7 @@ function Vehicle() {
   );
  console.log(vehicle)
   const call =() => {
-    setLoading(true)
-    const fetchData = async () => {
-      await dispatch(createVehicleAction());
-      setLoading(false);
-    };
-    fetchData();
+       setShowModal(!showModal)
   };
  
 useEffect(()=>{
@@ -51,23 +47,16 @@ useEffect(()=>{
 
   return   (
 <div>
-<DeleteModal
-        showModal={showModal}
-       
-        onClose={() => toggleModal(false)}
-       
-      />
-<div className="main-section  overflow-y-auto max-h-screen">
- <button onClick={()=>{call()}}>call</button>
 
- <button
-                onClick={() => toggleModal(true)}
-                className="text-red-500"
-              > button 
-                </button>
+<div className="main-section relative overflow-y-auto max-h-screen">
 
 
-                <div  className="grid grid-cols-1 sm:grid-cols-2  gap-0">
+
+    { showModal &&   <div className=" left-20 bg-white flex mx-auto items-center"> <VehicleForm   /></div> }
+
+
+        { !showModal &&         <div  className="grid grid-cols-1 sm:grid-cols-2  gap-0">
+        <Cards call={call} />
  {vehicle?.map((vehicled, index) => (
 
     
@@ -75,7 +64,7 @@ useEffect(()=>{
          <Cards key={index} vehicle={vehicled} />
        
       ))}
-       </div>
+       </div>}
 
   </div>
   </div>

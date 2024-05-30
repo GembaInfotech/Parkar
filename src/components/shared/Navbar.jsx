@@ -174,17 +174,19 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
             </Transition>
           </div> }
         
-          <HiOutlineMenu  onClick={()=>{setOpen(!open)}} className="text-2xl"/>
+          {open ? <RxCross1 onClick={()=>{setOpen(!open)}} className="text-2xl"/> : <HiOutlineMenu onClick={()=>{setOpen(!open)}} className="text-2xl"/>
+}
         </div>
       </div>
       
       <div className={    ` sm:my-1  max-sm:absolute max-sm:top-11 max-sm:h-screen   max-sm:px-2 px-24 flex flex-row max-sm:flex-col justify-between max-sm:justify-start  ${open  ? "max-sm:w-full max-sm:bg-white" :"max-sm:hidden "} `}>
         <div>
           <ul className="flex max-sm:flex-col font-semibold">
-          <li className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[10px] lg:text-xs"><Link to="/"><FaHome className="text-xl text-blue-600 "/></Link></li>
+          <li onClick={()=>{setOpen(false)}}  className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[10px] lg:text-xs"><Link to="/"><FaHome className="text-xl text-blue-600 "/></Link></li>
 
           {navigation.map((item) => (
                            <Link to={`${item.href}`}
+                           onClick={()=>{setOpen(false)}}
                            className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[14px] lg:text-xs"
                            >
                             <p 
@@ -200,15 +202,15 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
          <div className=" max-sm:hidden relative flex justify-end md:w-36">
             <button
               type="button"
-              className="inline-flex h-8 w-24 cursor-pointer items-center justify-center rounded-full"
+              className="inline-flex max-sm:h-4 max-sm:w-16 h-8 w-24 cursor-pointer items-center justify-center rounded-full"
               onClick={handleProfileClick}
             >
               <img
                 src={userData.avatar}
                 alt="profile"
-                className="h-12 w-12  rounded-full object-cover"
+                className="h-8 w-12  rounded-full object-cover"
               />
-                                          <p className="text-sm font-semibold text-gray-700 ">{userData?.name}</p>
+                                          <p className="text-sm  min-w-fit font-semibold text-gray-700 ">{userData?.name}</p>
 
             </button>
             <Transition

@@ -99,16 +99,16 @@ const PublicNavbar = () => {
         </div>
         <div className="sm:hidden flex items-center " >
 
-        { userData && <div className=" sm:hidden relative flex justify-end md:w-36">
+        { userData && <div className=" sm:hidden relative flex justify-end  md:w-36">
             <button
               type="button"
-              className="inline-flex h-8 w-24 cursor-pointer items-center justify-end rounded-full"
+              className="inline-flex max-sm:h-4 max-sm:w-16 h-8 w-24 cursor-pointer items-center justify-end rounded-full"
               onClick={handleProfileClick}
             >
               <img
                 src={userData?.avatar}
                 alt="profile"
-                className="h-12 w-12  rounded-full object-cover"
+                className=" h-12 w-12  rounded-full object-cover"
               />
                                           <p className="text-sm font-semibold text-gray-700 max-sm:hidden">{userData?.name}</p>
 
@@ -175,10 +175,11 @@ const PublicNavbar = () => {
       <div className={    ` sm:my-1  max-sm:absolute max-sm:top-11 max-sm:h-screen   max-sm:px-2 px-24 flex flex-row max-sm:flex-col justify-between max-sm:justify-start  ${open  ? "max-sm:w-full max-sm:bg-white" :"max-sm:hidden "} `}>
         <div>
           <ul className="flex max-sm:flex-col font-semibold">
-          <li className="max-sm:pt-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[12px] lg:text-xs"><Link to="/"><FaHome className=" text-3xl sm:text-2xl text-blue-600"/></Link></li>
+          <li  onClick={()=>{setOpen(false)}} className="max-sm:pt-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[12px] lg:text-xs"><Link to="/"><FaHome className=" text-3xl sm:text-2xl text-blue-600"/></Link></li>
 
           {navigation.map((item) => (
                            <Link to={`${item.href}`}
+                           onClick={()=>{setOpen(false)}}
                            className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[14px] lg:text-xs"
                            >
                             <p 
@@ -200,7 +201,7 @@ const PublicNavbar = () => {
         <img
           src={userData.avatar}
           alt="profile"
-          className="h-18 w-10  rounded-full object-cover"
+          className="h-8 w-8  rounded-full object-cover"
         />
                                           <p className="  text-sm font-semibold text-gray-700 ">{userData?.name}</p>
 

@@ -1,18 +1,33 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import { getBookingAction } from '../redux/actions/bookingAction';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user?.user);
+  const data = useSelector((state)=>state.bookings?.bookings)
+  useEffect(()=>{
+      const fetchData = async () => {
+          await dispatch(getBookingAction());
+         
+        };
+        fetchData();
+  },[])
+
   return (
     <div>
         
-        <div className=" flex flex-col sm:flex-row">
+      { user.vehicle?   <div className=" flex flex-col sm:flex-row">
             <div className="flex justify-center m-2  rounded-md items-center h-20 sm:h-32 w-48 sm:w-72 bg-blue-900 text-white">
-                <p>3 Vehicles </p>
+                <p>{user?.vehicle?.length} Registered Vehicles </p>
             </div>
             <div className="flex justify-center m-2  rounded-md items-center h-20 sm:h-32 w-48  sm:w-72 bg-blue-700 text-white">
-                <p>3 Booking  </p>
+                <p>{data?.length} Booking  </p>
             </div>
           
-        </div>
+        </div>  :  <h2 className='p-phone sm:text-sm'> We are currently unable to fetch Details</h2>}
     </div>
   )
 }

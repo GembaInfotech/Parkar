@@ -66,3 +66,19 @@ export const getFollowingUsers = async () => {
     return handleApiError(error);
   }
 };
+export const getState = async () => {
+  try {
+    const { data } = await API.get("/add/state");
+    return { error: null, data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+export const getCity = async (state) => {
+  try {
+    const { data } = await API.get(`/add/city/${state}`);
+    return { error: null, data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};

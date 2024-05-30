@@ -4,6 +4,8 @@ import { getBookingAction } from '../redux/actions/bookingAction'
 
 import CommonLoading from "../components/loader/CommonLoading";
 import BookingCard from '../components/booking/BookingCard';
+import { Link } from 'react-router-dom';
+import Search from '../components/shared/Search';
 
 const Bookings = () => {
     const dispatch = useDispatch()
@@ -41,7 +43,16 @@ const Bookings = () => {
     <div>
 
       
-{/* <ParkingRender data={data.data} /> */}
+
+
+    
+  
+<Search/>
+   
+
+   
+
+  
 <div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{bookingCards}</div>
 
 

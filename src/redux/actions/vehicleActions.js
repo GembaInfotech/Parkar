@@ -1,9 +1,9 @@
 import * as api from "../api/vehicleAPI";
 import * as types from "../constants/vehicleConstants";
 
-export const createVehicleAction = (vehicle) => async (dispatch) => {
+export const createVehicleAction = ({vehicleName, vehicleNumber, vehicleType}) => async (dispatch) => {
   try {
-    const { error, data } = await  api.createVehicle(vehicle);
+    const { error, data } = await  api.createVehicle({vehicleName, vehicleNumber, vehicleType});
     if (error) {
       throw new Error(error);
     }
@@ -88,6 +88,19 @@ export const getVehicleAction = () => async (dispatch) => {
         requiresAuth: true,
       },
     });
+  }
+};
+export const deleteVehicleAction = (id) => async (dispatch) => {
+  try {
+    const { error, data } = await  api.deleteVehicle(id);
+    
+    if (error) {
+      throw new Error(error);
+    }
+ 
+    
+  } catch (error) {
+   console.log("error" , error)
   }
 };
 

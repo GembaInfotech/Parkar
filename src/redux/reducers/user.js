@@ -7,6 +7,8 @@ const initialState = {
   publicUserProfile: {},
   followingUsers: [],
   isFollowing: null,
+  state:[],
+  city:[],
   userError: null,
 };
 
@@ -27,6 +29,10 @@ const userReducer = (state = initialState, action) => {
 
     case types.GET_USER_SUCCESS:
       return { ...state, user: payload, userError: null };
+      case types.GET_STATE:
+        return { ...state, state: payload, userError: null };
+        case types.GET_CITY:
+          return { ...state, city: payload, userError: null };
 
     case types.GET_USER_FAIL:
       return { ...state, userError: payload };

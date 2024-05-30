@@ -42,7 +42,7 @@ const AppContainer = () => {
         const appStore = await createAppStore();
         setStore(appStore);
       } catch (err) {
-        setError(`Error initializing the app: ${err.message}`);
+        setError(`Oops.. Please reload the Page`);
       } finally {
         setLoading(false);
       }

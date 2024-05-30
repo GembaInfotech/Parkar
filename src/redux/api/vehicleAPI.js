@@ -1,12 +1,12 @@
 import { API, handleApiError } from "./utils";
 
-export const createVehicle = async () => {
+export const createVehicle = async ({vehicleName, vehicleNumber, vehicleType}) => {
   try {
     const vehicle ={
-        vehicle_name:"santro",
-        vehicle_number:"mh06hg2180",
-        vehicle_type:"four wheeler",
-        isDefault:true
+        vehicle_name:vehicleName,
+        vehicle_number:vehicleNumber,
+        vehicle_type:vehicleType,
+        isDefault:false
     }
     console.log(vehicle)
     const {data} = await API.post(`/vehicle/create-new-vehicle`,  {vehicle}, 
@@ -81,4 +81,15 @@ export const getVehicle = async () => {
   };
 
 
-
+  export const deleteVehicle = async (id) => {
+    try {
+     
+      const {data} = await API.delete(`/vehicle/delete-vehicle/${id}` 
+       );
+      
+      return { error: null, data };
+    } catch (error) {
+  
+      return handleApiError(error);
+    }
+  };

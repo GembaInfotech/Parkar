@@ -1,17 +1,23 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { useState } from "react";
+
 import {
   getUserAction,
   updateUserAction,
+  getCityAction
 } from "../../redux/actions/userActions";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import ButtonLoadingSpinner from "../loader/ButtonLoadingSpinner";
 import { FiUser, FiMapPin, FiEdit } from "react-icons/fi";
+import CommonLoading from "../loader/CommonLoading";
 
 
 
-const ProfileUpdateModal = ({ user }) => {
+const ProfileUpdateModal = ({ user, stateList }) => {
   const dispatch = useDispatch();
+  const cityList = useSelector((state) =>state?.user?.city)
+  const [load, setLoad] = useState(false);
 
   const [isUpdating, setIsUpdating] = useState(false);
   const [name, setName] = useState(user.name ? user.name : "");
@@ -42,18 +48,20 @@ const ProfileUpdateModal = ({ user }) => {
 
     await dispatch(updateUserAction(user._id, formData));
     await dispatch(getUserAction(user._id));
-    setName("");
-    setcontact("");
-    setpincode("");
-    setaddress("");
-    setcity("");
-    setstate("");
-    setcountry("");
-    setlicence_no("");
+   
 
     setIsUpdating(false);
+ console.log(cityList.city)
+  
 
   };
+  const getCityFunc= async (state) =>{
+     setLoad(true);
+    await dispatch(getCityAction(state));
+    setLoad(false);
+
+  }
+  console.log(cityList)
 
   return (
 
@@ -75,6 +83,7 @@ const ProfileUpdateModal = ({ user }) => {
                 type="text"
                 className="mt-1 w-full  rounded-md border border-blue-400 text-xs p-2 outline-none"
                 value={name}
+                disabled ={true}
                 onChange={(e) => setName(e.target.value)}
               />
               </div>
@@ -106,6 +115,7 @@ const ProfileUpdateModal = ({ user }) => {
                 type="text"
                 className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
                 value={email}
+                disabled ={true}
                 onChange={(e) => setEmail(e.target.value)}
               />
               </div>
@@ -120,6 +130,7 @@ const ProfileUpdateModal = ({ user }) => {
                 type="text"
                 className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
                 value={contact}
+                disabled ={true}
                 onChange={(e) => setcontact(e.target.value)}
               />
               </div>
@@ -158,7 +169,29 @@ const ProfileUpdateModal = ({ user }) => {
               </div>
             </div>
                       <div className=" flex  flex-col sm:flex-row  justify-start">
+                      <div className="w-full sm:w-[50%] p-2 ">
+              <div className="flex items-center space-x-0">
+                <FiUser className="text-gray-600" />
+                <label className="block text-sm font-medium text-gray-700">
+                  State
+                </label>
+              </div>
+              <select
+         value={state}
+         onChange={(e) => {setstate(e.target.value)
 
+          getCityFunc(e.target.value)
+         }}
+            className='mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none'
+          >
+         {stateList.map((type, index) => (
+        <option key={type?._id} value={type.state}>
+          {type?.state.toUpperCase()}
+        </option>
+      ))}
+          </select>
+           
+              </div>
               <div className="w-full sm:w-[50%] p-2">
               <div className="flex items-center space-x-0">
                 <FiUser className="text-gray-600" />
@@ -166,27 +199,26 @@ const ProfileUpdateModal = ({ user }) => {
                   City
                 </label>
               </div>
-              <input
-                type="text"
-                className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
-                value={city}
-                onChange={(e) => setcity(e.target.value)}
-              />
+         {load ? <CommonLoading/> :   
+            <select
+         value={city}
+         
+         onChange={(e) => {setcity(e.target.value)
+
+         }}
+            className='mt-1  block w-full rounded-md border border-blue-400 text-xs p-2 outline-none fancy-selec'
+          >
+            
+         {cityList[0]?.city.map((city, index) => (
+        <option  className="p-1 rounded-md text-sm fancy-option" key={index} value={city.toLowerCase().replace(" ", "-")}>
+          {city.toUpperCase()}
+        </option>
+     
+      ))}
+          </select>}
+             
               </div>
-              <div className="w-full sm:w-[50%] p-2 ">
-              <div className="flex items-center space-x-0">
-                <FiUser className="text-gray-600" />
-                <label className="block text-sm font-medium text-gray-700">
-                  State
-                </label>
-              </div>
-              <input
-                type="text"
-                className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
-                value={state}
-                onChange={(e) => setstate(e.target.value)}
-              />
-              </div>
+           
             </div>
                       <div className=" flex  flex-col sm:flex-row  justify-start">
 

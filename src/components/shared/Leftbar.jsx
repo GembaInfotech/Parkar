@@ -2,6 +2,8 @@ import { useMemo, useEffect, memo } from "react";
 import { Link , useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { IoCarOutline } from "react-icons/io5";
+import { useRef } from "react";
+import { useState } from "react";
 import { BsBookmarkCheck } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
 
@@ -17,6 +19,22 @@ import {
 
 
 const Leftbar = ({ showLeftbar, userData }) => {
+  const dropdownRef = useRef(null);
+  const [showDropdown, setShowDropdown] = useState(true);
+
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
   const location = useLocation();
 
   // Define a function to determine if the link is active based on the URL path
@@ -26,9 +44,11 @@ const Leftbar = ({ showLeftbar, userData }) => {
 
 
   return (
-   
-      <div className="flex flex-col justify-start  items-center h-[90vh]  sm:h-[84vh] bg-[#110065] rounded-md sticky top-20  ">
-        <div className=" font-nunito-sans flex flex-col items-start text-white gap-4 w-full p-5">
+     
+        <div>
+           
+               <div ref={dropdownRef} className="  flex flex-col justify-start  items-center h-[90vh]  sm:h-[84vh] bg-[#110065] rounded-md sticky top-20  ">
+      {  <div className=" font-nunito-sans flex flex-col items-start text-white gap-4 w-full p-5">
         
         <div className="flex flex-col justify-center items-center w-[100%] ">
           <img src={userData?.avatar} alt="" className="rounded-full w-12 h-auto" />
@@ -83,8 +103,10 @@ const Leftbar = ({ showLeftbar, userData }) => {
        
        
       
-        </div>
+        </div>}
       </div>
+</div>
+     
     
   );
 };

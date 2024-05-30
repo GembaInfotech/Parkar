@@ -2,22 +2,25 @@
 import { useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { getUserAction   , updateUserAction
+import { getStateAction, getUserAction   , updateUserAction
 } from "../redux/actions/userActions";
 
 import CommonLoading from "../components/loader/CommonLoading";
 import ProfileUpdateModal from "../components/modals/ProfileUpdateModal";
+import axios from "axios";
 
 const Profile = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
   const userData = useSelector((state) => state.auth?.userData);
+  const stateList = useSelector((state) =>state?.user?.state)
 
   const user = useSelector((state) => state.user?.user);
   useEffect(() => {
     setLoading(true);
     const fetchUser = async () => {
+       await dispatch(getStateAction());
       await dispatch(getUserAction(userData?._id));
     };
     fetchUser().then(() => setLoading(false));
@@ -50,18 +53,13 @@ const Profile = () => {
 
     await dispatch(updateUserAction(user._id, formData));
     await dispatch(getUserAction(user._id));
-    setName("");
-    setcontact("");
-    setpincode("");
-    setaddress("");
-    setcity("");
-    setstate("");
-    setcountry("");
-    setlicence_no("");
+    
 
     setIsUpdating(false);
    
   };
+  console.log(stateList)
+
 
   return (
     <>
@@ -75,7 +73,7 @@ const Profile = () => {
       <div>
         <h1 className="h3-phone sm:text-2xl text-blue-800"> Profile</h1>
        
-        <ProfileUpdateModal user ={user}/>
+        <ProfileUpdateModal stateList={stateList} user ={user}/>
         <hr/>
         <h1 className="h3-phone sm:text-2xl text-blue-800 my-1"> Delete Account</h1>
 

@@ -58,13 +58,7 @@ function Search({inT, ouT}) {
     setInputFocused(false);
   };
 
-  // useEffect(() => {
-  //   const timerId = setTimeout(() => {
-  //     fetchSuggestions(inputText);
-  //   }, 100);
 
-  //   return () => clearTimeout(timerId);
-  // }, [inputText]);
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
@@ -124,19 +118,18 @@ function Search({inT, ouT}) {
 
 
     <div className='mx-auto' >
-{ location.pathname =="/" &&      <h1 className='text-white font-bold  text-2xl sm:text-4xl mt-24 mb-8 sm:mt-32 text-center'>THE  SMART WAY OF PARKING </h1>
-}    
-    <div className="    pb-2 m-h-screen  sticky   mx-auto w-[70vw] max-sm:w-[80vw] top-20 z-10  overflow-y:hidden">
-     
 
+    <div className="   pb-2 m-h-screen  sticky   mx-auto w-[70vw] max-sm:w-[80vw]  z-10  overflow-y:hidden">
+     
+  
     
       
-      <div className={`${view ? 'null' : 'max-sm:hidden'}   items-center justify-center bg-white  rounded-xl  w-full flex max-sm:flex-col  shadow-lg  max-sm:p-4  sticky"`} >
+      <div className={`${view ? null : 'max-sm:hidden'}   items-center justify-center bg-white  rounded-xl   flex max-sm:flex-col  shadow-lg  max-sm:p-4  sticky"`} >
       <div className=' sm:hidden flex w-full  justify-end items-center '>
          
          <RxCross2 onClick={()=>setView(!view)} className='sm:hidden float-right'/>
          </div>
-        <div className='w-[40%] flex  max-sm:w-full '>
+        <div className='w-[50%] flex  max-sm:w-full '>
         <input 
         className=" relative  w-[90%] font-bold uppercase rounded-l-xl max-sm:rounded-xl max-sm:m-1  py-4 max-sm:py-2 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs max-sm:text-[12px]" type="text"
         value={inputText}
@@ -172,7 +165,7 @@ function Search({inT, ouT}) {
         </div>
         <input aria-label="Date and time"
         
-          className="font-bold uppercase max-sm:rounded-xl max-sm:w-full max-sm:m-1   py-4 px-4 max-sm:py-2 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
+          className="font-bold sm:w-[25%]  uppercase max-sm:rounded-xl max-sm:w-full max-sm:m-1   py-4 px-4 max-sm:py-2 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
           type="datetime-local" 
           name='inTime'
           value=  { inT || timeValues.inTime}
@@ -182,7 +175,7 @@ function Search({inT, ouT}) {
           onChange={handleChange}/>
         <input aria-label="Date and time"
        
-          className="font-bold uppercase  max-sm:rounded-xl max-sm:w-full max-sm:m-1 py-4 px-4 max-sm:py-2 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
+          className="font-bold uppercase sm:w-[25%]  max-sm:rounded-xl max-sm:w-full max-sm:m-1 py-4 px-4 max-sm:py-2 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
           type="datetime-local" 
           name='outTime'
           onFocus={handleInputFocus}
@@ -236,22 +229,26 @@ function Search({inT, ouT}) {
           </ul>
         )}
       </div>
+      
 
     </div>
 
 
 
 
-
-    <div hidden={view} className="  p-2 py-2 pt-0 m-h-screen  sticky   mx-auto w-[70vw] top-20 z-5  overflow-y:hidden">
+    { location.pathname =="/" &&     
+ <h1 hidden={view} className='text-white font-bold   text-xl sm:text-4xl mt-2 text-center'>THE  SMART WAY OF PARKING </h1>
+} 
+    <div hidden={view} className="  p-2 py-2 pt-0 m-h-screen  sticky    mx-auto w-[70vw]  z-5  overflow-y:hidden">
        <div
       className={`fixed inset-0 bg-black opacity-50  transition-opacity ${isInputFocused ? 'block' : 'hidden'}`}
       aria-hidden="true"
     />
 
     
-      
+  
       <div onClick={()=>{setView(!view)}} className=" sm:hidden p-2 items-center bg-white  rounded-3xl  w-full flex justify-end  shadow-lg   sticky" >
+       
         <h1 className='twxt-center  font-semibold pr-4'>Want to book Parking..? </h1>
       <div className='flex max-sm:text-sm font-semibold px-1 justify-center items-center bg-blue-600 rounded-full '>
             <svg className="  w-6  h-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
