@@ -41,7 +41,7 @@ const dispatch = useDispatch();
   </p>
 </div>
 </div>  <div onClick={()=>{delete_vehice(vehicle?._id)}} className='float-right text-xl px-2 '><MdOutlineDelete onClick={()=> {alert("Deleting ")}}/></div>
-</> : <> <div onClick={()=>call()} className='text-white text-3xl sm:text-[48px] flex flex-col my-auto items-center max-sm:h-24  justify-center '><div><AiOutlinePlus/></div></div></> }
+</> : <> <div onClick={()=>call()} className='text-white text-3xl sm:text-[48px] flex flex-col my-auto items-center max-sm:h-24 h-32  justify-center '><div><AiOutlinePlus/></div></div></> }
      
     </div>
   )

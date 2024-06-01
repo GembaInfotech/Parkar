@@ -20,7 +20,10 @@ const BookingCard = ({data}) => {
         <div className="flex justify-between items-center">  <p>Status  </p><p className='text-green-500'>{data?.status}</p></div>             
 
         <div className="flex   justify-between max-sm:items-start items-center"> <p>Arrival</p>  <p>{format(data?.inTime , "EE dd MMMM hh:mm aa")}</p>
-</div>             
+        
+</div>  
+           
+
 <div className="flex   justify-between max-sm:items-start items-center"> <p>Departure</p>  <p>{format(data?.outTime , "EE dd MMMM hh:mm aa")}</p>
 </div>           
 

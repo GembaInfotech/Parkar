@@ -130,7 +130,7 @@ const ProfileUpdateModal = ({ user, stateList }) => {
                 type="text"
                 className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
                 value={contact}
-                disabled ={true}
+                disabled ={user?.contact?true:false}
                 onChange={(e) => setcontact(e.target.value)}
               />
               </div>

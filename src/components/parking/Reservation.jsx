@@ -24,7 +24,7 @@ const Reservation = ({data, inT , ouT}) => {
     const launch = ()=>{
     
         
-        navigate(`/checkout?name=${data.name}&id=${data._id}&in=${inT}&out=${ouT}&amt=${amt}&diff=${difference}`)
+        navigate(`/checkout?name=${data.name}&id=${data._id}&c=${data.code}&in=${inT}&out=${ouT}&amt=${amt}&diff=${difference}`)
         
         }
   return (

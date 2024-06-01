@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getBookingAction } from '../redux/actions/bookingAction';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Navigate } from 'react-router';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,9 @@ const Dashboard = () => {
                 <p>{data?.length} Booking  </p>
             </div>
           
-        </div>  :  <h2 className='p-phone sm:text-sm'> We are currently unable to fetch Details</h2>}
+        </div>  : <> <h2 className='p-phone sm:text-sm'> We are currently unable to fetch Details</h2>
+                        <Navigate to="/profile" /></>
+                          }
     </div>
   )
 }

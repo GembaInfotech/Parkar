@@ -18,6 +18,8 @@ function Checkout() {
   const amt = searchParams?.get('amt');
   const name = searchParams?.get('name');
   const id = searchParams?.get('id');
+  const code = searchParams?.get('c');
+
   const inT = searchParams?.get('in');
   const out = searchParams?.get('out');
   const dif = searchParams?.get('diff');
@@ -52,7 +54,7 @@ function Checkout() {
     totalPrice: Number(amount),
     vehicle: vehicle,
     transaction_id: '' ,
-    order_id: '' ,
+    parkingCode: code ,
     vehicle_number: '',
     vehicle_name: ''
   });

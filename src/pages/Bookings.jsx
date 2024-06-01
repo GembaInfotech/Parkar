@@ -19,12 +19,25 @@ const Bookings = () => {
           };
           fetchData();
     },[])
+    const currentDate = new Date();
 
-    const bookingCards = useMemo(() => {
+    const currentBookings = data.filter(booking => booking.status!="Completed");
+    const pastBookings = data.filter(booking => booking.status=="Completed");
+    const pastCards = useMemo(() => {
         if (!data) {
           return null;
         }
-        return data.map((booking) => (
+        return pastBookings?.map((booking) => (
+          <div key={booking._id} className=" ">
+            <BookingCard className="mb-5" data={booking} />
+          </div>
+        ));
+      }, [data]);
+      const currentCards = useMemo(() => {
+        if (!data) {
+          return null;
+        }
+        return currentBookings?.map((booking) => (
           <div key={booking._id} className=" ">
             <BookingCard className="mb-5" data={booking} />
           </div>
@@ -52,8 +65,10 @@ const Bookings = () => {
 
    
 
-  
-<div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{bookingCards}</div>
+<h2 className='h3-phone text-blue-900 font-bold'>Current Bookings</h2>
+<div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{currentCards}</div>
+<h2 className='h3-phone text-blue-900 font-bold'>Completed Bookings</h2>
+<div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{pastCards}</div>
 
 
   </div>

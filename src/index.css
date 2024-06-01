@@ -9,18 +9,18 @@
 }
 /* General scrollbar styles */
 *::-webkit-scrollbar {
-  width: 6px; /* Set the width of the scrollbar */
+  width: 0px; /* Set the width of the scrollbar */
   height: 0px;
 }
 
 *::-webkit-scrollbar-track {
-  border-radius: 2px; /* Adjust the border radius if needed */
+  border-radius: 0px; /* Adjust the border radius if needed */
 }
 
 *::-webkit-scrollbar-thumb {
   background-image: linear-gradient(to bottom, #0070ff, #3b80ff, #0070ff);
-  border-radius: 4px;
-  border: 1px solid #fff; /* Adjust the border color if needed */
+  border-radius: 1px;
+  border: 0px solid #fff; /* Adjust the border color if needed */
 }
 
 /* Remove the class that hides the scrollbar */
