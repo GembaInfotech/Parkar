@@ -12,7 +12,7 @@ function Checkout() {
   const [activeSection, setActiveSection] = useState('section1');
   const location = useLocation();
   const userData = useSelector((state) => state.auth?.userData);
-  const [clicked , setClicked ] = useState(true)
+  const [clicked, setClicked] = useState(true)
   const dispatch = useDispatch()
   const searchParams = new URLSearchParams(location.search);
   const amt = searchParams?.get('amt');
@@ -36,7 +36,7 @@ function Checkout() {
     const func = async () => {
       const amounts = await data.price + Math.ceil(data.price * 0.09) + Math.ceil(data.price * 0.09)
       await setAmount(amounts)
-      await setData({...data, vehicle_name:vehicles?.vehicle_name, vehicle_number:vehicles?.vehicle_number})
+      await setData({ ...data, vehicle_name: vehicles?.vehicle_name, vehicle_number: vehicles?.vehicle_number })
     }
     func();
   }, [vehicles])
@@ -53,15 +53,15 @@ function Checkout() {
     cgst: Math.ceil(amt * 0.09),
     totalPrice: Number(amount),
     vehicle: vehicle,
-    transaction_id: '' ,
-    parkingCode: code ,
+    transaction_id: '',
+    parkingCode: code,
     vehicle_number: '',
     vehicle_name: ''
   });
 
   const handleBooking = async () => {
     await dispatch(saveBookingData(data))
-   // console.log(data)
+    // console.log(data)
   }
 
 
@@ -88,103 +88,111 @@ function Checkout() {
 
 
 
-          <div className=' max-sm:w-[100%] max-sm:my-2 sticky sm:ml-4 shadow-2xl dark:bg-white rounded-2xl   border border-1 border-gray-300  '>
-            <div className=' p-4 sm:p-6 pb-2'><p className='text-sm text-gray-600'>Summary</p></div>
+        <div className=' max-sm:w-[100%] max-sm:my-2 sticky sm:ml-4 shadow-2xl dark:bg-white rounded-2xl   border border-1 border-gray-300  '>
+          <div className=' p-4 sm:p-6 pb-2'><p className='text-sm text-gray-600'>Summary</p></div>
 
 
-            <div className=' px-2 '>
+          <div className=' px-2 '>
 
-              <div className=' border border-1 border-gray-100 p-2 sm:px-4  rounded-3xl   '>
-                <h1 className='text-gray-700 font-bold-600  sm:text-xl'>{name}</h1>
-                <div className='flex justify-between text-sm py-1'>
-                  <h1 className='text-gray-700 font-bold-600'>{Math.round(dif / 60)} hour</h1>
-                  <div className='flex'>
-                    <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm ' />
-                    <p className='text-orange-400  text-sm '>{amt} </p>
-                  </div>
-
-                </div>
-                <div className='flex justify-between text-sm py-1'>
-                  <h1 className='text-gray-700 font-bold-600'>cgst</h1>
-                  <div className='flex'>
-                    <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm ' />
-                    <p className='text-orange-400  text-sm '>{Math.ceil(amt * 0.09)} </p>
-                  </div>
-
-                </div>
-                <div className='flex justify-between text-sm py-1'>
-                  <h1 className='text-gray-700 font-bold-600'>sgst</h1>
-                  <div className='flex'>
-                    <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm ' />
-                    <p className='text-orange-400  text-sm '>{Math.ceil(amt * 0.09)} </p>
-                  </div>
-
-                </div>
-                <div className='flex  justify-between '>
-
-
-
-                </div>
-                <div className='py-1'>
-                  <hr />
-                </div>
-                <div className='flex justify-between '>
-                  <div>
-                    <div><p className='sm:text-xl text-gray-500'>Total </p>
-                    </div>
-                  </div>
-                  <div>
-
-                    <div>  <div className='flex '>
-                      <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-xl ' />
-                      <p className='text-orange-400  text-xl '>{data.totalPrice} </p>
-                    </div>
-
-                    </div>
-                  </div>
+            <div className=' border border-1 border-gray-100 p-2 sm:px-4  rounded-3xl   '>
+              <h1 className='text-gray-700 font-bold-600  sm:text-xl'>{name}</h1>
+              <div className='flex justify-between text-sm py-1'>
+                <h1 className='text-gray-700 font-bold-600'>{Math.round(dif / 60)} hour</h1>
+                <div className='flex'>
+                  <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm ' />
+                  <p className='text-orange-400  text-sm '>{amt} </p>
                 </div>
 
-                <div className='flex justify-between bg-[#F2F2FD] rounded-xl p-2 mt-2 '>
-                  <div>
-                    <div><p className='text-[12px]'>Arrival </p>
-                      <p className='text-sm'> {format(inT, "EE dd MMMM hh:mm")}</p></div>
-                  </div>
-                  <div>
-
-                    <div><p className='text-[12px]'>Departure</p>
-                      <p className='text-sm'>{format(out, "EE dd MMMM  hh:mm")}</p>
-                    </div>
-                  </div>
+              </div>
+              <div className='flex justify-between text-sm py-1'>
+                <h1 className='text-gray-700 font-bold-600'>cgst</h1>
+                <div className='flex'>
+                  <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm ' />
+                  <p className='text-orange-400  text-sm '>{Math.ceil(amt * 0.09)} </p>
                 </div>
+
+              </div>
+              <div className='flex justify-between text-sm py-1'>
+                <h1 className='text-gray-700 font-bold-600'>sgst</h1>
+                <div className='flex'>
+                  <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm ' />
+                  <p className='text-orange-400  text-sm '>{Math.ceil(amt * 0.09)} </p>
+                </div>
+
+              </div>
+              <div className='flex  justify-between '>
+
 
 
               </div>
+              <div className='py-1'>
+                <hr />
+              </div>
+              <div className='flex justify-between '>
+                <div>
+                  <div><p className='sm:text-xl text-gray-500'>Total </p>
+                  </div>
+                </div>
+                <div>
+
+                  <div>  <div className='flex '>
+                    <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-xl ' />
+                    <p className='text-orange-400  text-xl '>{data.totalPrice} </p>
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div className='flex justify-between bg-[#F2F2FD] rounded-xl p-2 mt-2 '>
+                <div>
+                  <div><p className='text-[12px]'>Arrival </p>
+                    <p className='text-sm'> {format(inT, "EE dd MMMM hh:mm")}</p></div>
+                </div>
+                <div>
+
+                  <div><p className='text-[12px]'>Departure</p>
+                    <p className='text-sm'>{format(out, "EE dd MMMM  hh:mm")}</p>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
-            <div className='p-6 '>
-              <div>
+          </div>
+          <div className='p-6 '>
+            <div>
 
-              </div>
-              <div>
-                {
-                  clicked  ? <button
-
-               
-                  className={`  sm:w-96 transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
-                    !clicked ? "cursor-not-allowed opacity-50" : ""
-                    }`}
-                  onClick={()=>{handleBooking() ;
-                                       setClicked(!clicked)
-                                       
-
-                  }}>Confirm</button> :  <Comp handleBooking={handleBooking} amt={data.totalPrice} open={activeSection} />
-
-
-                }
-              </div>
             </div>
+            <div>
+              {vehicles == null && (
+                <p className="text-red-500 mb-4 text-xs ">Please add vehicle to proceed</p>
+              )}
+              {
+                clicked ? (
+                  <button
+                    className={`sm:w-96 transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 ${vehicles == null ? "cursor-not-allowed opacity-50" : "hover:bg-blue-700"} focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50`}
+                    onClick={() => {
+                      if (vehicles != null) {
+                        handleBooking();
+                        setClicked(!clicked);
+                      }
+                    }}
+                    disabled={vehicles == null}
+                  >
+                    Confirm
+                  </button>
+                ) : (
+                  <Comp handleBooking={handleBooking} amt={data.totalPrice} open={activeSection} />
+                )
+              }
+            </div>
+
 
           </div>
-      
+
+        </div>
+
       </div>
 
 

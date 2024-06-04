@@ -34,7 +34,7 @@ const VehicleComponent = ({handler}) => {
 
 
       if(vehicle?.length==0){
-        return <h1>Kindly add One vehicle for proceed <span><Link to="/vehicles" className='text-blue p-phone sm:text-sm'> Add Vehicle</Link></span></h1>
+        return <h1>Kindly add One vehicle for proceed <span><Link to="/vehicles" className='text-blue p-phone sm:text-sm font-semibold text-green-600'> Add Vehicle</Link></span></h1>
       }
 
 
