@@ -24,6 +24,7 @@ import ContactUs from "./pages/ContactUs";
 import WeHelpYou from "./pages/WeHelpYou";
 import HowDoesItWork from "./pages/HowDoesItWork";
 import Dashboard from "./pages/Dashboard";
+import ResetPasswordRedirect from "./components/resetPassword/ResetpasswordRedirect";
 const ReportedPost = lazy(() => import("./pages/ReportedPost"));
 const Moderator = lazy(() => import("./pages/Moderator"));
 const DevicesLocations = lazy(() => import("./pages/DevicesLocations"));
@@ -119,6 +120,9 @@ export const publicRoutes = [
     path: "/about",
     element: <About />,
   },
+{
+
+},
   {
     path: "/how-works",
     element: <HowDoesItWork />,

@@ -4,11 +4,13 @@ import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import FallbackLoading from "./components/loader/FallbackLoading";
 import { publicRoutes, privateRoutes, semiPrivateRoute } from "./routes";
+import ForgotPassword from "../src/components/resetPassword/forgotPassword"
 
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import SemiPrivateRoute from "./SemiPrivateRoute";
 import SignIn from "./pages/SignIn";
+import ResetPasswordRedirect from "./components/resetPassword/ResetpasswordRedirect";
 
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
@@ -23,7 +25,7 @@ const App = () => {
     <Suspense fallback={<FallbackLoading />}>
       <Routes>
 
-      <Route element={<SemiPrivateRoute userData={userData} />}>
+        <Route element={<SemiPrivateRoute userData={userData} />}>
           {semiPrivateRoute.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
@@ -33,14 +35,14 @@ const App = () => {
           {privateRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
-                          </Route>
+        </Route>
 
-     
-        <Route element={<PublicRoute    />}>
-        {publicRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-                </Route>
+
+        <Route element={<PublicRoute />}>
+          {publicRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
 
 
 
@@ -48,6 +50,12 @@ const App = () => {
           path="/signin"
           element={userData ? <Navigate to="/" /> : <SignIn />}
         />
+
+        <Route path="/forgot-password"
+          element={<ForgotPassword />} />
+
+        <Route path="/reset-password/:token" element={<ResetPasswordRedirect />} />
+
 
         <Route
           path="/admin/signin"

@@ -84,7 +84,7 @@ const SignIn = () => {
           )}
           <div className="mt-6 flex items-center justify-center">
             <Link
-              to={"/signin"}
+              to={"signIn"}
               className="w-1/3 border-b-2 border-blue-500 pb-4 text-center font-medium text-gray-800 "
             >
               Sign In
@@ -171,6 +171,10 @@ const SignIn = () => {
             </button>
           </div>
         </form>
+        <div className="mt-6 text-blue-500">
+            {/* Use Link component from react-router-dom to navigate to Forgot Password page */}
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </div>
      
       </div>
     </section>
@@ -178,3 +182,4 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
