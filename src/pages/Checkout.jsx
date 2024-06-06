@@ -85,6 +85,9 @@ function Checkout() {
           <VehicleComponent handler={handleVehicle} />
 
         </div>
+        {/* <div>
+          <button>Add New Vehicle</button>
+        </div> */}
 
 
 
