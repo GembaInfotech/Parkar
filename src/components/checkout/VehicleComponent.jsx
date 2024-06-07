@@ -28,13 +28,14 @@ const VehicleComponent = ({ handler }) => {
       <div className="container mx-auto p-4">
         <h1>Kindly add a vehicle to proceed <span><button className='text-blue p-phone sm:text-sm font-semibold text-green-600' onClick={() => setShowModal(true)}>Add Vehicle</button></span></h1>
         {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-10">
+        <div className="fixed inset-0 flex items-center justify-start z-10">
           <div 
             className="fixed inset-0 bg-black opacity-50" 
             onClick={() => setShowModal(false)}
           ></div>
           <div 
-            className="bg-white w-1/2 py-4 px-6 shadow-lg rounded-lg relative z-20"
+            className="bg-white py-4 px-6 w-1/3 shadow-lg rounded-lg relative z-20"
+            style={{ marginLeft: '28rem' }}
             onClick={(e) => e.stopPropagation()} // Prevent clicks inside the modal from closing it
           >
             <button 
@@ -48,7 +49,6 @@ const VehicleComponent = ({ handler }) => {
         </div>
       )}
       </div>
-
     );
   }
 
@@ -61,13 +61,14 @@ const VehicleComponent = ({ handler }) => {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-10">
+        <div className="fixed inset-0 flex items-center justify-start z-10">
           <div 
             className="fixed inset-0 bg-black opacity-50" 
             onClick={() => setShowModal(false)}
           ></div>
           <div 
-            className="bg-white w-1/2 py-4 px-6 shadow-lg rounded-lg relative z-20"
+            className="bg-white py-4 px-6 w-1/3 shadow-lg rounded-lg relative z-20"
+            style={{ marginLeft: '30rem' }}
             onClick={(e) => e.stopPropagation()} // Prevent clicks inside the modal from closing it
           >
             <button 

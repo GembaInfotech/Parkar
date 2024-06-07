@@ -18,8 +18,8 @@ function VehicleForm() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <form onSubmit={handleSubmit} className="w-80">
+    <div className="flex flex-col justify-center items-center ">
+      <form onSubmit={handleSubmit} className="w-70 ">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicleName">
             Vehicle Name:
