@@ -1,8 +1,9 @@
 import { API, handleApiError } from "./utils";
 
-export const searchParkings = async (locationQuery, latitude, longitude, type) => {
+export const searchParkings = async (locationQuery, latitude, longitude, type, outTime) => {
   try {
-    const { data } = await API.get(`/parking/search?place=${locationQuery}&latitude=${latitude}&longitude=${longitude}&type=${type}`);
+    console.log(outTime);
+    const { data } = await API.get(`/parking/search?place=${locationQuery}&latitude=${latitude}&longitude=${longitude}&type=${type}&outTime=${outTime}`);
     return { error: null, data };
   } catch (error) {
     return handleApiError(error);

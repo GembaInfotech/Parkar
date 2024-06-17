@@ -1,9 +1,10 @@
 import * as api from "../api/parkingAPI";
 import * as types from "../constants/parkingConstant";
 
-export const searchParkings = (place, latitude, longitude, type) => async (dispatch) => {
+export const searchParkings = (place, latitude, longitude, type,outTime) => async (dispatch) => {
   try {
-    const { error, data } = await api.searchParkings(place,latitude, longitude, type);
+    console.log(outTime);
+    const { error, data } = await api.searchParkings(place,latitude, longitude, type, outTime);
  
     if (error) {
       throw new Error(error);
