@@ -10,12 +10,15 @@ import VehicleComponent from '../components/checkout/VehicleComponent';
 
 function Checkout() {
   const [activeSection, setActiveSection] = useState('section1');
+  const [amt, setamt] = useState();
   const location = useLocation();
   const userData = useSelector((state) => state.auth?.userData);
   const [clicked, setClicked] = useState(true)
   const dispatch = useDispatch()
   const searchParams = new URLSearchParams(location.search);
-  const amt = searchParams?.get('amt');
+  const amtF = searchParams?.get('amt');
+  const amtT = searchParams?.get('amtT');
+
   const name = searchParams?.get('name');
   const id = searchParams?.get('id');
   const code = searchParams?.get('c');
@@ -32,17 +35,22 @@ function Checkout() {
   };
   const vehicles = useSelector((state) => state.vehicle?.selectedVehicle)
   console.log(vehicles)
+  const [amount, setAmount] = useState()
+
   useEffect(() => {
     const func = async () => {
+
+      const amount = (vehicles?.vehicle_type == "two wheeler" )? amtT : amtF
+      setamt(amount)
       const amounts = await data.price + Math.ceil(data.price * 0.09) + Math.ceil(data.price * 0.09)
+      const val = Number(amt) + Number(Math.ceil(amt * 0.09)) + Number(Math.ceil(amt * 0.09))
+      setAmount(val)
       await setAmount(amounts)
       await setData({ ...data, vehicle_name: vehicles?.vehicle_name, vehicle_number: vehicles?.vehicle_number })
     }
     func();
   }, [vehicles])
 
-  const val = Number(amt) + Number(Math.ceil(amt * 0.09)) + Number(Math.ceil(amt * 0.09))
-  const [amount, setAmount] = useState(val)
   const [data, setData] = useState({
     parking: id,
     parkingName: name,
