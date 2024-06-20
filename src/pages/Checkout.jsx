@@ -11,6 +11,8 @@ import VehicleComponent from '../components/checkout/VehicleComponent';
 function Checkout() {
   const [activeSection, setActiveSection] = useState('section1');
   const [amt, setamt] = useState();
+  const [stop, setStop] = useState(true);
+
   const location = useLocation();
   const userData = useSelector((state) => state.auth?.userData);
   const [clicked, setClicked] = useState(true)
@@ -106,7 +108,7 @@ function Checkout() {
           <div className=' p-4 sm:p-6 pb-2'><p className='text-sm text-gray-600'>Summary</p></div>
 
 
-          <div className=' px-2 '>
+          <div className=' px-2 ' hidden={vehicles==null}>
 
             <div className=' border border-1 border-gray-100 p-2 sm:px-4  rounded-3xl   '>
               <h1 className='text-gray-700 font-bold-600  sm:text-xl'>{name}</h1>
