@@ -47,7 +47,7 @@ function Checkout() {
       const tax = Math.ceil(amount_cal*0.09);
       setAmount(val)
       await setAmount(amounts)
-      await setData({ ...data, vehicle_name: vehicles?.vehicle_name, vehicle_number: vehicles?.vehicle_number, price:amount_cal , sgst:tax, totalPrice:val, cgst:tax })
+      await setData({ ...data, vehicle_name: vehicles?.vehicle_name, vehicle_number: vehicles?.vehicle_number, vehicle_type:vehicles?.vehicle_type,  price:amount_cal , sgst:tax, totalPrice:val, cgst:tax })
 
     }
     func();
@@ -66,6 +66,7 @@ function Checkout() {
     transaction_id: '',
     parkingCode: code,
     vehicle_number: '',
+    vehicle_type: '',
     vehicle_name: ''
   });
 
