@@ -73,8 +73,10 @@ function Checkout() {
   });
 
   const handleBooking = async () => {
+    console.log(data)
+
     await dispatch(saveBookingData(data))
-    // console.log(data)
+    console.log(data)
   }
 
 
