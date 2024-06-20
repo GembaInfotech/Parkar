@@ -40,13 +40,15 @@ function Checkout() {
   useEffect(() => {
     const func = async () => {
 
-      const amount = (vehicles?.vehicle_type == "two wheeler" )? amtT : amtF
-      setamt(amount)
+      const amount_cal = (vehicles?.vehicle_type == "two wheeler" )? amtT : amtF
+      setamt(amount_cal)
       const amounts = await data.price + Math.ceil(data.price * 0.09) + Math.ceil(data.price * 0.09)
-      const val = Number(amt) + Number(Math.ceil(amt * 0.09)) + Number(Math.ceil(amt * 0.09))
+      const val = Number(amount_cal) + Number(Math.ceil(amount_cal * 0.09)) + Number(Math.ceil(amount_cal * 0.09))
+      const tax = Math.ceil(amount_cal*0.09);
       setAmount(val)
       await setAmount(amounts)
-      await setData({ ...data, vehicle_name: vehicles?.vehicle_name, vehicle_number: vehicles?.vehicle_number })
+      await setData({ ...data, vehicle_name: vehicles?.vehicle_name, vehicle_number: vehicles?.vehicle_number, price:amount_cal , sgst:tax, totalPrice:val, cgst:tax })
+
     }
     func();
   }, [vehicles])
@@ -56,10 +58,10 @@ function Checkout() {
     parkingName: name,
     inTime: inT,
     outTime: out,
-    price: amt,
+    price:  0 ,
     sgst: Math.ceil(amt * 0.09),
     cgst: Math.ceil(amt * 0.09),
-    totalPrice: Number(amount),
+    totalPrice: 0,
     vehicle: vehicle,
     transaction_id: '',
     parkingCode: code,
