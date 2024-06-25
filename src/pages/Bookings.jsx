@@ -21,8 +21,12 @@ const Bookings = () => {
     },[])
     const currentDate = new Date();
 
-    const currentBookings = data.filter(booking => booking.status!="Completed");
-    const pastBookings = data.filter(booking => booking.status=="Completed");
+    const currentBookings = data.filter(
+      booking => booking.status !== "Completed" && (booking.status === "Confirmed" || booking.status === "Parked")
+    );
+        const pastBookings = data.filter(booking => booking.status=="Completed");
+    const cancelBookings = data.filter(booking => booking.status=="Cancelled");
+
     const pastCards = useMemo(() => {
         if (!data) {
           return null;
@@ -38,6 +42,17 @@ const Bookings = () => {
           return null;
         }
         return currentBookings?.map((booking) => (
+          <div key={booking._id} className=" ">
+            <BookingCard className="mb-5" data={booking} />
+          </div>
+        ));
+      }, [data]);
+
+      const cancelCards = useMemo(() => {
+        if (!data) {
+          return null;
+        }
+        return cancelBookings?.map((booking) => (
           <div key={booking._id} className=" ">
             <BookingCard className="mb-5" data={booking} />
           </div>
@@ -69,6 +84,9 @@ const Bookings = () => {
 <div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{currentCards}</div>
 <h2 className='h3-phone text-blue-900 font-bold'>Completed Bookings</h2>
 <div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{pastCards}</div>
+<h2 className='h3-phone text-blue-900 font-bold'>Cancelled Bookings</h2>
+<div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{cancelCards}</div>
+
 
 
   </div>

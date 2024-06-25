@@ -11,6 +11,20 @@ export const createBooking = async (bookingData) => {
     return handleApiError(error);
   }
 };
+
+
+export const cancelBooking = async (id, transactionId) => {
+  try {
+    const {data} = await API.put(`/booking/cancel-booking/${id}`, {transactionId}, 
+     );
+    
+    return { error: null, data };
+  } catch (error) {
+
+    return handleApiError(error);
+  }
+};
+
 export const confirmBooking = async (id) => {
   try {
     const {data} = await API.put(`/booking/confirm-booking/${id}`

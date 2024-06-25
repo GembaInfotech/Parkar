@@ -81,4 +81,26 @@ export const saveBookingData = (data) => ({
       });
     }
   };
+
+
+  export const cancelBookingAction = (id,transactionId) => async (dispatch) => {
+    try {
+      const { error, data } = await api.cancelBooking(id, transactionId);
+   
+      if (error) {
+        throw new Error(error);
+      }
+  
+      dispatch({
+        type: types.CANCEL_BOOKING_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: types.CANCEL_BOOKING_FAIL,
+        payload: error.message,
+      });
+    }
+    
+  };
   
