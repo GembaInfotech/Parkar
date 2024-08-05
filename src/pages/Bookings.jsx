@@ -21,11 +21,11 @@ const Bookings = () => {
     },[])
     const currentDate = new Date();
 
-    const currentBookings = data.filter(
+    const currentBookings = data?.filter(
       booking => booking.status !== "Completed" && (booking.status === "Confirmed" || booking.status === "Parked")
     );
-        const pastBookings = data.filter(booking => booking.status=="Completed");
-    const cancelBookings = data.filter(booking => booking.status=="Cancelled");
+        const pastBookings = data?.filter(booking => booking.status=="Completed");
+    const cancelBookings = data?.filter(booking => booking.status=="Cancelled");
 
     const pastCards = useMemo(() => {
         if (!data) {

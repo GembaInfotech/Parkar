@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { LuParkingCircle } from "react-icons/lu";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cancelBookingAction } from '../../redux/actions/bookingAction';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BookingCard = ({ data }) => {
   const dispatch = useDispatch();
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const response = useSelector((state) => state?.bookings?.responseMsg);
+
+  console.log(response?.msg);
 
   const handleCancelClick = () => {
     setShowConfirmation(true);
@@ -15,11 +20,14 @@ const BookingCard = ({ data }) => {
   const handleConfirmCancel = async (id, transactionId) => {
     try {
       await dispatch(cancelBookingAction(id, transactionId));
+      // toast.error(response?.msg);
+      window.alert(response?.msg);
+
       setShowConfirmation(false);
-      window.location.reload();
     } catch (error) {
       console.error("Cancellation failed:", error);
-      // Optionally handle the error, e.g., show a message to the user
+      toast.error('Cancellation failed. Please try again.');
+      setShowConfirmation(false);  // Ensure popup closes on error
     }
   };
 
@@ -29,6 +37,7 @@ const BookingCard = ({ data }) => {
 
   return (
     <div className="w-full sm:w-[30vw]">
+      <ToastContainer />
       <div className="bg-[#1034A6] text-white shadow-lg rounded-md p-4 mb-4">
         <div className="text-xs sm:text-sm flex">
           <LuParkingCircle className="text-2xl sm:text-[32px] mr-2 mb-1" />
