@@ -10,27 +10,28 @@ const BookingCard = ({ data }) => {
   const dispatch = useDispatch();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const response = useSelector((state) => state?.bookings?.responseMsg);
-
-  console.log(response?.msg);
-
+  console.log(response?.msg?.message);
   const handleCancelClick = () => {
     setShowConfirmation(true);
   };
 
   const handleConfirmCancel = async (id, transactionId) => {
     try {
-      await dispatch(cancelBookingAction(id, transactionId));
-      // toast.error(response?.msg);
-      window.alert(response?.msg);
-
+      dispatch(cancelBookingAction(id, transactionId));
+      if(response?.msg?.message)(
+        window.alert(response?.msg?.message)
+      )
+      else if(response?.msg) {
+        window.alert(response?.msg);
+      }
       setShowConfirmation(false);
     } catch (error) {
       console.error("Cancellation failed:", error);
       toast.error('Cancellation failed. Please try again.');
-      setShowConfirmation(false);  // Ensure popup closes on error
+      setShowConfirmation(false); 
     }
   };
-
+  
   const handleClosePopup = () => {
     setShowConfirmation(false);
   };
