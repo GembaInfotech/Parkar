@@ -36,7 +36,7 @@ function SearchPage() {
   useEffect(() => {
     const fetchData = async () => {
       console.log(outTime)
-      await dispatch(searchParkings(locationQuery, latitude, longitude, type,outTime));
+      await dispatch(searchParkings(locationQuery, latitude, longitude, type,outTime,inTime));
       setLoading(false);
     };
     fetchData();
