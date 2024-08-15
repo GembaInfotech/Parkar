@@ -16,7 +16,7 @@ function ResetPasswordRedirect() {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const response = await axios.post(`http://ec2-13-53-42-37.eu-north-1.compute.amazonaws.com:4005/resetpassword/reset-password/${token}`);
+        const response = await axios.post(`http://vistaerp.gembainfotech.com:4005/resetpassword/reset-password/${token}`);
         console.log(response);
         if (response?.data?.status === 200) {
           setIsValid(true);
@@ -40,7 +40,7 @@ function ResetPasswordRedirect() {
       return;
     }
     try {
-      const response = await axios.post('http://ec2-13-53-42-37.eu-north-1.compute.amazonaws.com:4005/resetpassword/reset-password', {
+      const response = await axios.post('http://vistaerp.gembainfotech.com:4005/resetpassword/reset-password', {
         token,
         password,
         confirmPassword,

@@ -10,18 +10,20 @@ const BookingCard = ({ data }) => {
   const dispatch = useDispatch();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const response = useSelector((state) => state?.bookings?.responseMsg);
-  console.log(response?.msg?.message);
+  console.log(response);
   const handleCancelClick = () => {
     setShowConfirmation(true);
   };
 
   const handleConfirmCancel = async (id, transactionId) => {
     try {
-      dispatch(cancelBookingAction(id, transactionId));
+      await dispatch(cancelBookingAction(id, transactionId));
       if(response?.msg?.message)(
         window.alert(response?.msg?.message)
       )
-      else if(response?.msg) {
+      else if(response) {
+        console.log(response);
+        
         window.alert(response?.msg);
       }
       setShowConfirmation(false);
