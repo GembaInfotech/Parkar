@@ -199,7 +199,7 @@ const PublicNavbar = () => {
         onClick={handleProfileClick}
       >
         <img
-          src={userData.avatar}
+          src={`ProfileImage/UserProfileImg/${userData.profile}`}
           alt="profile"
           className="h-8 w-8  rounded-full object-cover"
         />
@@ -225,11 +225,11 @@ const PublicNavbar = () => {
           >
             <div className="py-1" role="none">
               <div className="flex flex-col items-center">
-                <img
+                {/* <img
                   src={userData.avatar}
                   alt="profile"
                   className="mb-2 h-16 w-16 rounded-full object-cover"
-                />
+                /> */}
                                    
 
                 <div className="text-sm font-semibold text-gray-700 hover:underline">

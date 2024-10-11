@@ -17,6 +17,9 @@ const Profile = () => {
   const stateList = useSelector((state) =>state?.user?.state)
 
   const user = useSelector((state) => state.user?.user);
+
+  console.log(user.profileImage);
+  
   useEffect(() => {
     setLoading(true);
     const fetchUser = async () => {
@@ -70,8 +73,9 @@ const Profile = () => {
     ) : (
       <>
        <div className="main-section my-1 ">
-      <div>
+      <div className="">
         <h1 className="h3-phone sm:text-2xl text-blue-800"> Profile</h1>
+        <img src={`ProfileImage/UserProfileImg/${user.profileImage}`} alt="Profile Image" className="h-64 w-64 rounded-full object-cover " />
        
         <ProfileUpdateModal stateList={stateList} user ={user}/>
         <hr/>

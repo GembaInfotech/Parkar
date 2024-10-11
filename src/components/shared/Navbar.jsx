@@ -206,9 +206,9 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
               onClick={handleProfileClick}
             >
               <img
-                src={userData.avatar}
+                src={`ProfileImage/UserProfileImg/${userData.profile}`}
                 alt="profile"
-                className="h-8 w-12  rounded-full object-cover"
+                className="h-10 w-10  rounded-full object-cover"
               />
                                           <p className="text-sm  min-w-fit font-semibold text-gray-700 ">{userData?.name}</p>
 
