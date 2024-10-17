@@ -3,7 +3,7 @@ import AboutSmartParking from './AboutSmartParking'
 import ExploreParking from './ExploreParking'
 import WhySmartParking from './WhySmartParking'
 import road from '../../assets/road.avif'
-import { TbMoneybag } from "react-icons/tb";
+// import { TbMoneybag } from "react-icons/tb";
 import { BiSolidMapPin } from "react-icons/bi";
 import { FaRoute } from "react-icons/fa";
 import { FaCity } from "react-icons/fa";
@@ -20,7 +20,7 @@ const HeroSection = () => {
 <ExploreParking/>
 <WhySmartParking/>
 
-<div className=' my-20  h-96  md:h-64 w-full  flex  flex-col items-center  md:flex-row  justify-center items-center ' 
+<div className=' my-20  h-96  md:h-64 w-full  flex  flex-col  md:flex-row  justify-center items-center ' 
     style={{ backgroundImage: `url(${road}) `,
     backgroundSize: 'cover',
     backgroundPosition: 'center',

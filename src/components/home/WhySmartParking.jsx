@@ -24,15 +24,14 @@ const WhySmartParking = () => {
 
             <div className="flex sm:w-[75vw]">
                 <div className=' flex flex-col items-center justify-center sm:w-[25vw]'>
-
                     <div className='p-4 sm:p-2 mx-2 text-2xl flex justify-center items-center  sm:text-[68px] text-[#5cb3ee]  font-bold rounded-full '>
                         <IoHappyOutline /></div>
                     <p className='font-bold text-[#353b4d]'>Convenient</p>
                     <p className='p-phone sm:text-sm text-center'>
                     Effortlessly book your parking spot online, saving you time and stress                        </p>
                 </div>
+                
                 <div className=' flex flex-col items-center justify-center sm:w-[25vw]'>
-
                     <div className='p-4 sm:p-2 mx-2 text-2xl flex justify-center items-center  sm:text-[68px] text-[#5cb3ee]  rounded-full '>
                         <HiMiniArrowsRightLeft /></div>
                     <p className='font-bold text-[#353b4d]'>Fast</p>
