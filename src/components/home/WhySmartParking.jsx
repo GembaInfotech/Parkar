@@ -18,8 +18,6 @@ const WhySmartParking = () => {
                     <p className='text-center text-sm  max-sm:text-[11px]'>
                     Effortlessly reserve your parking spot online, ensuring hassle-free arrivals every time. Streamline your parking experience with our convenient online booking platform.                    </p>
                 </div>
-
-
             </div>
 
             <div className="flex sm:w-[75vw]">
