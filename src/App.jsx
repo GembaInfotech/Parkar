@@ -27,7 +27,9 @@ const App = () => {
     socket.current = io("http://localhost:4005"); //Control from env
     if (socket.current) {
         socket.current.on("new-msg", (msg) => {
-            console.log("User Id",msg.to);
+            console.log("User Id",msg.userId);
+            // css set on notification badge using state
+            // getNotification(msg.userId) -> api request to fetch all notifications for above user ID
             console.log("fetchNotifications from backend");
         });
     }
