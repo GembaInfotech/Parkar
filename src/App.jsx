@@ -1,5 +1,5 @@
 
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import FallbackLoading from "./components/loader/FallbackLoading";
@@ -11,6 +11,7 @@ import PublicRoute from "./PublicRoute";
 import SemiPrivateRoute from "./SemiPrivateRoute";
 import SignIn from "./pages/SignIn";
 import ResetPasswordRedirect from "./components/resetPassword/ResetpasswordRedirect";
+import { io } from "socket.io-client";
 
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
@@ -20,6 +21,17 @@ const App = () => {
   const adminAccessToken = JSON.parse(
     localStorage.getItem("admin")
   )?.accessToken;
+
+  const socket = useRef();
+  useEffect(() => {
+    socket.current = io("http://localhost:4005"); //Control from env
+    if (socket.current) {
+        socket.current.on("new-msg", (msg) => {
+            console.log("User Id",msg.to);
+            console.log("fetchNotifications from backend");
+        });
+    }
+});
 
   return (
     <Suspense fallback={<FallbackLoading />}>
