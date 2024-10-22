@@ -62,13 +62,24 @@ const ParkingDetailComponent = ({ data, inT, ouT }) => {
           <h3 className="  font-normal  text-left text-[12px] sm:text-sm text-gray-400  ">{data.address_line1}, {data?.address_line2}, {data.city}</h3>
 
         </div>
-        <div className=' flex overflow-x-auto w-full  scrollbar-hide'>
-          <img src={img} alt="" className='m-2 rounded-2xl h-32 sm:h-48 ' />
+        {/* <div className=' flex overflow-x-auto w-full  scrollbar-hide'>
+          <img src={`http://localhost:3456/v1/api/parking/send-parking-image/${img}`} alt="" className='m-2 rounded-2xl h-32 sm:h-48 ' />
           <img src={image2} alt="" className='m-2 rounded-2xl h-32 sm:h-48' />
           <img src={img} alt="" className='m-2 rounded-2xl h-32 sm:h-48' />
           <img src={image2} alt="" className='m-2 rounded-2xl h-32 sm:h-48' />
 
-        </div>
+        </div> */}
+
+        <div className='flex overflow-x-auto w-full  scrollbar-hide'>
+      {data?.image.map((img, index) => (
+        <img
+          key={index}
+          src={`http://localhost:3456/v1/api/parking/send-parking-image/${img}`}
+          alt={`Parking Image ${index + 1}`}
+          className='rounded-2xl h-32 sm:h-48 transition-transform transform hover:scale-105 shadow-lg flex-shrink-0 snap-start'
+        />
+      ))}
+    </div>
 
 
 

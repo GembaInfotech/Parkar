@@ -5,10 +5,6 @@ import CommonLoading from "../components/loader/CommonLoading";
 import { useLocation } from 'react-router-dom';
 import ParkingDetailComponent from '../components/parking/ParkingDetailComponent';
 
-
-
-
-
 const ParkingDetail = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -26,12 +22,7 @@ const ParkingDetail = () => {
     (state) => state.parkings?.parkings
   );
 
- 
-  
-
   useEffect(() => {
-    
-    
     const fetchData = async () => {
       if(parkingss.length==0)
         {
@@ -45,18 +36,14 @@ const ParkingDetail = () => {
     fetchData();
   }, [dispatch]);
 
-
-
   const parkingDetail = useMemo(() => {
     if (!parking) {
       return null;
     }
     return   <div  className="main-section ">
-         <ParkingDetailComponent data={parking} inT={inT} ouT={ouT}/>      </div>
-  
+         <ParkingDetailComponent data={parking} inT={inT} ouT={ouT}/>    </div>
   }, [parking]);
  
-
   if (loading) {
     return (
       <div className="col-span-2 flex h-screen items-center justify-center">
@@ -66,7 +53,6 @@ const ParkingDetail = () => {
   }
   return (
     <div className='w-[90vw] mx-auto'>{parkingDetail}</div>
-
   )
 };
 

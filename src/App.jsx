@@ -37,14 +37,11 @@ const App = () => {
           ))}
         </Route>
 
-
         <Route element={<PublicRoute />}>
           {publicRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
-
-
 
         <Route
           path="/signin"
@@ -53,9 +50,7 @@ const App = () => {
 
         <Route path="/forgot-password"
           element={<ForgotPassword />} />
-
         <Route path="/reset-password/:token" element={<ResetPasswordRedirect />} />
-
 
         <Route
           path="/admin/signin"
