@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createVehicleAction, getVehicleAction } from '../redux/actions/vehicleActions';
+import { getVehicleAction } from '../redux/actions/vehicleActions';
 import CommonLoading from "../components/loader/CommonLoading";
 import Cards from "../components/vehi/Cards";
 import VehicleForm from "../components/vehi/VehicleForm";

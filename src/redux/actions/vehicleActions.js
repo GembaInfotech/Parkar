@@ -1,9 +1,9 @@
 import * as api from "../api/vehicleAPI";
 import * as types from "../constants/vehicleConstants";
 
-export const createVehicleAction = ({vehicleName, vehicleNumber, vehicleType}) => async (dispatch) => {
+export const createVehicleAction = ({vehicleName, vehicleNumber, vehicleType, isDefault}) => async (dispatch) => {
   try {
-    const { error, data } = await  api.createVehicle({vehicleName, vehicleNumber, vehicleType});
+    const { error, data } = await  api.createVehicle({vehicleName, vehicleNumber, vehicleType, isDefault});
     if (error) {
       throw new Error(error);
     }
@@ -32,10 +32,20 @@ export const selectVehicleAction = (id) => ({
   payload: id,
 });
 
-export const updateVehicleAction = (vehicle) => async (dispatch) => {
+export const updateVehicleAction = ({
+  id, 
+  vehicle_name, 
+  vehicle_number, 
+  vehicle_type,
+  isDefault 
+}) => async (dispatch) => {
   try {
-    console.log("ni ")
-    const { error, data } = await  api.updateVehicle(vehicle);
+    const { error, data } = await  api.updateVehicle( id, 
+      vehicle_name, 
+      vehicle_number, 
+      vehicle_type,
+      isDefault,
+     );
     if (error) {
       throw new Error(error);
     }
