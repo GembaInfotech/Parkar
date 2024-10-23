@@ -12,7 +12,7 @@ export const getUser = async (id) => {
 
 export const updateUser = async (id, formData) => {
   try {
-    const { data } = await API.put(`/users/${id}`, formData, {
+    const { data } = await API.put(`/users/UpdateInfo`, formData, {
       headers: {
         "Content-Type": "application/json",
       },

@@ -5,6 +5,7 @@ import Search from "./Search";
 import { memo } from "react";
 import { CiSearch } from "react-icons/ci";
 import { HiOutlineMenu } from "react-icons/hi";
+import Img  from "../../assets/profileT.jpg"
 
 
 import { logoutAction } from "../../redux/actions/authActions";
@@ -26,8 +27,9 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
 
 
 
+console.log(userData);
 
-  
+
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -75,7 +77,7 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
       { name: 'WE HELP YOU', href: '/help-you', current: false },
       { name: 'HOW DOES IT WORK', href: '/how-works', current: false },
       { name: 'CONTACT US', href: '/contact', current: false },
-     
+
     ];
   const [show, setShow] = useState(false);
 
@@ -103,10 +105,10 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
           <FaTwitter />
           <FaGooglePlusG />
           <FaInstagramSquare />
-           
+
         </div>
         <div className="sm:hidden flex items-center ">
-       { userData && <div className=" sm:hidden relative flex justify-end md:w-36">
+          {userData && <div className=" sm:hidden relative flex justify-end md:w-36">
             <button
               type="button"
               className="inline-flex h-8 w-24 cursor-pointer items-center justify-center rounded-full"
@@ -117,7 +119,7 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
                 alt="profile"
                 className="h-12 w-12  rounded-full object-cover"
               />
-                                          <p className="text-sm font-semibold text-gray-700 max-sm:hidden">{userData?.name}</p>
+              <p className="text-sm font-semibold text-gray-700 max-sm:hidden">{userData?.name}</p>
 
             </button>
             <Transition
@@ -172,45 +174,45 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
                 </div>
               )}
             </Transition>
-          </div> }
-        
-          {open ? <RxCross1 onClick={()=>{setOpen(!open)}} className="text-2xl"/> : <HiOutlineMenu onClick={()=>{setOpen(!open)}} className="text-2xl"/>
-}
+          </div>}
+
+          {open ? <RxCross1 onClick={() => { setOpen(!open) }} className="text-2xl" /> : <HiOutlineMenu onClick={() => { setOpen(!open) }} className="text-2xl" />
+          }
         </div>
       </div>
-      
-      <div className={    ` sm:my-1  max-sm:absolute max-sm:top-11 max-sm:h-screen   max-sm:px-2 px-24 flex flex-row max-sm:flex-col justify-between max-sm:justify-start  ${open  ? "max-sm:w-full max-sm:bg-white" :"max-sm:hidden "} `}>
+
+      <div className={` sm:my-1  max-sm:absolute max-sm:top-11 max-sm:h-screen   max-sm:px-2 px-24 flex flex-row max-sm:flex-col justify-between max-sm:justify-start  ${open ? "max-sm:w-full max-sm:bg-white" : "max-sm:hidden "} `}>
         <div>
           <ul className="flex max-sm:flex-col font-semibold">
-          <li onClick={()=>{setOpen(false)}}  className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[10px] lg:text-xs"><Link to="/"><FaHome className="text-xl text-blue-600 "/></Link></li>
+            <li onClick={() => { setOpen(false) }} className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[10px] lg:text-xs"><Link to="/"><FaHome className="text-xl text-blue-600 " /></Link></li>
 
-          {navigation.map((item) => (
-                           <Link to={`${item.href}`}
-                           onClick={()=>{setOpen(false)}}
-                           className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[14px] lg:text-xs"
-                           >
-                            <p 
-    >{item.name}</p>
+            {navigation.map((item) => (
+              <Link to={`${item.href}`}
+                onClick={() => { setOpen(false) }}
+                className="max-sm:py-2 mx-0.5 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 sm:text-[10px] text-[14px] lg:text-xs"
+              >
+                <p
+                >{item.name}</p>
 
 
-                        </Link>
-                        ))}
-          
+              </Link>
+            ))}
+
           </ul>
         </div>
-     { userData ? 
-         <div className=" max-sm:hidden relative flex justify-end md:w-36">
+        {userData ?
+          <div className=" max-sm:hidden relative flex justify-end md:w-36">
             <button
               type="button"
               className="inline-flex max-sm:h-4 max-sm:w-16 h-8 w-24 cursor-pointer items-center justify-center rounded-full"
               onClick={handleProfileClick}
             >
               <img
-                src={`ProfileImage/UserProfileImg/${userData.profile}`}
+                src={userData?.profile ? `http://localhost:4005/users/send-profile/${userData.profile}` : Img} 
                 alt="profile"
-                className="h-10 w-10  rounded-full object-cover"
+                className="h-8 w-8  rounded-full object-cover mr-1"
               />
-                                          <p className="text-sm  min-w-fit font-semibold text-gray-700 ">{userData?.name}</p>
+              <p className="text-sm  min-w-fit font-semibold text-gray-700 ">{userData?.name}</p>
 
             </button>
             <Transition
@@ -265,17 +267,17 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
                 </div>
               )}
             </Transition>
-          </div> :    <div className="flex max-sm:flex-col font-semibold"> 
-          <div className="">
-<Link  to="/signin">
-<p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[14px] sm:text-[10px] lg:text-xs  ">USER LOGIN</p>
-</Link>
-          </div>
-          <div className="">
-          <Link  to="/signup">
-<p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[14px] sm:text-[10px] lg:text-xs  ">USER SIGNUP</p>
-</Link>          </div>
-        </div>}
+          </div> : <div className="flex max-sm:flex-col font-semibold">
+            <div className="">
+              <Link to="/signin">
+                <p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[14px] sm:text-[10px] lg:text-xs  ">USER LOGIN</p>
+              </Link>
+            </div>
+            <div className="">
+              <Link to="/signup">
+                <p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[14px] sm:text-[10px] lg:text-xs  ">USER SIGNUP</p>
+              </Link>          </div>
+          </div>}
       </div>
     </div>
 

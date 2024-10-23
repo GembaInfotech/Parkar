@@ -6,7 +6,7 @@ import { memo } from "react";
 import { CiSearch } from "react-icons/ci";
 import { HiOutlineMenu } from "react-icons/hi";
 import { useSelector } from "react-redux";
-
+import Img from "../../assets/profileT.jpg"
 
 import { logoutAction } from "../../redux/actions/authActions";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -199,7 +199,7 @@ const PublicNavbar = () => {
         onClick={handleProfileClick}
       >
         <img
-          src={`ProfileImage/UserProfileImg/${userData.profile}`}
+          src={userData?.profile ? `http://localhost:4005/users/send-profile/${userData.profile}` : Img} 
           alt="profile"
           className="h-8 w-8  rounded-full object-cover"
         />

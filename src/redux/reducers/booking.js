@@ -37,9 +37,10 @@ const bookingReducer = (state = initialState, action) => {
         bookingError: null
       }
     case types.GET_BOOKINGS_SUCCESS:
+      console.log("payload", payload)
       return {
         ...state,
-        bookings: payload ? payload.data : [null],
+        bookings: payload ? payload : [null],
         bookingError: null
       }
     case types.CANCEL_BOOKING_SUCCESS:

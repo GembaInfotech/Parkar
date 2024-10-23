@@ -67,10 +67,10 @@ export const updateVehicle = async () => {
 //     }
 //   };
   
-export const getVehicle = async () => {
+export const getVehicle = async (page, limit) => {
     try {
      
-      const {data} = await API.get(`/vehicle/view-vehicle-list` 
+      const {data} = await API.get(`/vehicle/view-vehicle-list?page=${page}&limit=${limit}` 
        );
       
       return { error: null, data };

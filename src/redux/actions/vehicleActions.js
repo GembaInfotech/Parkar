@@ -58,9 +58,9 @@ export const updateVehicleAction = (vehicle) => async (dispatch) => {
   }
 };
 
-export const getVehicleAction = () => async (dispatch) => {
+export const getVehicleAction = ({page, limit}) => async (dispatch) => {
   try {
-    const { error, data } = await  api.getVehicle();
+    const { error, data } = await  api.getVehicle(page, limit);
     
     if (error) {
       throw new Error(error);

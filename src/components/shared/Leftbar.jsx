@@ -1,14 +1,12 @@
 import { useMemo, useEffect, memo } from "react";
-import { Link , useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { IoCarOutline } from "react-icons/io5";
 import { useRef } from "react";
 import { useState } from "react";
 import { BsBookmarkCheck } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
-
-
-
+import { CgProfile } from "react-icons/cg";
 
 import {
   HiOutlineHome,
@@ -16,7 +14,6 @@ import {
   HiOutlineRectangleStack,
   HiOutlineTag,
 } from "react-icons/hi2";
-
 
 const Leftbar = ({ showLeftbar, userData }) => {
   const dropdownRef = useRef(null);
@@ -37,25 +34,23 @@ const Leftbar = ({ showLeftbar, userData }) => {
   };
   const location = useLocation();
 
-  // Define a function to determine if the link is active based on the URL path
   const isActive = (path) => {
+    console.log("path", path);
     return location.pathname === path;
   };
 
-
   return (
-     
-        <div>
-           
-               <div ref={dropdownRef} className="  flex flex-col justify-start  items-center h-[90vh]  sm:h-[84vh] bg-[#110065] rounded-md sticky top-20  ">
-      {  <div className=" font-nunito-sans flex flex-col items-start text-white gap-4 w-full p-5">
-        
-        <div className="flex flex-col justify-center items-center w-[100%] ">
-          <img src={userData?.avatar} alt="" className="rounded-full w-12 h-auto" />
-          <p className="p-phone sm:text-lg mt-1">{userData?.name}</p>
-        </div>
+
+    <div>
+
+      <div ref={dropdownRef} className="  flex flex-col justify-start  items-center h-[90vh]  sm:h-[84vh] bg-[#110065] rounded-md sticky top-20  ">
+        {<div className=" font-nunito-sans flex flex-col items-start text-white gap-4 w-full p-5">
+          <div className="flex flex-col justify-center items-center w-[100%] ">
+            <img src={userData?.avatar} alt="" className="rounded-full w-12 h-auto" />
+            <p className="p-phone sm:text-lg mt-1">{userData?.name}</p>
+          </div>
           <div className="border-0 border-b-2 border-gray-100 w-full"></div>
-        <Link
+          <Link
             style={{ color: isActive('/dashboard') ? 'blue' : null }}
             className=" flex hover:bg-white hover:text-black hover:rounded-xl transition:smooth hover:w-full  duration-300 hover:px-2 hover:py-1 items-center gap-2 text-lg font-medium hover:text-primary"
             to="/dashboard"
@@ -68,7 +63,7 @@ const Leftbar = ({ showLeftbar, userData }) => {
             className=" flex hover:bg-white hover:text-black hover:rounded-xl transition:smooth hover:w-full  duration-300 hover:px-2 hover:py-1 items-center gap-2 text-lg font-medium hover:text-primary"
             to="/profile"
           >
-            <HiOutlineHome className="text-xl" />
+            <CgProfile className="text-xl" />
             <p className="font-nunito-sans p-phone  sm:text-lg">Profile</p>
           </Link>
           <Link
@@ -88,26 +83,19 @@ const Leftbar = ({ showLeftbar, userData }) => {
             <p className="font-nunito-sans p-phone  sm:text-lg">Vehicle</p>
           </Link>
 
-       
-            <Link
-              style={{ color: isActive('/setting') ? 'blue' : null }}
+          <Link
+            style={{ color: isActive('/setting') ? 'blue' : null }}
             className="flex hover:bg-white hover:text-black hover:rounded-xl transition:smooth hover:w-full  duration-300 hover:px-2 hover:py-1 items-center gap-2 text-lg font-medium hover:text-primary"
             to="/setting"
-            >
-              <CiSettings className="text-xl" />
-              <p className="font-nunito-sans p-phone  sm:text-lg">Setting</p>
-            </Link>
-          
-
-
-       
-       
-      
+          >
+            <CiSettings className="text-xl" />
+            <p className="font-nunito-sans p-phone  sm:text-lg">Setting</p>
+          </Link>
         </div>}
       </div>
-</div>
-     
-    
+    </div>
+
+
   );
 };
 

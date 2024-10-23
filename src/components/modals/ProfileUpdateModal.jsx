@@ -1,6 +1,4 @@
-import { Dialog, Transition } from "@headlessui/react";
 import { useState } from "react";
-
 import {
   getUserAction,
   updateUserAction,
@@ -9,29 +7,26 @@ import {
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import ButtonLoadingSpinner from "../loader/ButtonLoadingSpinner";
-import { FiUser, FiMapPin, FiEdit } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
 import CommonLoading from "../loader/CommonLoading";
 
+const ProfileUpdateModal = ({ user}) => {
 
-
-const ProfileUpdateModal = ({ user, stateList }) => {
   const dispatch = useDispatch();
-  const cityList = useSelector((state) =>state?.user?.city)
+  const userData = useSelector((state) => state.user?.user);
+
   const [load, setLoad] = useState(false);
-
   const [isUpdating, setIsUpdating] = useState(false);
-  const [name, setName] = useState(user.name ? user.name : "");
-  const [contact, setcontact] = useState(user.contact ? user.contact : "");
-  const [email, setEmail] = useState(user.email ? user.email : "");
+  const [name, setName] = useState(userData.name ? userData.name : "");
+  const [contact, setContact] = useState(userData.contact ? userData.contact : "");
+  const [email, setEmail] = useState(userData.email ? userData.email : "");
+  const [address, setAddress] = useState(userData.address ? userData.address : "");
+  const [pincode, setPincode] = useState(userData.pincode ? userData.pincode : "");
+  const [city, setCity] = useState(userData.city ? userData.city : "");
+  const [state, setState] = useState(userData.state ? userData.state : "");
+  const [country, setCountry] = useState(userData.country ? userData.country : "");
+  const [licence_no, setLicenceNo] = useState(userData.licence_no ? userData.licence_no : "");
 
-  const [address, setaddress] = useState(user.address ? user.address : "");
-
-  const [pincode, setpincode] = useState(user.pincode ? user.pincode : "");
-
-  const [city, setcity] = useState(user.city ? user.city : "");
-  const [state, setstate] = useState(user.state ? user.state : "");
-  const [country, setcountry] = useState(user.country ? user.country : "");
-  const [licence_no, setlicence_no] = useState(user.licence_no ? user.licence_no : "");
   const handleUpdateProfile = async () => {
     setIsUpdating(true);
 
@@ -41,215 +36,151 @@ const ProfileUpdateModal = ({ user, stateList }) => {
       pincode,
       address,
       city,
-      state, country,
+      state,
+      country,
       licence_no
-
     };
 
     await dispatch(updateUserAction(user._id, formData));
     await dispatch(getUserAction(user._id));
-   
-
     setIsUpdating(false);
- console.log(cityList.city)
-  
-
   };
-  const getCityFunc= async (state) =>{
-     setLoad(true);
+
+  const getCityFunc = async (state) => {
+    setLoad(true);
     await dispatch(getCityAction(state));
     setLoad(false);
-
-  }
-  console.log(cityList)
+  };
 
   return (
-
-    <div className="inline-block w-[60vw] transform overflow-hidden rounded-md   pb-4 pt-0 text-left align-bottom  transition-all sm:my-2 sm:px-1 sm:align-middle ">
+    <div className="inline-block w-[60vw] transform overflow-hidden rounded-md pb-4 pt-0 text-left align-bottom transition-all sm:my-2 sm:px-1 sm:align-middle">
       <div className="w-full">
         <div className="mt-3 text-center sm:mt-0 sm:text-left">
-        
-
           <div>
-            <div className=" flex  flex-col sm:flex-row  justify-start">
+            <div className="flex flex-col sm:flex-row justify-start">
               <div className="w-full sm:w-[50%] p-2">
-              <div className="flex items-center ">
-                <FiUser className="text-gray-600" />
-                <label className=" text-sm font-medium text-gray-700">
-                  Name
-                </label>
-              </div>
-              <input
-                type="text"
-                className="mt-1 w-full  rounded-md border border-blue-400 text-xs p-2 outline-none"
-                value={name}
-                disabled ={true}
-                onChange={(e) => setName(e.target.value)}
-              />
-              </div>
-              <div className="w-full sm:w-[50%] p-2">
-              <div className="flex items-center space-x-0">
-              <FiUser className="text-gray-600" />
-              <label className="block text-sm font-medium text-gray-700">
-                Licence
-              </label>
-            </div>
-            <input
-              type="text"
-              className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
-              value={licence_no}
-              onChange={(e) => setlicence_no(e.target.value)}
-            />
-              </div>
-            </div>
-                      <div className=" flex  flex-col sm:flex-row  justify-start">
-
-            <div className="w-full sm:w-[50%] p-2">
-            <div className="flex items-center space-x-0">
-                <FiUser className="text-gray-600" />
-                <label className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
-              </div>
-              <input
-                type="text"
-                className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
-                value={email}
-                disabled ={true}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              </div>
-              <div className="w-full sm:w-[50%] p-2">
-              <div className="flex items-center space-x-0">
-                <FiUser className="text-gray-600" />
-                <label className="block text-sm font-medium text-gray-700">
-                  Contact
-                </label>
-              </div>
-              <input
-                type="text"
-                className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
-                value={contact}
-                disabled ={user?.contact?true:false}
-                onChange={(e) => setcontact(e.target.value)}
-              />
-              </div>
-            
-            </div>
-                      <div className=" flex  flex-col sm:flex-row  justify-start">
-
-              <div className="w-full sm:w-[50%] p-2 ">
-              <div className="flex items-center space-x-0">
+                <div className="flex items-center">
                   <FiUser className="text-gray-600" />
-                  <label className="block text-sm font-medium text-gray-700">
-                    Address
-                  </label>
+                  <label className="text-sm font-medium text-gray-700">Name</label>
+                </div>
+                <input
+                  type="text"
+                  className="mt-1 w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="w-full sm:w-[50%] p-2">
+                <div className="flex items-center space-x-0">
+                  <FiUser className="text-gray-600" />
+                  <label className="block text-sm font-medium text-gray-700">Licence</label>
+                </div>
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
+                  value={licence_no}
+                  onChange={(e) => setLicenceNo(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row justify-start">
+              <div className="w-full sm:w-[50%] p-2">
+                <div className="flex items-center space-x-0">
+                  <FiUser className="text-gray-600" />
+                  <label className="block text-sm font-medium text-gray-700">Email</label>
+                </div>
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="w-full sm:w-[50%] p-2">
+                <div className="flex items-center space-x-0">
+                  <FiUser className="text-gray-600" />
+                  <label className="block text-sm font-medium text-gray-700">Contact</label>
+                </div>
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row justify-start">
+              <div className="w-full sm:w-[50%] p-2">
+                <div className="flex items-center space-x-0">
+                  <FiUser className="text-gray-600" />
+                  <label className="block text-sm font-medium text-gray-700">Address</label>
                 </div>
                 <input
                   type="text"
                   className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
                   value={address}
-                  onChange={(e) => setaddress(e.target.value)}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
               </div>
-              <div className="w-full sm:w-[50%] p-2 ">
-              <div className="flex items-center space-x-0">
-                <FiUser className="text-gray-600" />
-                <label className="block text-sm font-medium text-gray-700">
-                  Pincode
-                </label>
-              </div>
-              <input
-                type="text"
-                className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
-                value={pincode}
-                onChange={(e) => setpincode(e.target.value)}
-              />
-
+              <div className="w-full sm:w-[50%] p-2">
+                <div className="flex items-center space-x-0">
+                  <FiUser className="text-gray-600" />
+                  <label className="block text-sm font-medium text-gray-700">Pincode</label>
+                </div>
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
+                  value={pincode}
+                  onChange={(e) => setPincode(e.target.value)}
+                />
               </div>
             </div>
-                      <div className=" flex  flex-col sm:flex-row  justify-start">
-                      <div className="w-full sm:w-[50%] p-2 ">
-              <div className="flex items-center space-x-0">
-                <FiUser className="text-gray-600" />
-                <label className="block text-sm font-medium text-gray-700">
-                  State
-                </label>
-              </div>
-              <select
-         value={state}
-         onChange={(e) => {setstate(e.target.value)
-
-          getCityFunc(e.target.value)
-         }}
-            className='mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none'
-          >
-         {stateList.map((type, index) => (
-        <option key={type?._id} value={type.state}>
-          {type?.state.toUpperCase()}
-        </option>
-      ))}
-          </select>
-           
+            <div className="flex flex-col sm:flex-row justify-start">
+              <div className="w-full sm:w-[50%] p-2">
+                <div className="flex items-center space-x-0">
+                  <FiUser className="text-gray-600" />
+                  <label className="block text-sm font-medium text-gray-700">State</label>
+                </div>
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
+                  value={state}
+                  onChange={(e) => {
+                    setState(e.target.value);
+                    getCityFunc(e.target.value);
+                  }}
+                />
               </div>
               <div className="w-full sm:w-[50%] p-2">
-              <div className="flex items-center space-x-0">
-                <FiUser className="text-gray-600" />
-                <label className="block text-sm font-medium text-gray-700">
-                  City
-                </label>
+                <div className="flex items-center space-x-0">
+                  <FiUser className="text-gray-600" />
+                  <label className="block text-sm font-medium text-gray-700">City</label>
+                </div>
+                {load ? <CommonLoading /> : (
+                  <input
+                    type="text"
+                    className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                )}
               </div>
-         {load ? <CommonLoading/> :   
-            <select
-         value={city}
-         
-         onChange={(e) => {setcity(e.target.value)
-
-         }}
-            className='mt-1  block w-full rounded-md border border-blue-400 text-xs p-2 outline-none fancy-selec'
-          >
-            
-         {cityList[0]?.city.map((city, index) => (
-        <option  className="p-1 rounded-md text-sm fancy-option" key={index} value={city.toLowerCase().replace(" ", "-")}>
-          {city.toUpperCase()}
-        </option>
-     
-      ))}
-          </select>}
-             
-              </div>
-           
             </div>
-                      <div className=" flex  flex-col sm:flex-row  justify-start">
-
+            <div className="flex flex-col sm:flex-row justify-start">
               <div className="w-full sm:w-[50%] p-2">
-              <div className="flex items-center space-x-0">
-                <FiUser className="text-gray-600" />
-                <label className="block text-sm font-medium text-gray-700">
-                  Country
-                </label>
+                <div className="flex items-center space-x-0">
+                  <FiUser className="text-gray-600" />
+                  <label className="block text-sm font-medium text-gray-700">Country</label>
+                </div>
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                />
               </div>
-              <input
-                type="text"
-                className="mt-1 block w-full rounded-md border border-blue-400 text-xs p-2 outline-none"
-                value={country}
-                onChange={(e) => setcountry(e.target.value)}
-              />
-              </div>
-             
             </div>
-
           </div>
-
-
-
-
-
-       
-
-
-
-
         </div>
       </div>
 
@@ -269,11 +200,9 @@ const ProfileUpdateModal = ({ user, stateList }) => {
             <span>Save Changes</span>
           )}
         </button>
-      
       </div>
     </div>
-
   );
 };
 
-export default ProfileUpdateModal;
+export default ProfileUpdateModal

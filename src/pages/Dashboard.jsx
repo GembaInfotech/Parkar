@@ -11,7 +11,7 @@ const Dashboard = () => {
   const data = useSelector((state)=>state.bookings?.bookings)
   useEffect(()=>{
       const fetchData = async () => {
-          await dispatch(getBookingAction());
+          await dispatch(getBookingAction({status:undefined}));
          
         };
         fetchData();
@@ -25,7 +25,7 @@ const Dashboard = () => {
                 <p>{user?.vehicle?.length} Registered Vehicles </p>
             </div>
             <div className="flex justify-center m-2  rounded-md items-center h-20 sm:h-32 w-48  sm:w-72 bg-blue-700 text-white">
-                <p>{data?.length} Booking  </p>
+                <p>{data?.pagination?.totalDocuments} Booking  </p>
             </div>
           
         </div>  : <> <h2 className='p-phone sm:text-sm'> We are currently unable to fetch Details</h2>

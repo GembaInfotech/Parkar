@@ -1,63 +1,61 @@
-import React, { useMemo, useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getBookingAction } from '../redux/actions/bookingAction'
-
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getBookingAction } from '../redux/actions/bookingAction';
 import CommonLoading from "../components/loader/CommonLoading";
 import BookingCard from '../components/booking/BookingCard';
-import { Link } from 'react-router-dom';
 import Search from '../components/shared/Search';
 
 const Bookings = () => {
-  const dispatch = useDispatch()
-  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [selectedStatus, setSelectedStatus] = useState('Confirmed');
 
-  const data = useSelector((state) => state.bookings?.bookings)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bookingsPerPage] = useState(10); 
+
+  const data = useSelector((state) => state.bookings?.bookings);
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(getBookingAction());
+      setLoading(true);
+      await dispatch(getBookingAction({
+        status: selectedStatus,
+        pageNumber: currentPage,
+        pageLimit: bookingsPerPage
+      }));
       setLoading(false);
     };
     fetchData();
-  }, [])
-  const currentDate = new Date();
+  }, [selectedStatus, currentPage, dispatch]); 
 
-  const currentBookings = data?.filter(
-    booking => booking.status !== "Completed" && (booking.status === "Confirmed" || booking.status === "Parked")
-  );
-  const pastBookings = data?.filter(booking => booking.status == "Completed");
-  const cancelBookings = data?.filter(booking => booking.status == "Cancelled");
+  const filteredBookings = data?.data;
+  const totalPages = Math.ceil(data?.pagination?.totalDocuments / bookingsPerPage); 
 
-  const pastCards = useMemo(() => {
-    if (!data) {
-      return null;
-    }
-    return pastBookings?.map((booking) => (
-      <div key={booking._id} className=" ">
-        <BookingCard className="mb-5" data={booking} />
-      </div>
-    ));
-  }, [data]);
-  const currentCards = useMemo(() => {
-    if (!data) {
-      return null;
-    }
-    return currentBookings?.map((booking) => (
-      <div key={booking._id} className=" ">
-        <BookingCard className="mb-5" data={booking} />
-      </div>
-    ));
-  }, [data]);
+  const bookingCards = filteredBookings?.map((booking) => (
+    <div key={booking._id} className="mb-5">
+      <BookingCard data={booking} />
+    </div>
+  ));
 
-  const cancelCards = useMemo(() => {
-    if (!data) {
-      return null;
+  const handleStatusChange = (status) => {
+    setSelectedStatus(status);
+    setCurrentPage(1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
     }
-    return cancelBookings?.map((booking) => (
-      <div key={booking._id} className=" ">
-        <BookingCard className="mb-5" data={booking} />
-      </div>
-    ));
-  }, [data]);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   if (loading) {
     return (
@@ -66,18 +64,61 @@ const Bookings = () => {
       </div>
     );
   }
+
   return (
     <div>
       <Search />
-      <h2 className='h3-phone text-blue-900 font-bold'>Current Bookings</h2>
-      <div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{currentCards}</div>
-      <h2 className='h3-phone text-blue-900 font-bold'>Completed Bookings</h2>
-      <div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{pastCards}</div>
-      <h2 className='h3-phone text-blue-900 font-bold'>Cancelled Bookings</h2>
-      <div className="main-section grid grid-cols-1 sm:grid-cols-2  gap-0 overflow-y-auto max-h-screen">{cancelCards}</div>
+      <div className="flex justify-around my-4">
+        <button
+          onClick={() => handleStatusChange('Confirmed')}
+          className={`px-4 py-2 ${selectedStatus === 'Confirmed' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        >
+          Confirmed
+        </button>
+        <button
+          onClick={() => handleStatusChange('Parked')}
+          className={`px-4 py-2 ${selectedStatus === 'Parked' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        >
+          Parked
+        </button>
+        <button
+          onClick={() => handleStatusChange('Completed')}
+          className={`px-4 py-2 ${selectedStatus === 'Completed' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        >
+          Completed
+        </button>
+        <button
+          onClick={() => handleStatusChange('Cancelled')}
+          className={`px-4 py-2 ${selectedStatus === 'Cancelled' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        >
+          Cancelled
+        </button>
+      </div>
+
+      <div className="main-section grid grid-cols-1 sm:grid-cols-2 gap-0 overflow-y-auto max-h-screen">
+        {bookingCards?.length > 0 ? bookingCards : <p>No bookings found for {selectedStatus}</p>}
+      </div>
+      <div className="flex justify-center items-center mt-4">
+        <button
+          onClick={handlePreviousPage}
+          className={`mx-2 px-3 py-1 ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white'}`}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="mx-2">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={handleNextPage}
+          className={`mx-2 px-3 py-1 ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white'}`}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default Bookings
+export default Bookings;

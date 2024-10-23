@@ -50,10 +50,9 @@ export const saveBookingData = (data) => ({
     payload: data,
   });
   
-  export const getBookingAction = () => async (dispatch) => {
+  export const getBookingAction = ({ status=undefined, pageNumber=1, pageLimit=20 }) => async (dispatch) => {
     try {
-      const { error, data } = await  api.getBookings();
-      
+      const { error, data } = await  api.getBookings(status, pageNumber, pageLimit);
       if (error) {
         throw new Error(error);
       }
