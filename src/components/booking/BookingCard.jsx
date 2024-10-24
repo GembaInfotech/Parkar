@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// import { toast } from 'react-toastify';
 import { format } from 'date-fns';
 import { LuParkingCircle } from "react-icons/lu";
 import { useDispatch, useSelector } from 'react-redux';
-import { cancelBookingAction } from '../../redux/actions/bookingAction';
+// import { cancelBookingAction } from '../../redux/actions/bookingAction';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,22 +17,26 @@ const BookingCard = ({ data }) => {
     setShowConfirmation(true);
   };
 
+
+  // http://localhost:4005/booking/cancel-booking/${id}
   const handleConfirmCancel = async (id, transactionId) => {
     try {
-      await dispatch(cancelBookingAction(id, transactionId));
-      if(response?.msg?.message)(
-        window.alert(response?.msg?.message)
-      )
-      else if(response) {
-        console.log(response);
-        
-        window.alert(response?.msg);
+      const response = await axios.put(`http://localhost:4005/booking/cancel-booking/${id}`, {
+        transactionId, // Include any necessary payload here
+      });
+  
+      if (response.data?.msg?.message) {
+        window.alert(response.data.msg.message);
+      } else if (response.data) {
+        console.log(response.data);
+        window.alert(response.data.msg);
       }
+  
       setShowConfirmation(false);
     } catch (error) {
       console.error("Cancellation failed:", error);
       toast.error('Cancellation failed. Please try again.');
-      setShowConfirmation(false); 
+      setShowConfirmation(false);
     }
   };
   
@@ -111,5 +117,4 @@ const BookingCard = ({ data }) => {
     </div>
   );
 };
-
 export default BookingCard;

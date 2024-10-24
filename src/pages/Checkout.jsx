@@ -4,15 +4,12 @@ import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import { PiCurrencyInrLight } from "react-icons/pi";
-import { getVehicleAction } from '../redux/actions/vehicleActions';
 import { saveBookingData } from '../redux/actions/bookingAction';
 import VehicleComponent from '../components/checkout/VehicleComponent';
 
 function Checkout() {
   const [activeSection, setActiveSection] = useState('section1');
   const [amt, setamt] = useState();
-  const [stop, setStop] = useState(true);
-
   const location = useLocation();
   const userData = useSelector((state) => state.auth?.userData);
   const [clicked, setClicked] = useState(true)
@@ -49,7 +46,7 @@ function Checkout() {
       const tax = Math.ceil(amount_cal*0.09);
       setAmount(val)
       await setAmount(amounts)
-      await setData({ ...data, vehicle_name: vehicles?.vehicle_name, vehicle_number: vehicles?.vehicle_number, vehicle_type:vehicles?.vehicle_type,  price:amount_cal , sgst:tax, totalPrice:val, cgst:tax })
+      await setData({ ...data, vehicle_id: vehicles?._id, price:amount_cal , sgst:tax, totalPrice:val, cgst:tax })
 
     }
     func();
@@ -67,9 +64,7 @@ function Checkout() {
     vehicle: vehicle,
     transaction_id: '',
     parkingCode: code,
-    vehicle_number: '',
-    vehicle_type: '',
-    vehicle_name: ''
+    vehicle_id:'',
   });
 
   const handleBooking = async () => {
@@ -77,12 +72,6 @@ function Checkout() {
 
     await dispatch(saveBookingData(data))
     console.log(data)
-  }
-
-
-  const handleVehicle = async () => {
-    //console.log(vehicles)
-    //await setData({...data, vehicle_name:vehicles?.vehicle_name, vehicle_number:vehicles?.vehicle_number})
   }
 
   return (
@@ -97,7 +86,7 @@ function Checkout() {
         <div className='sm:w-1/2 mx-2 bg-gray-100 p-2 rounded-md'>
           <h1 className='  h3-phone sm:text-xl'>Vehicle Information</h1>
 
-          <VehicleComponent handler={handleVehicle} />
+          <VehicleComponent />
 
         </div>
         {/* <div>
@@ -212,9 +201,6 @@ function Checkout() {
         </div>
 
       </div>
-
-
-
 
     </div>
   );

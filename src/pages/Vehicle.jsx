@@ -13,7 +13,9 @@ function Vehicle() {
   const [loading, setLoading] = useState(false);
 
   const vehicle = useSelector((state) => state.vehicle?.vehicleList);
-  console.log("vehicle", vehicle?.data?.total);
+  console.log("vehicle", vehicle
+    
+  );
 
   const call = () => {
     setShowModal(!showModal);

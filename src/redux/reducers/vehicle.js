@@ -57,7 +57,7 @@ const vehicleReducer = (state = initialState, action) => {
         vehicleError: null,
       };
       case types.SELECTED_VEHICLE_SAVED:
-        const vehicle = state.vehicleList.find(vehicle => vehicle._id === payload);
+        const vehicle = state.vehicleList.data.vehicleList.find(vehicle => vehicle._id === payload);
         return {
           ...state,
           selectedVehicle: vehicle ? vehicle : {},
