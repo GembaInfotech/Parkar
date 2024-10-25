@@ -16,7 +16,7 @@ function ResetPasswordRedirect() {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const response = await axios.post(`http://vistaerp.gembainfotech.com:4005/resetpassword/reset-password/${token}`);
+        const response = await axios.post(`http://localhost:4005/resetpassword/reset-password/${token}`);
         console.log(response);
         if (response?.data?.status === 200) {
           setIsValid(true);
@@ -40,14 +40,14 @@ function ResetPasswordRedirect() {
       return;
     }
     try {
-      const response = await axios.post('http://vistaerp.gembainfotech.com:4005/resetpassword/reset-password', {
+      const response = await axios.post('http://localhost:4005/resetpassword/reset-password', {
         token,
         password,
         confirmPassword,
       });
       console.log(response);
       if (response?.data?.status) {
-        navigate('/signin'); // Redirect to sign-in page after successful password reset
+        navigate('/signin'); 
       } else {
         setErrorMessage(response.data.message || 'Failed to reset password.');
       }
