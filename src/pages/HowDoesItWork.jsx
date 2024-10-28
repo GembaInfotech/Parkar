@@ -10,7 +10,7 @@ import { FaMobileScreen } from "react-icons/fa6";
 const HowDoesItWork = () => {
   return (
     <>
-      <div className="my-8  px-4 sm:my-8 sm:px-24 md:px-48 lg:px-64 xl:px-48 ">
+      <div className="my-8 px-4 sm:my-8 sm:px-24 md:px-48 lg:px-64 xl:px-48 ">
         <div className="flex flex-col items-center md:flex-row md:items-start ">
           <div className="text-center md:w-1/2 md:text-start">
             <h1 className=" mb-4 font-bold text-gray-800 max-sm:text-xl md:text-4xl">
