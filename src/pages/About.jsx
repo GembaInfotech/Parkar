@@ -26,10 +26,10 @@ const About = () => {
     >
       <div  className='px-4  sm:px-24 md:px-48 lg:px-64 xl:px-48 my-8 sm:my-8 text-center py-20 text-white'>
       <div className='center-div'>
-      <h1 className='max-sm:text-xl mb-2 text-5xl text-white'>About Us</h1>
+      <h1 className='max-sm:text-xl mb-2 text-3xl font-bold text-white'>About Us</h1>
       </div>
       <div className='center-div'>
-      <p className='text-center text-base  max-sm:text-[11px]'> 
+      <p className='text-center text-sm  max-sm:text-[11px]'> 
       Our journey began with a simple idea: making parking easy and accessible for everyone. Seeing the struggle and frustration of drivers trying to find parking in busy areas, we set out to develop a solution that addresses the root of the problem. From humble beginnings, we have grown into a passionate team dedicated to solving parking problems with technology.</p>
       </div>
       </div>
@@ -45,8 +45,8 @@ const About = () => {
       </div>
       </div>
 
-      <div className='center bg-gray-200   py-6 sm:py-12' >
-    <div >
+      <div className='center bg-gray-200 py-6 sm:py-12'>
+    <div>
         <h1 className='h1 max-sm:text-[18px] text-xl'>Parking Prioritized: Convenient, Efficient, Stress-Free</h1>
     </div>
     <div className='flex max-sm:flex-col items-center  py-2 sm:py-4 w-[70vw] sm:w-[75vw] my-1 sm:my-2 justify-evenly'>
@@ -71,7 +71,7 @@ const About = () => {
     <div className='center-div'>
                     <h1 className='h1 max-sm:text-xl mb-2'>What We Offer</h1>
                 </div>
-                <div className="flex flex-col md:flex-row sm:w-[75vw] items-center">
+                <div className="flex flex-col md:flex-row sm:w-[60vw] items-center">
                 <div className=' flex flex-col items-center justify-center sm:w-[25vw]'>
                 <div className='p-4 sm:p-2 mx-2 text-2xl flex justify-center items-center  sm:text-[68px] text-[#5cb3ee]  font-bold rounded-full '>
                 <LuParkingCircle /></div>
@@ -112,9 +112,9 @@ const About = () => {
     backgroundRepeat: 'no-repeat'}}  >
     <div className='px-4  sm:px-24 md:px-48 lg:px-64 xl:px-48 my-8 sm:my-8 py-20 justify-center items-center'>
     <div >
-        <h1 className=' max-sm:text-[18px] text-5xl text-white justify-center items-center'>Download the app and <br/>start parking smarter.</h1>
+        <h1 className=' max-sm:text-[18px] text-3xl text-white justify-center items-center'>Download the app and <br/>start parking smarter.</h1>
     </div>
-    <div className="flex flex-col sm:flex-row md:flex-row my-10 md:my-4 ">
+    <div className="flex flex-col sm:flex-row md:flex-row my-6 md:my-4 ">
     <div className="sm:mt-5 md:mt-4 w-[30vw] md:w-[16vw] ml-2">
         <a href="#">
             <img src={appstore} alt="App Store"  className=" md:min-w-[128px] rounded-md md:rounded-md " />
