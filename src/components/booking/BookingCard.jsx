@@ -17,29 +17,35 @@ const BookingCard = ({ data }) => {
     setShowConfirmation(true);
   };
 
+console.log("data", data)
+const handleConfirmCancel = async (id, transactionId) => {
+  try {
+    const response = await axios.put(`http://localhost:4005/booking/cancel-booking/${id}`, {
+      transactionId, 
+    });
 
-  // http://localhost:4005/booking/cancel-booking/${id}
-  const handleConfirmCancel = async (id, transactionId) => {
-    try {
-      const response = await axios.put(`http://localhost:4005/booking/cancel-booking/${id}`, {
-        transactionId, // Include any necessary payload here
-      });
-  
-      if (response.data?.msg?.message) {
-        window.alert(response.data.msg.message);
-      } else if (response.data) {
-        console.log(response.data);
-        window.alert(response.data.msg);
-      }
-  
-      setShowConfirmation(false);
-    } catch (error) {
-      console.error("Cancellation failed:", error);
-      toast.error('Cancellation failed. Please try again.');
-      setShowConfirmation(false);
+    // Display success or info messages from backend in a prompt popup
+    if (response?.data?.message) {
+      alert(response.data.message);
+    } else if (response?.data?.msg) {
+      alert(response.data.msg);
     }
-  };
-  
+
+    setShowConfirmation(false);
+  } catch (error) {
+    console.error("Cancellation failed:", error);
+
+    // Show specific error message from backend, if available
+    if (error.response && error.response.data && error.response.data.message) {
+      alert(error.response.data.message); // Display backend message in a prompt popup
+    } else {
+      alert('Cancellation failed. Please try again.'); // Default error message
+    }
+
+    setShowConfirmation(false);
+  }
+};
+
   const handleClosePopup = () => {
     setShowConfirmation(false);
   };
@@ -73,7 +79,7 @@ const BookingCard = ({ data }) => {
           </div>
           <div className="flex justify-between items-center">
             <p>Vehicle</p>
-            <p>{data?.vehicle_number}</p>
+            <p>{data?.vehicle?.number}</p>
           </div>
           <div className="flex justify-between items-center">
             <p>Transaction ID</p>
