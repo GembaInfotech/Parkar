@@ -13,70 +13,30 @@ const SignUpNew = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [avatar, setAvatar] = useState(null);
-  const [avatarError, setAvatarError] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isConsentGiven, setIsConsentGiven] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const signUpError = useSelector((state) => state.auth?.signUpError);
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-
-    if (e.target.value.includes("mod.Parkar.com")) {
-      setIsModerator(true);
-    } else {
-      setIsModerator(false);
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) {
-      setAvatar(null);
-      setAvatarError(null);
-      return;
-    }
-    if (
-      file.type !== "image/jpeg" &&
-      file.type !== "image/png" &&
-      file.type !== "image/jpg"
-    ) {
-      setAvatar(null);
-      setAvatarError("Please upload a valid image file (jpeg, jpg, png)");
-    } else if (file.size > 10 * 1024 * 1024) {
-      setAvatar(null);
-      setAvatarError("Please upload an image file less than 10MB");
-    } else {
-      setAvatar(file);
-      setAvatarError(null);
-    }
-  };
-
-  const [isConsentGiven, setIsConsentGiven] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModerator, setIsModerator] = useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
     setLoading(true);
     setLoadingText("Signing up...");
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("avatar", avatar);
-    formData.append("role", "general");
-    formData.append("isConsentGiven", isConsentGiven.toString());
+
+    const formData = {
+      name,
+      email,
+      password,
+      isConsentGiven,
+    };
 
     const timeout = setTimeout(() => {
       setLoadingText(
@@ -84,7 +44,7 @@ const SignUpNew = () => {
       );
     }, 5000);
 
-    await dispatch(signUpAction(formData, navigate, isConsentGiven, email));
+    await dispatch(signUpAction(formData, navigate));
     setLoading(false);
     setIsConsentGiven(false);
     clearTimeout(timeout);
@@ -98,8 +58,7 @@ const SignUpNew = () => {
     <section className="bg-white">
       <div className="container mx-auto flex min-h-[80vh] items-center justify-center px-6">
         <form className="w-full max-w-md" onSubmit={handleSubmit}>
-          <div className="mx-auto flex justify-center">
-          </div>
+          <div className="mx-auto flex justify-center"></div>
           {signUpError &&
             Array.isArray(signUpError) &&
             signUpError.map((err, i) => (
@@ -132,7 +91,24 @@ const SignUpNew = () => {
               Sign Up
             </Link>
           </div>
-          <div className="relative mt-8 flex items-center">
+
+          {/* Consent Checkbox */}
+          <div className="mt-6">
+            <label className="inline-flex items-center">
+              <input
+                type="checkbox"
+                checked={isConsentGiven}
+                onChange={() => setIsConsentGiven(!isConsentGiven)}
+                className="form-checkbox h-5 w-5 text-blue-600"
+              />
+              <span className="ml-2 text-gray-700">
+                I agree to the terms and conditions for registration
+              </span>
+            </label>
+          </div>
+
+          {/* Username Field */}
+          <div className="relative mt-6 flex items-center">
             <span className="absolute">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -154,53 +130,16 @@ const SignUpNew = () => {
               name="name"
               type="text"
               value={name}
-              onChange={handleNameChange}
+              onChange={(e) => setName(e.target.value)}
               className="block w-full rounded-lg border bg-white px-11 py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               placeholder="Username"
               required
               autoComplete="off"
+              disabled={!isConsentGiven}
             />
           </div>
-          <label
-            htmlFor="avatar"
-            className="mx-auto mt-6 flex cursor-pointer items-center rounded-lg border-2 border-blue-400 border-dashed bg-white px-3 py-2 sm:py-3 text-center"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-gray-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-              />
-            </svg>
-            <h2 className="mx-3 text-gray-400">Profile Photo</h2>
-            <input
-              id="avatar"
-              type="file"
-              className="hidden"
-              name="avatar"
-              accept="image/*"
-              onChange={handleAvatarChange}
-              autoComplete="off"
-            />
-          </label>
-          {avatar && (
-            <div className="mt-2 flex items-center justify-center">
-              <span className="font-medium text-blue-500">{avatar.name}</span>
-            </div>
-          )}
-          {avatarError && (
-            <div className="mt-2 flex items-center justify-center">
-              <span className="text-red-500">{avatarError}</span>
-            </div>
-          )}
 
+          {/* Email Field */}
           <div className="relative mt-6 flex items-center">
             <span className="absolute">
               <svg
@@ -222,14 +161,17 @@ const SignUpNew = () => {
               id="email"
               name="email"
               value={email}
-              onChange={handleEmailChange}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               className="block w-full rounded-lg border bg-white px-11 py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               placeholder="Email address"
               required
               autoComplete="off"
+              disabled={!isConsentGiven}
             />
           </div>
+
+          {/* Password Field */}
           <div className="relative mt-4 flex items-center">
             <span className="absolute">
               <svg
@@ -252,48 +194,61 @@ const SignUpNew = () => {
               name="password"
               type="password"
               value={password}
-              onChange={handlePasswordChange}
+              onChange={(e) => setPassword(e.target.value)}
               className="block w-full rounded-lg border bg-white px-10 py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               placeholder="Password"
               required
               autoComplete="off"
+              disabled={!isConsentGiven}
             />
           </div>
+
+          {/* Confirm Password Field */}
+          <div className="relative mt-4 flex items-center">
+            <span className="absolute">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mx-3 h-6 w-6 text-gray-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+            </span>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="block w-full rounded-lg border bg-white px-10 py-2 sm:py-3 text-gray-700 border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              placeholder="Confirm Password"
+              required
+              autoComplete="off"
+              disabled={!isConsentGiven}
+            />
+          </div>
+
           <div className="mt-6">
             <button
-              disabled={loading}
+              className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white font-semibold hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
               type="submit"
-              className={`w-full transform rounded-lg bg-blue-800 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
-                loading ? "cursor-not-allowed opacity-50" : ""
-              }`}
+              disabled={loading || !isConsentGiven}
             >
-              {loading ? (
-                <ButtonLoadingSpinner loadingText={loadingText} />
-              ) : (
-                <span>Sign Up</span>
-              )}
+              {loading ? <ButtonLoadingSpinner /> : "Sign Up"}
             </button>
+          </div>
 
-            {/* <div onClick={() => setIsModalOpen(true)} className="mt-6">
-              {isConsentGiven && !isModerator ? (
-                <p className="mt-2 cursor-pointer rounded-lg border border-green-500 px-4 py-3 text-center text-sm font-semibold text-green-600">
-                  Context-Based Authentication is enabled
-                </p>
-              ) : (
-                <p className="mt-2 cursor-pointer rounded-lg border px-4 py-3 text-center text-sm font-semibold">
-                  Context-Based Authentication is disabled
-                </p>
-              )}
-            </div> */}
-
-            <div>
-              <ContextAuthModal
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
-                setIsConsentGiven={setIsConsentGiven}
-                isModerator={isModerator}
-              />
-            </div>
+          <div className="mt-6 text-center">
+            <Link to={"/signin"} className="text-sm text-blue-500 hover:underline">
+              Already have an account? Sign in
+            </Link>
           </div>
         </form>
       </div>

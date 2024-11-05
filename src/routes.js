@@ -224,7 +224,7 @@ export const publicRoutes = [
   },
 
   {
-    path: "/auth/verify",
+    path: "/auth/verify/:token",
     element: <VerifyEmail />,
   },
   {

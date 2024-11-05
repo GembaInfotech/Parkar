@@ -54,32 +54,32 @@ export const logoutAction = () => async (dispatch) => {
 };
 
 export const signUpAction =
-  (formData, navigate, isConsentGiven = false, email) =>
+  (formData, navigate) =>
   async (dispatch) => {
     try {
       localStorage.removeItem("profile");
       const response = await api.signUp(formData);
       const { error } = response;
+
       if (error) {
         dispatch({
           type: types.SIGNUP_FAIL,
           payload: error,
         });
       } else {
-        if (!isConsentGiven) {
+        // Navigate based on `isConsentGiven`
+        if (formData.isConsentGiven) {
+          dispatch({
+            type: types.SIGNUP_SUCCESS,
+            payload: types.SIGNUP_SUCCESS_MESSAGE,
+          });
+          navigate("/auth/verify", { state: formData.email });
+        } else {
           dispatch({
             type: types.SIGNUP_SUCCESS,
             payload: types.SIGNUP_SUCCESS_MESSAGE,
           });
           navigate("/signin");
-        }
-
-        if (isConsentGiven) {
-          dispatch({
-            type: types.SIGNUP_SUCCESS,
-            payload: types.SIGNUP_SUCCESS_MESSAGE,
-          });
-          navigate("/auth/verify", { state: email });
         }
       }
     } catch (error) {
@@ -89,6 +89,7 @@ export const signUpAction =
       });
     }
   };
+
 
 export const signInAction = (formData, navigate) => async (dispatch) => {
   try {
