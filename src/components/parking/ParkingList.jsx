@@ -14,7 +14,7 @@ import { FaMotorcycle } from "react-icons/fa6";
 
 const ParkingList = ({ data, inT, outT }) => {
   const navigate = useNavigate();
-  console.log(inT, outT);
+  console.log(inT, data);
   const launch = () => {
     const url = `#/detail/${data.name}?city=${data.city}&id=${data._id}&in=${inT}&out=${outT}`
 
@@ -35,6 +35,25 @@ const ParkingList = ({ data, inT, outT }) => {
         <div className='flex flex-col'>
           <h3 className="  font-bold  text-[20px] text-gray-900 ">{data.name}</h3>
           <h3 className="  font-normal  text-left p-phone md:text-sm text-gray-400  ">{data.address_line1}, {data?.address_line2}, {data.city}</h3>
+        </div>
+        <div className='flex flex-col'>
+          <div className='flex gap-4'>
+          <h3 className='text-[14px] text-gray-400'>Available Space for Four Wheeler</h3>
+          <h3
+            className={`font-bold text-[14px] ${data.fourWheelerCapacity - data.bookingData.countCar !== 0 ? 'text-green-600' : 'text-red-600'}`}
+          >
+            {data.fourWheelerCapacity - data.bookingData.countCar} available
+          </h3>
+
+          </div>
+          <div className='flex gap-4'>
+          <h3 className='text-[14px] text-gray-400'>Available Space for Two Wheeler</h3>
+          <h3
+            className={`font-bold text-[14px] ${data.twoWheelerCapacity - data.bookingData.countBike !== 0 ? 'text-green-600' : 'text-red-600'}`}
+          >
+            {data.twoWheelerCapacity - data.bookingData.countBike} available
+          </h3>
+          </div>
         </div>
 
         <div className='flex justify-between'>
@@ -62,7 +81,7 @@ const ParkingList = ({ data, inT, outT }) => {
           <div className='flex gap-2 '>
             <div className=' bg-yellow-400 text-white rounded-full h-8 w-8 py-2 pl-2 text-xl mt-2'>
               {/* <img src={cycleImg} alt="Car" /> */}
-              <FaMotorcycle  className=''/>
+              <FaMotorcycle className='' />
             </div>
             <div className='flex flex-col'>
               <h1 className='font-medium text-[12px] text-gray-400 float-right'>Price For {data.price_for} hours</h1>

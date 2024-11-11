@@ -37,6 +37,9 @@ function Search({inT, ouT}) {
     inTime:   format(new Date(), "yyyy-MM-dd'T'HH:mm"),
     outTime:  isoDateTime
   });
+
+  console.log("timeValues", timeValues);
+  
   const [searchfor, setSearchfor] = useState({
     type: '',
     coordinates: []
@@ -48,7 +51,7 @@ function Search({inT, ouT}) {
       ...timeValues,
       [name]: value
     });
-    console.log(timeValues)
+    console.log("timeValues", timeValues)
   };
   const handleInputFocus = () => {
     setInputFocused(true);
@@ -79,9 +82,14 @@ function Search({inT, ouT}) {
     let type = searchQuery.type
     let ln = searchQuery.coordinates[0]
     let lt = searchQuery.coordinates[1]
-    await dispatch(searchParkings(place, ln, lt, type));
-   if(inputText && timeValues.inTime && timeValues.outTime && searchfor)
-    navigate(`/search?place=${place}&lt=${ln}&ln=${lt}&in=${timeValues.inTime}&out=${timeValues.outTime}&type=${type}`);
+    await dispatch(searchParkings(place, ln, lt, type, timeValues.outTime, timeValues?.inTime));
+   if(inputText && timeValues.inTime && timeValues.outTime && searchfor){
+
+    console.log("timeValues.inTime", timeValues.inTime );
+    
+    navigate(`/search?place=${place}&lt=${ln}&ln=${lt}&in=${timeValues?.inTime}&out=${timeValues?.outTime}&type=${type}`);
+
+   }
    setRedirecting(false);
    setShowDropdown(false)
   }
