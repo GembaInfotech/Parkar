@@ -87,7 +87,7 @@ const Profile = () => {
 
               <div className="relative w-48 h-48">
                 <img
-                  src={preview || (user?.profileImage ? `http://localhost:4005/users/send-profile/${user.profileImage}` : Img)}
+                  src={preview || (user?.profileImage ? `http://know2parking.com:4005/users/send-profile/${user.profileImage}` : Img)}
                   alt="Profile Image"
                   className="h-48 w-48 rounded-full object-cover"
                 />

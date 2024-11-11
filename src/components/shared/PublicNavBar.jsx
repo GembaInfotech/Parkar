@@ -121,7 +121,7 @@ const PublicNavbar = () => {
                   <div className="py-1" role="none">
                     <div className="flex flex-col items-center">
                       <img
-                        src={userData?.profile ? `http://localhost:4005/users/send-profile/${userData.profile}` : Img}
+                        src={userData?.profile ? `http://know2parking.com:4005/users/send-profile/${userData.profile}` : Img}
                         alt="profile"
                         className="mb-2 h-16 w-16 rounded-full object-cover"
                       />
@@ -186,7 +186,7 @@ const PublicNavbar = () => {
               onClick={handleProfileClick}
             >
               <img
-                src={userData?.profile ? `http://localhost:4005/users/send-profile/${userData.profile}` : Img}
+                src={userData?.profile ? `http://know2parking.com:4005/users/send-profile/${userData.profile}` : Img}
                 alt="profile"
                 className="h-6 w-6 mr-1 rounded-full object-cover"
               />
@@ -213,7 +213,7 @@ const PublicNavbar = () => {
                   <div className="py-1" role="none">
                     <div className="flex flex-col items-center">
                       <img
-                        src={userData?.profile ? `http://localhost:4005/users/send-profile/${userData.profile}` : Img}
+                        src={userData?.profile ? `http://know2parking.com:4005/users/send-profile/${userData.profile}` : Img}
                         alt="profile"
                         className="mb-2 h-16 w-16 rounded-full object-cover"
                       />
