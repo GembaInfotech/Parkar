@@ -71,7 +71,7 @@ const About = () => {
     <div className='center-div'>
                     <h1 className='h1 max-sm:text-xl mb-2'>What We Offer</h1>
                 </div>
-                <div className="flex flex-col md:flex-row sm:w-[60vw] items-center">
+                <div className="flex flex-col md:flex-row sm:w-[72vw] items-center">
                 <div className=' flex flex-col items-center justify-center sm:w-[25vw]'>
                 <div className='p-4 sm:p-2 mx-2 text-2xl flex justify-center items-center  sm:text-[68px] text-[#5cb3ee]  font-bold rounded-full '>
                 <LuParkingCircle /></div>
