@@ -8,12 +8,13 @@ import { saveBookingData } from '../redux/actions/bookingAction';
 import VehicleComponent from '../components/checkout/VehicleComponent';
 
 function Checkout() {
+  const token = useSelector((state) => state.auth.accessToken);
   const [activeSection, setActiveSection] = useState('section1');
   const [amt, setamt] = useState();
   const location = useLocation();
   const userData = useSelector((state) => state.auth?.userData);
   const [clicked, setClicked] = useState(true);
-  const [couponCode, setCouponCode] = useState(""); // State to store the coupon code
+  const [couponCode, setCouponCode] = useState(""); 
   const dispatch = useDispatch();
   const searchParams = new URLSearchParams(location.search);
   const amtF = searchParams?.get('amt');
@@ -31,17 +32,17 @@ function Checkout() {
   const toggleSection = (sectionId) => {
     setActiveSection(sectionId);
   };
-  
+
   const vehicles = useSelector((state) => state.vehicle?.selectedVehicle);
   const [amount, setAmount] = useState();
 
   useEffect(() => {
     const func = async () => {
-      const amount_cal = (vehicles?.vehicle_type === "two wheeler" ) ? amtT : amtF;
+      const amount_cal = (vehicles?.vehicle_type === "two wheeler") ? amtT : amtF;
       setamt(amount_cal);
-      const val = Number(amount_cal) + Number(Math.ceil(amount_cal * 0.09)) * 2;
-      const tax = Math.ceil(amount_cal * 0.09);
-      setAmount(val);
+      const tax = Math.ceil(amount_cal * 0.09); // CGST and SGST (both 9%)
+      const totalPrice = Number(amount_cal) + Number(tax) * 2; // Adding both CGST and SGST
+      setAmount(totalPrice);
       setData({
         ...data, 
         vehicle_id: vehicles?._id, 
@@ -49,7 +50,7 @@ function Checkout() {
         price: amount_cal, 
         sgst: tax, 
         cgst: tax, 
-        totalPrice: val 
+        totalPrice: totalPrice 
       });
     };
     func();
@@ -75,9 +76,48 @@ function Checkout() {
     await dispatch(saveBookingData(data));
   };
 
-  const handleApplyCoupon = () => {
-    // Logic to apply the coupon code
-    console.log("Coupon Code Applied:", couponCode);
+  const handleApplyCoupon = async () => {
+    if (!couponCode) {
+      alert("Please enter a coupon code.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://know2parking.com:4005/coupon/applyCoupon", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          couponCode,  
+          parkingId: id,  
+          price: amt 
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        console.log("Coupon applied:", data);
+        const discountedPrice = amount - data.discount;
+        setAmount(data?.finalPrice); 
+        setData((prevData) => ({
+          ...prevData,
+          price: data?.finalPrice, 
+          sgst: Math.ceil(discountedPrice * 0.09), 
+          cgst: Math.ceil(discountedPrice * 0.09), 
+          totalPrice: data.finalPrice + 2* (Math.ceil(discountedPrice * 0.09))
+          // totalPrice: discountedPrice,
+        }));
+        alert("Coupon applied successfully!");
+      } else {
+        alert(data.message || "Failed to apply coupon.");
+      }
+    } catch (error) {
+      console.error("Error applying coupon:", error);
+      alert("An error occurred while applying the coupon.");
+    }
   };
 
   return (
@@ -109,16 +149,14 @@ function Checkout() {
                 <h1 className='text-gray-700 font-bold-600'>{Math.round(dif / 60)} hour</h1>
                 <div className='flex'>
                   <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm' />
-                  <p className='text-orange-400 text-sm'>{amt}</p>
+                  <p className='text-orange-400 text-sm'>{data.price}</p>
                 </div>
               </div>
-
-              {/* Additional Fee Details */}
               <div className='flex justify-between text-sm py-1'>
                 <h1 className='text-gray-700 font-bold-600'>CGST</h1>
                 <div className='flex'>
                   <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm' />
-                  <p className='text-orange-400 text-sm'>{Math.ceil(amt * 0.09)}</p>
+                  <p className='text-orange-400 text-sm'>{data.sgst}</p>
                 </div>
               </div>
 
@@ -126,7 +164,7 @@ function Checkout() {
                 <h1 className='text-gray-700 font-bold-600'>SGST</h1>
                 <div className='flex'>
                   <PiCurrencyInrLight className='pt-1 text-orange-400 font-bold text-sm' />
-                  <p className='text-orange-400 text-sm'>{Math.ceil(amt * 0.09)}</p>
+                  <p className='text-orange-400 text-sm'>{data.sgst}</p>
                 </div>
               </div>
 
@@ -134,7 +172,6 @@ function Checkout() {
                 <hr />
               </div>
 
-              {/* Total Price */}
               <div className='flex justify-between'>
                 <div>
                   <p className='sm:text-xl text-gray-500'>Total</p>
@@ -145,7 +182,6 @@ function Checkout() {
                 </div>
               </div>
 
-              {/* Coupon Code Input */}
               <div className="mt-4 flex items-center">
                 <input
                   type="text"
