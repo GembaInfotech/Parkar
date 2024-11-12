@@ -20,7 +20,7 @@ const BookingCard = ({ data }) => {
 console.log("data", data)
 const handleConfirmCancel = async (id, transactionId) => {
   try {
-    const response = await axios.put(`http://localhost:4005/booking/cancel-booking/${id}`, {
+    const response = await axios.put(`http://know2parking.com:4005/booking/cancel-booking/${id}`, {
       transactionId, 
     });
 
