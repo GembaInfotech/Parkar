@@ -11,7 +11,7 @@ const VerifyEmail = () => {
 
   const handleVerify = useCallback(() => {
     setLoading(true);
-    const verificationLink = `http://localhost:4005/activate/activate-account/${token}`;
+    const verificationLink = `http://know2parking.com:4005/activate/activate-account/${token}`;
     
     axios
       .get(verificationLink)
