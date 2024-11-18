@@ -73,7 +73,7 @@ export const signUpAction =
             type: types.SIGNUP_SUCCESS,
             payload: types.SIGNUP_SUCCESS_MESSAGE,
           });
-          navigate("/auth/verify", { state: formData.email });
+          navigate("/signin");
         } else {
           dispatch({
             type: types.SIGNUP_SUCCESS,
