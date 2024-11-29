@@ -53,8 +53,9 @@ const Profile = () => {
     formData.append("profileImage", file); 
     formData.append("profileType", "user"); 
 
+    
     try {
-      const response = await axios.post(`http://localhost:4005/users/UploadUserProfile`, formData, {
+      const response = await axios.post(`http://know2parking.com:4005/users/UploadUserProfile`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           'Authorization': `Bearer ${token}` // Use Bearer format

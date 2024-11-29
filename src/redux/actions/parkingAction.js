@@ -25,10 +25,10 @@ export const searchParkings = (place, latitude, longitude, type,outTime, inTime)
 // parkingActions.js
 
 
-export const getParkingAction = (id) => async (dispatch) => {
+export const getParkingAction = (id, inT, ouT) => async (dispatch) => {
   try {
-    console.log("testoing..1");
-    const { error, data } = await api.getParking(id);
+    console.log("testoing..1", inT);
+    const { error, data } = await api.getParking(id, inT, ouT);
     console.log(data.data);
 
     if (error) {

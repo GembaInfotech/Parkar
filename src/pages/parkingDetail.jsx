@@ -26,7 +26,7 @@ const ParkingDetail = () => {
     const fetchData = async () => {
       if(parkingss.length==0)
         {
-          await dispatch(getParkingAction(id));
+          await dispatch(getParkingAction(id, inT, ouT));
         }
      else{
       await dispatch(getParkingById(id));

@@ -10,9 +10,11 @@ export const searchParkings = async (locationQuery, latitude, longitude, type, o
   }
 };
 
-export const getParking = async (id) => {
+export const getParking = async (id, inT, ouT) => {
   try {
-    const { data } = await API.get(`/parking/get-parking/${id}`);
+    console.log("intime", inT,"outtime", ouT);
+    
+    const { data } = await API.get(`/parking/get-parking/${id}?inT=${inT}&ouT=${ouT}`);
     console.log(data)
     return { error: null, data };
   } catch (error) {
