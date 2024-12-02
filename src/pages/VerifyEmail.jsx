@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import LoadingSpinner from "../components/loader/ButtonLoadingSpinner";
+import appConfig from "../Config/app.config";
 
 const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,7 @@ const VerifyEmail = () => {
 
   const handleVerify = useCallback(() => {
     setLoading(true);
-    const verificationLink = `http://know2parking.com:4005/activate/activate-account/${token}`;
+    const verificationLink = `${appConfig.apiBaseUrl}activate/activate-account/${token}`;
     
     axios
       .get(verificationLink)

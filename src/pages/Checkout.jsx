@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { PiCurrencyInrLight } from "react-icons/pi";
 import { saveBookingData } from '../redux/actions/bookingAction';
 import VehicleComponent from '../components/checkout/VehicleComponent';
+import appConfig from '../Config/app.config';
 
 function Checkout() {
   const token = useSelector((state) => state.auth.accessToken);
@@ -83,7 +84,7 @@ function Checkout() {
     }
 
     try {
-      const response = await fetch("http://know2parking.com:4005/coupon/applyCoupon", {
+      const response = await fetch(`${appConfig.apiBaseUrl}coupon/applyCoupon`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

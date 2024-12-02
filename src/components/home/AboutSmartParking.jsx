@@ -17,10 +17,10 @@ const AboutSmartParking = () => {
        <p className='text-center text-sm  max-sm:text-[11px]'> 
        At Smart Parking, we're passionate about revolutionizing parking convenience with our cutting-edge online platform. With a commitment to seamless experiences, we aim to redefine how you park, one click at a time.       </p>
        </div>
-       <div className='center-div'>
+       {/* <div className='center-div'>
        <p className='text-center text-sm max-sm:hidden'> 
        At Smart Parking, we're passionate about revolutionizing parking convenience with our cutting-edge online platform. With a commitment to seamless experiences, we aim to redefine how you park, one click at a time.       </p>
-       </div>
+       </div> */}
        <div className='center-div py-4'>
  <Link to="/about">        <button className='purple-rounded-button'><p className='text-white text-sm'>Read More</p></button>
 </Link>

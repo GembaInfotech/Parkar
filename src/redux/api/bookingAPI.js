@@ -1,8 +1,9 @@
 import { API, handleApiError } from "./utils";
+import { APIS } from "../../Constants/api.constant";
 
 export const createBooking = async (bookingData) => {
   try {
-    const {data} = await API.post(`/booking/create-new-booking`,  {bookingData}, 
+    const {data} = await API.post(`${APIS.CREATE_BOOKING}`,  {bookingData}, 
      );
     return { error: null, data };
   } catch (error) {
@@ -12,7 +13,7 @@ export const createBooking = async (bookingData) => {
 
 export const cancelBooking = async (id, transactionId) => {
   try {
-    const {data} = await API.put(`/booking/cancel-booking/${id}`, {transactionId}, 
+    const {data} = await API.put(`${APIS.CANCEL_BOOKING}/${id}`, {transactionId}, 
      );
     
     return { error: null, data };
@@ -54,7 +55,7 @@ export const getBookings = async (status, pageNumber, pageLimit) => {
     const queryString = queryParams.length ? `?${queryParams.join('&')}` : '';
 
     // Make the API request with the constructed query string
-    const { data } = await API.get(`/booking/view-booking-list${queryString}`);
+    const { data } = await API.get(`${APIS.VIEW_BOOKING_LIST}${queryString}`);
     return { error: null, data };
   } catch (error) {
     return handleApiError(error);

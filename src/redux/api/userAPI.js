@@ -1,4 +1,5 @@
 import { API, handleApiError } from "./utils";
+import { APIS } from "../../Constants/api.constant";
 
 export const getUser = async (id) => {
   try {
@@ -12,7 +13,7 @@ export const getUser = async (id) => {
 
 export const updateUser = async (id, formData) => {
   try {
-    const { data } = await API.put(`/users/UpdateInfo`, formData, {
+    const { data } = await API.put(`${APIS.UPDATE_USER}`, formData, {
       headers: {
         "Content-Type": "application/json",
       },

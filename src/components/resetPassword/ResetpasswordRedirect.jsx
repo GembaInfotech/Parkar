@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import appConfig from '../../Config/app.config';
+import { APIS } from '../../Constants/api.constant';
 
 function ResetPasswordRedirect() {
     console.log("passworddd.....");
@@ -16,7 +18,7 @@ function ResetPasswordRedirect() {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const response = await axios.post(`http://know2parking.com:4005/resetpassword/reset-password/${token}`);
+        const response = await axios.post(`${appConfig.apiBaseUrl}${APIS.FORGET_PASSWORD_RESET}/${token}`);
         console.log(response);
         if (response?.data?.status === 200) {
           setIsValid(true);
@@ -40,7 +42,7 @@ function ResetPasswordRedirect() {
       return;
     }
     try {
-      const response = await axios.post('http://know2parking.com:4005/resetpassword/reset-password', {
+      const response = await axios.post(`${appConfig.apiBaseUrl}${APIS.FORGET_PASSWORD_REDIRECT}`, {
         token,
         password,
         confirmPassword,

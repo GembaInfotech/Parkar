@@ -1,8 +1,9 @@
 import { API, handleApiError } from "./utils";
+import { APIS } from "../../Constants/api.constant";
 
 export const forgotPassword = async (email) => {
   try {
-    const {data} = await API.post(`/resetpassword/forgot-password`,  {email}, 
+    const {data} = await API.post(`${APIS.FORGET_PASSWORD}`,  {email}, 
      );
     
     return { error: null, data };

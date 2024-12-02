@@ -14,6 +14,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaGooglePlusG } from "react-icons/fa";
+import appConfig from "../../Config/app.config";
 
 const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
   const [open, setOpen] = useState(false);
@@ -186,7 +187,7 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
               onClick={handleProfileClick}
             >
               <img
-                src={userData?.profile ? `http://know2parking.com:4005/users/send-profile/${userData.profile}` : Img}
+                src={userData?.profile ? `${appConfig.apiBaseUrl}users/send-profile/${userData.profile}` : Img}
                 alt="profile"
                 className="h-8 w-8  rounded-full object-cover mr-1"
               />
@@ -213,7 +214,7 @@ const Navbar = ({ userData, toggleLeftbar, showLeftbar }) => {
                   <div className="py-1" role="none">
                     <div className="flex flex-col items-center">
                       <img
-                        src={userData?.profile ? `http://know2parking.com:4005/users/send-profile/${userData.profile}` : Img}
+                        src={userData?.profile ? `${appConfig.apiBaseUrl}users/send-profile/${userData.profile}` : Img}
                         alt="profile"
                         className="mb-2 h-16 w-16 rounded-full object-cover"
                       />

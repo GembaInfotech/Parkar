@@ -7,6 +7,7 @@ import Img from "../assets/profileT.jpg";
 import axios from "axios";
 import { FaPlusCircle } from "react-icons/fa"; 
 import { MdCancel } from "react-icons/md"; 
+import appConfig from "../Config/app.config";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Profile = () => {
 
     
     try {
-      const response = await axios.post(`http://know2parking.com:4005/users/UploadUserProfile`, formData, {
+      const response = await axios.post(`${appConfig.apiBaseUrl}users/UploadUserProfile`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           'Authorization': `Bearer ${token}` // Use Bearer format
@@ -88,7 +89,7 @@ const Profile = () => {
 
               <div className="relative w-48 h-48">
                 <img
-                  src={preview || (user?.profileImage ? `http://know2parking.com:4005/users/send-profile/${user.profileImage}` : Img)}
+                  src={preview || (user?.profileImage ? `${appConfig.apiBaseUrl}users/send-profile/${user.profileImage}` : Img)}
                   alt="Profile Image"
                   className="h-48 w-48 rounded-full object-cover"
                 />

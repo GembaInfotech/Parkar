@@ -8,7 +8,8 @@ import { selecetedParking } from '../../redux/actions/parkingAction';
 import Search from '../shared/Search';
 import { format, parseISO } from 'date-fns';
 import Tooltip from "../shared/Tooltip";
-import image2 from '../../assets/road2.jpg'
+import appConfig from "../../Config/app.config"
+
 
 
 import { PiCurrencyInrLight } from "react-icons/pi";
@@ -74,16 +75,12 @@ const ParkingDetailComponent = ({ data, inT, ouT }) => {
       {data?.image.map((img, index) => (
         <img
           key={index}
-          src={`http://know2parking.com:3456/v1/api/parking/send-parking-image/${img}`}
+          src={`${appConfig.apiBaseUrlV}v1/api/parking/send-parking-image/${img}`}
           alt={`Parking Image ${index + 1}`}
           className='rounded-2xl h-32 sm:h-48 transition-transform transform hover:scale-105 shadow-lg flex-shrink-0 snap-start'
         />
       ))}
     </div>
-
-
-
-
         <div>
           <div className='bg-gray-100 rounded-2xl my-4 p-8 '>
             <h1 className='text-xl font-gray-700'>Details</h1>

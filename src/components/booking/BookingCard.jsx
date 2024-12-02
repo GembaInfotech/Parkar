@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { cancelBookingAction } from '../../redux/actions/bookingAction';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import appConfig from "../../Config/app.config"
+
 
 const BookingCard = ({ data }) => {
   const dispatch = useDispatch();
@@ -20,7 +22,7 @@ const BookingCard = ({ data }) => {
 console.log("data", data)
 const handleConfirmCancel = async (id, transactionId) => {
   try {
-    const response = await axios.put(`http://know2parking.com:4005/booking/cancel-booking/${id}`, {
+    const response = await axios.put(`${appConfig.apiBaseUrl}booking/cancel-booking/${id}`, {
       transactionId, 
     });
 
