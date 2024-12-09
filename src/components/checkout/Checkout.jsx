@@ -63,7 +63,7 @@ function Comp({ amt, open, handleBooking }) {
 		const data = response.data
 
 		const options = {
-			key: 'rzp_test_muLBb6gKqfrZA5',
+			key: 'rzp_live_6kMhx8CKjR3kUY',
 			currency: data.currency,
 			amount: data.amount.toString(),
 			order_id: data.id,

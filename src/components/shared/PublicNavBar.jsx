@@ -16,6 +16,9 @@ import { FaInstagramSquare } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaGooglePlusG } from "react-icons/fa";
 import appConfig from "../../Config/app.config";
+import { IoNotificationsOutline } from "react-icons/io5";
+import NotificationList from "../Notification/FNotification";
+
 
 const PublicNavbar = () => {
   const userData = useSelector((state) => state.auth?.userData);
@@ -23,6 +26,7 @@ const PublicNavbar = () => {
   const dispatch = useDispatch();
   const [loggingOut, setLoggingOut] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const dropdownRef = useRef(null);
 
@@ -194,6 +198,10 @@ const PublicNavbar = () => {
               <p className="  text-sm font-semibold text-gray-700 ">{userData?.name}</p>
 
             </button>
+            <div className="text-lg" onClick={() => setShowNotification(!showNotification)}>
+              <IoNotificationsOutline />
+            </div>
+
             <Transition
               show={showDropdown}
               enter="transition ease-out duration-100 transform"
@@ -258,6 +266,11 @@ const PublicNavbar = () => {
                 <p className="mx-0.5 max-sm:py-2 sm:mx-1 md:mx-1 lg:mx-4 xl:mx-2 text-[14px] sm:text-[10px] lg:text-xs  ">USER SIGNUP</p>
               </Link>          </div>
           </div>}
+        {showNotification && (
+          <div className="fixed top-24 right-8 w-100 bg-white shadow-lg rounded-lg z-50">
+            <NotificationList />
+          </div>
+        )}
       </div>
     </div>
   );

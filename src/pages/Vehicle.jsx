@@ -8,7 +8,7 @@ import VehicleForm from "../components/vehi/VehicleForm";
 function Vehicle() {
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1); 
-  const vehiclesPerPage = 10; 
+  const vehiclesPerPage = 7; 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 

@@ -1,5 +1,5 @@
 
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import FallbackLoading from "./components/loader/FallbackLoading";
@@ -12,11 +12,20 @@ import SemiPrivateRoute from "./SemiPrivateRoute";
 import SignIn from "./pages/SignIn";
 import ResetPasswordRedirect from "./components/resetPassword/ResetpasswordRedirect";
 
+import { requestFCMToken, listenForMessages } from "./firebase";
+
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
 
 const App = () => {
-  const userData = useSelector((state) => state.auth?.userData);
+   const userData = useSelector((state) => state.auth?.userData);
+   const  userId = userData?._id
+  
+  useEffect(() => {
+    requestFCMToken(userId); // Request FCM token for the logged-in user
+    listenForMessages(); // Listen for foreground messages
+  }, [userId]);
+
   const adminAccessToken = JSON.parse(
     localStorage.getItem("admin")
   )?.accessToken;
