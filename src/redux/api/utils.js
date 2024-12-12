@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "/";
+const BASE_URL = "http://know2parking.com:4005/";
 const ADMIN_URL = `${BASE_URL}/admin`;
 
 const authInterceptor = (req) => {

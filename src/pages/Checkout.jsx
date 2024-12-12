@@ -20,22 +20,20 @@ function Checkout() {
   const searchParams = new URLSearchParams(location.search);
   const amtF = searchParams?.get('amt');
   const amtT = searchParams?.get('amtT');
-
   const name = searchParams?.get('name');
   const id = searchParams?.get('id');
   const code = searchParams?.get('c');
-
   const inT = searchParams?.get('in');
   const out = searchParams?.get('out');
   const dif = searchParams?.get('diff');
   const [vehicle, setVehicle] = useState();
+  const vehicles = useSelector((state) => state.vehicle?.selectedVehicle);
+  const [amount, setAmount] = useState();
+  const [isCouponApplied, setIsCouponApplied] = useState(false);  // Track if coupon is applied
 
   const toggleSection = (sectionId) => {
     setActiveSection(sectionId);
   };
-
-  const vehicles = useSelector((state) => state.vehicle?.selectedVehicle);
-  const [amount, setAmount] = useState();
 
   useEffect(() => {
     const func = async () => {
@@ -77,6 +75,7 @@ function Checkout() {
     await dispatch(saveBookingData(data));
   };
 
+  // Apply Coupon Logic
   const handleApplyCoupon = async () => {
     if (!couponCode) {
       alert("Please enter a coupon code.");
@@ -109,8 +108,8 @@ function Checkout() {
           sgst: Math.ceil(discountedPrice * 0.09), 
           cgst: Math.ceil(discountedPrice * 0.09), 
           totalPrice: data.finalPrice + 2* (Math.ceil(discountedPrice * 0.09))
-          // totalPrice: discountedPrice,
         }));
+        setIsCouponApplied(true);  // Set coupon as applied
         alert("Coupon applied successfully!");
       } else {
         alert(data.message || "Failed to apply coupon.");
@@ -118,6 +117,44 @@ function Checkout() {
     } catch (error) {
       console.error("Error applying coupon:", error);
       alert("An error occurred while applying the coupon.");
+    }
+  };
+
+  const handleRemoveCoupon = async () => {
+    try {
+      const response = await fetch(`http://localhost:4005/coupon/removeCoupon`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          couponCode,
+          parkingId: id,
+          price: amt,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        console.log("Coupon removed:", data);
+        setAmount(amount + data.discount); // Revert the amount
+        setData((prevData) => ({
+          ...prevData,
+          price: amount + data.discount,
+          sgst: Math.ceil((amount + data.discount) * 0.09),
+          cgst: Math.ceil((amount + data.discount) * 0.09),
+          totalPrice: amount + data.discount + 2 * Math.ceil((amount + data.discount) * 0.09),
+        }));
+        setIsCouponApplied(false);  // Set coupon as not applied
+        alert("Coupon removed successfully!");
+      } else {
+        alert(data.message || "Failed to remove coupon.");
+      }
+    } catch (error) {
+      console.error("Error removing coupon:", error);
+      alert("An error occurred while removing the coupon.");
     }
   };
 
@@ -192,10 +229,10 @@ function Checkout() {
                   className="w-full border border-gray-300 rounded-lg p-2 text-sm"
                 />
                 <button
-                  onClick={handleApplyCoupon}
+                  onClick={isCouponApplied ? handleRemoveCoupon : handleApplyCoupon}
                   className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm"
                 >
-                  Apply
+                  {isCouponApplied ? 'Remove' : 'Apply'}
                 </button>
               </div>
 

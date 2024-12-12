@@ -1,17 +1,25 @@
-import { API, handleApiError } from "./utils";
+import axios from "axios";
+import {handleApiError } from "./utils";
+import appConfig from "../../Config/app.config";
+
+
+const API = axios.create({
+  baseURL: appConfig.apiBaseUrl,
+});
 
 export const signIn = async (formData) => {
   try {
-    const res = await API.post("/users/signin", formData, {
+    const res = await API.post("users/signin", formData, {
       headers: {
         "Content-Type": "application/json",
       },
     });
     return { error: null, data: res.data };
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error); // Assuming `handleApiError` is a custom error handler
   }
 };
+
 export const signUp = async (formData) => {
   try {
     const res = await API.post("/users/signup", formData, {
