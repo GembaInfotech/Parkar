@@ -49,11 +49,12 @@ function Checkout() {
         price: amount_cal, 
         sgst: tax, 
         cgst: tax, 
-        totalPrice: totalPrice 
+        totalPrice: totalPrice,
+        couponCode: couponCode,
       });
     };
     func();
-  }, [vehicles]);
+  }, [vehicles, couponCode]);
 
   const [data, setData] = useState({
     parking: id,
@@ -69,13 +70,13 @@ function Checkout() {
     parkingCode: code,
     vehicle_id: '',
     vehicle_type: '',
+    couponCode:'',
   });
 
   const handleBooking = async () => {
     await dispatch(saveBookingData(data));
   };
 
-  // Apply Coupon Logic
   const handleApplyCoupon = async () => {
     if (!couponCode) {
       alert("Please enter a coupon code.");
@@ -267,7 +268,7 @@ function Checkout() {
                 Confirm
               </button>
             ) : (
-              <Comp handleBooking={handleBooking} amt={data.totalPrice} open={activeSection} />
+              <Comp handleBooking={handleBooking} amt={data.totalPrice} parkingId= {data.parking} couponCode={data.couponCode} open={activeSection} />
             )}
           </div>
         </div>

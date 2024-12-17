@@ -23,11 +23,12 @@ function loadScript(src) {
 
 const __DEV__ = document.domain === 'localhost'
 
-function Comp({ amt, open, handleBooking }) {
+function Comp({ amt,parkingId,couponCode, open, handleBooking }) {
 	const [name, setName] = useState('Ayush')
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const token = useSelector((state) => state.auth.accessToken);
+	
 	const userData = useSelector((state) => state.auth?.userData);
 
 	const [launched, setLaunched] = useState(false);
@@ -58,16 +59,30 @@ function Comp({ amt, open, handleBooking }) {
 			return
 		}
 
-		let response = await axios.post('/razorpay', { body: amt });
+		let response = await axios.post(
+			'http://localhost:4005/razorpay',
+			{
+			  amt: amt,
+			  parkingId: parkingId,
+			  couponCode: couponCode
+			},
+			{
+			  headers: {
+				"Content-Type": "application/json",
+				"Authorization": `Bearer ${token}`
+			  }
+			}
+		  );
 
+		  console.log("response response", response)
 		const data = response.data
 
 		const options = {
-			key: 'rzp_live_6kMhx8CKjR3kUY',
+			key: 'rzp_test_yaqYZsLqLJCryh',
 			currency: data.currency,
 			amount: data.amount.toString(),
 			order_id: data.id,
-			name: 'Parkar',
+			name: 'know2parking',
 			description: 'Thank you for booking with us. Please pay your booking amount',
 			image: 'http://localhost:1337/logo.svg',
 			handler: async function (response) {
@@ -109,8 +124,6 @@ function Comp({ amt, open, handleBooking }) {
 	return (
 		<div className="App">
 			<header className="App-header">
-
-
 				<button
 
 					className={`sm:w-96 transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${launched ? "cursor-not-allowed opacity-50" : ""
